@@ -1,11 +1,12 @@
 import React from 'react';
 
-import SEO from '../components/seo';
+import Layout from '../components/Layout';
+import SEO from '../components/SEO';
 
 export default function IndexPage({ ...restProps }) {
   return (
-    <>
+    <Layout {...restProps}>
       <SEO title="Home" />
-    </>
+    </Layout>
   );
 }
