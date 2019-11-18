@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 const Div = styled.div``;
 const GitHubLink = styled.a``;
 const LiveLink = styled.a``;
-const ProjectTitle = styled.ProjectTitle``;
+const ProjectTitle = styled.h2``;
 
 Project.propTypes = {
   children: PropTypes.node.isRequired,
