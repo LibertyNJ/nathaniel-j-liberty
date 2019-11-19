@@ -1,6 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
+import styledNormalize from 'styled-normalize';
 
-const BASELINE = 12;
+const BASELINE_PIXELS = 12;
 const REM_PIXELS = 16;
 const H1_REMS = 3;
 const H2_REMS = 2.5;
@@ -10,7 +11,8 @@ const H5_REMS = 1.25;
 const H6_REMS = 1;
 const BODY_REMS = 1;
 
-export default createGlobalStyle`
+export const GlobalStyle = createGlobalStyle`
+${styledNormalize}
   @font-face {
     font-family: 'Fira Mono';
     font-style: normal;
@@ -59,39 +61,47 @@ export default createGlobalStyle`
     padding: 0;
   }
   body {
+    background: black;
+    color: white;
     font-family: 'Fira Sans', sans-serif;
     line-height: ${calculateLineHeight(BODY_REMS)};
   }
-  h1, h2 {
-    font-family: 'Fira Mono', monospace;
-  }
   h1 {
-  font-size: ${H1_REMS}rem;
+    font-size: ${H1_REMS}rem;
     line-height: ${calculateLineHeight(H1_REMS)};
+    margin: 0 0 1rem 0;
   }
   h2 {
-  font-size: ${H2_REMS}rem;
+    font-size: ${H2_REMS}rem;
     line-height: ${calculateLineHeight(H2_REMS)};
+    margin-bottom: 1rem;
   }
   h3 {
-  font-size: ${H3_REMS}rem;
+    font-size: ${H3_REMS}rem;
     line-height: ${calculateLineHeight(H3_REMS)};
+    margin-bottom: 1rem;
   }
   h4 {
-  font-size: ${H4_REMS}rem;
+    font-size: ${H4_REMS}rem;
     line-height: ${calculateLineHeight(H4_REMS)};
+    margin-bottom: 1rem;
   }
   h5 {
-  font-size: ${H5_REMS}rem;
+    font-size: ${H5_REMS}rem;
     line-height: ${calculateLineHeight(H5_REMS)};
+    margin-bottom: 1rem;
   }
   h6 {
-  font-size: ${H6_REMS}rem;
+    font-size: ${H6_REMS}rem;
     line-height: ${calculateLineHeight(H6_REMS)};
+    margin-bottom: 1rem;
+  }
+  p {
+    margin-bottom: 1rem;
   }
 `;
 
 function calculateLineHeight(rems, baselines = 1) {
-  const lineHeight = (baselines * BASELINE) / (rems * REM_PIXELS);
+  const lineHeight = (baselines * BASELINE_PIXELS) / (rems * REM_PIXELS);
   return lineHeight > 1 ? lineHeight : calculateLineHeight(rems, baselines + 1);
 }

@@ -2,8 +2,8 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import styled from 'styled-components';
 
-import CopyrightWidget from '../CopyrightWidget';
-import GlobalStyle from '../GlobalStyle';
+import { CopyrightWidget, GlobalStyle } from '..';
+import { NavigationBar } from '../NavigationBar'; // Issue with styling a component imported from an index
 
 const Div = styled.div`
   display: flex;
@@ -12,25 +12,36 @@ const Div = styled.div`
 `;
 const Footer = styled.footer`
   display: flex;
+  flex: initial;
   justify-content: space-around;
   margin-top: auto;
 `;
-const Header = styled.header``;
+const Header = styled.header`
+  display: flex;
+  flex: initial;
+`;
 const Main = styled.main`
-  flex: 1;
+  display: ${props => props.mainDisplay || 'block'};
+  flex: auto;
+`;
+const StyledNavigationBar = styled(NavigationBar)`
+  flex: auto;
 `;
 
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
+  mainDisplay: PropTypes.string,
 };
 
-export default function Layout({ children, ...restProps }) {
+export function Layout({ children, mainDisplay, ...restProps }) {
   return (
     <>
       <GlobalStyle />
       <Div {...restProps}>
-        <Header />
-        <Main>{children}</Main>
+        <Header>
+          <StyledNavigationBar />
+        </Header>
+        <Main mainDisplay={mainDisplay}>{children}</Main>
         <Footer>
           <CopyrightWidget holder="Nathaniel J. Liberty" initialYear={2019} />
         </Footer>
