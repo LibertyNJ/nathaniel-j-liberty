@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 
 let _canvas;
-let _intervalId;
+let _animationRequestId;
 
 export function StarCanvas({ ...restProps }) {
   const canvasRef = useRef();
@@ -23,7 +23,7 @@ function listenForWindowResize() {
 }
 
 function handleWindowResize() {
-  clearInterval(_intervalId);
+  cancelAnimationFrame(_animationRequestId);
   initStarField();
 }
 
@@ -34,11 +34,11 @@ function stopListeningForWindowResize() {
 function initStarField() {
   spreadCanvas();
   const stars = createStars(200);
-  _intervalId = setInterval(() => {
+  _animationRequestId = requestAnimationFrame(() => {
     drawFrame(stars);
-  }, calculateIntervalFromFps(60));
+  });
   return () => {
-    clearInterval(_intervalId);
+    cancelAnimationFrame(_animationRequestId);
   };
 }
 
@@ -106,6 +106,9 @@ function randomizeStarSize() {
 function drawFrame(stars) {
   clearCanvas();
   drawStars(stars);
+  _animationRequestId = requestAnimationFrame(() => {
+    drawFrame(stars);
+  });
 }
 
 function clearCanvas() {
@@ -129,8 +132,4 @@ function getStarFillStyle({ hue, saturation, luminosity }) {
 
 function randomizeLuminosity(luminosity) {
   return Math.floor(Math.random() * (luminosity + 1));
-}
-
-function calculateIntervalFromFps(fps) {
-  return 1000 / fps;
 }
