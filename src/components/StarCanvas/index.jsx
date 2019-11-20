@@ -1,46 +1,51 @@
 import React, { useEffect, useRef } from 'react';
 
+let _canvas;
+let _intervalId;
+
 export function StarCanvas({ ...restProps }) {
   const canvasRef = useRef();
-  useEffect(drawCanvas, []);
+  useEffect(() => {
+    setCanvas(canvasRef.current);
+  }, []);
   useEffect(listenForWindowResize, []);
+  useEffect(initStarField, []);
   return <canvas ref={canvasRef} {...restProps}></canvas>;
-
-  function drawCanvas() {
-    draw(canvasRef.current);
-  }
-
-  function listenForWindowResize() {
-    window.addEventListener('resize', handleWindowResize);
-    return stopListeningForWindowResize;
-  }
-
-  function stopListeningForWindowResize() {
-    window.removeEventListener('resize', handleWindowResize);
-  }
-
-  function handleWindowResize() {
-    draw(canvasRef.current);
-  }
 }
 
-function draw(canvas) {
+function setCanvas(canvas) {
+  _canvas = canvas;
+}
+
+function listenForWindowResize() {
+  window.addEventListener('resize', handleWindowResize);
+  return stopListeningForWindowResize;
+}
+
+function handleWindowResize() {
+  clearInterval(_intervalId);
+  initStarField();
+}
+
+function stopListeningForWindowResize() {
+  window.removeEventListener('resize', handleWindowResize);
+}
+
+function initStarField() {
+  spreadCanvas();
+  const stars = createStars(200);
+  _intervalId = setInterval(() => {
+    drawFrame(stars);
+  }, calculateIntervalFromFps(60));
+  return () => {
+    clearInterval(_intervalId);
+  };
+}
+
+function spreadCanvas() {
   const { height, width } = getMainElementDimensions();
-  canvas.height = height;
-  canvas.width = width;
-  const canvasDimensions = { height: canvas.height, width: canvas.width };
-  const stars = createStars(200, canvasDimensions);
-  const context = canvas.getContext('2d');
-  stars.forEach(star => drawStar(star, context));
-}
-
-function createStars(numberOfStars, canvasDimensions) {
-  const stars = [];
-  for (let i = 0; i < numberOfStars; i++) {
-    const star = createStar(canvasDimensions);
-    stars.push(star);
-  }
-  return stars;
+  _canvas.height = height;
+  _canvas.width = width;
 }
 
 function getMainElementDimensions() {
@@ -50,46 +55,82 @@ function getMainElementDimensions() {
   return { height, width };
 }
 
-function drawStar({ color, coordinates, size }, context) {
-  context.fillStyle = color;
-  context.fillRect(coordinates.x, coordinates.y, size, size);
+function createStars(numberOfStars) {
+  const stars = [];
+  for (let i = 0; i < numberOfStars; i++) {
+    const star = createStar();
+    stars.push(star);
+  }
+  return stars;
 }
 
-function createStar(canvasDimensions) {
+function createStar() {
   return {
-    color: getStarColor(),
+    color: randomizeStarColor(),
     coordinates: {
-      x: getStarCoordinate(canvasDimensions.width),
-      y: getStarCoordinate(canvasDimensions.height),
+      x: randomizeStarCoordinate(_canvas.width),
+      y: randomizeStarCoordinate(_canvas.height),
     },
-    size: getStarSize(),
+    size: randomizeStarSize(),
   };
 }
 
 const starColors = [
-  'Blue',
-  'SteelBlue',
-  'LightSkyBlue',
-  'White',
-  'LightYellow',
-  'Moccasin',
-  'LightSalmon',
+  { name: 'Blue', hue: 240, saturation: 100, luminosity: 50 },
+  { name: 'SteelBlue', hue: 207, saturation: 44, luminosity: 49 },
+  { name: 'LightSkyBlue', hue: 203, saturation: 92, luminosity: 75 },
+  { name: 'White', hue: 0, saturation: 0, luminosity: 100 },
+  { name: 'LightYellow', hue: 60, saturation: 100, luminosity: 94 },
+  { name: 'Moccasin', hue: 38, saturation: 100, luminosity: 85 },
+  { name: 'LightSalmon', hue: 17, saturation: 100, luminosity: 74 },
 ];
 
-function getStarColor() {
-  const colorIndex = getColorIndex();
-  return starColors[colorIndex];
+function randomizeStarColor() {
+  const starColorIndex = randomizeStarColorIndex();
+  return starColors[starColorIndex];
 }
 
-function getColorIndex() {
+function randomizeStarColorIndex() {
   return Math.floor(Math.random() * starColors.length);
 }
 
-function getStarCoordinate(axisLength) {
+function randomizeStarCoordinate(axisLength) {
   return Math.floor(Math.random() * axisLength);
 }
 
-function getStarSize() {
-  const STAR_SIZES = 3;
-  return Math.ceil(Math.random() * STAR_SIZES);
+function randomizeStarSize() {
+  const MAX_STAR_SIZE = 3;
+  return Math.ceil(Math.random() * MAX_STAR_SIZE);
+}
+
+function drawFrame(stars) {
+  clearCanvas();
+  drawStars(stars);
+}
+
+function clearCanvas() {
+  const context = _canvas.getContext('2d');
+  context.clearRect(0, 0, _canvas.width, _canvas.height);
+}
+
+function drawStars(stars) {
+  const context = _canvas.getContext('2d');
+  stars.forEach(star => drawStar(star, context));
+}
+
+function drawStar({ color, coordinates, size }, context) {
+  context.fillStyle = getStarFillStyle(color);
+  context.fillRect(coordinates.x, coordinates.y, size, size);
+}
+
+function getStarFillStyle({ hue, saturation, luminosity }) {
+  return `hsl(${hue}, ${saturation}%, ${randomizeLuminosity(luminosity)}%)`;
+}
+
+function randomizeLuminosity(luminosity) {
+  return Math.floor(Math.random() * (luminosity + 1));
+}
+
+function calculateIntervalFromFps(fps) {
+  return 1000 / fps;
 }
