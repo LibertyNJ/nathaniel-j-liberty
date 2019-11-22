@@ -130,12 +130,12 @@ export function NavBar({ ...restProps }) {
   const navItemsWidth = getNavItemsWidth();
   return (
     <Nav {...restProps}>
-      <Link to="/">
+      {/* <Link to="/">
         <Brand>
           Nathaniel J. Liberty <br />
           <Tagline>Software Developer</Tagline>
         </Brand>
-      </Link>
+      </Link> */}
       {/* <NavItemsToggle
         onClick={() => {
           setNavItemsAreShown(!navItemsAreShown);
