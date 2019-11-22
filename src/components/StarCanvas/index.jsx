@@ -4,19 +4,28 @@ import React, { useEffect, useRef } from 'react';
 let _animationRequestId;
 let _canvas;
 let _coveredElementSelector;
+let _filter;
 let _twinkle;
 
 StarCanvas.propTypes = {
   coveredElementSelector: PropTypes.string.isRequired,
+  filter: PropTypes.bool,
   twinkle: PropTypes.bool,
 };
 
 StarCanvas.defaultProps = {
+  filter: false,
   twinkle: false,
 };
 
-export function StarCanvas({ coveredElementSelector, twinkle, ...restProps }) {
+export function StarCanvas({
+  coveredElementSelector,
+  filter,
+  twinkle,
+  ...restProps
+}) {
   setCoveredElementSelector(coveredElementSelector);
+  setFilter(filter);
   setTwinkle(twinkle);
   const canvasRef = useRef();
   useEffect(() => {
@@ -29,6 +38,10 @@ export function StarCanvas({ coveredElementSelector, twinkle, ...restProps }) {
 
 function setCoveredElementSelector(coveredElementSelector) {
   _coveredElementSelector = coveredElementSelector;
+}
+
+function setFilter(filter) {
+  _filter = filter;
 }
 
 function setTwinkle(twinkle) {
@@ -133,10 +146,11 @@ function randomizeStarSize() {
 function drawFrame(stars) {
   clearCanvas();
   drawStars(stars);
+  if (_filter) {
+    drawFilter();
+  }
   if (_twinkle) {
-    _animationRequestId = requestAnimationFrame(() => {
-      drawFrame(stars);
-    });
+    animateStars(stars);
   }
 }
 
@@ -161,4 +175,46 @@ function getStarFillStyle({ hue, saturation, luminosity }) {
 
 function randomizeLuminosity(luminosity) {
   return Math.floor(Math.random() * (luminosity + 1));
+}
+
+function drawFilter() {
+  const context = _canvas.getContext('2d');
+  const topGradient = context.createLinearGradient(
+    0,
+    0,
+    _canvas.width,
+    window.innerHeight
+  );
+  topGradient.addColorStop(0, 'rgba(0, 0, 0, 0)');
+  topGradient.addColorStop(1, 'rgba(0, 0, 0, 1)');
+  context.fillStyle = topGradient;
+  context.fillRect(0, 0, _canvas.width, window.innerHeight);
+  context.fillStyle = 'black';
+  context.fillRect(
+    0,
+    window.innerHeight,
+    _canvas.width,
+    _canvas.height - 2 * window.innerHeight
+  );
+  const bottomGradient = context.createLinearGradient(
+    0,
+    _canvas.height - window.innerHeight,
+    _canvas.width,
+    _canvas.height,
+  );
+  bottomGradient.addColorStop(0, 'rgba(0, 0, 0, 1)');
+  bottomGradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
+  context.fillStyle = bottomGradient;
+  context.fillRect(
+    0,
+    _canvas.height - window.innerHeight,
+    _canvas.width,
+    window.innerHeight
+  );
+}
+
+function animateStars(stars) {
+  _animationRequestId = requestAnimationFrame(() => {
+    drawFrame(stars);
+  });
 }

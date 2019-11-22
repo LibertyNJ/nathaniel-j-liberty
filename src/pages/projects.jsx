@@ -6,7 +6,7 @@ import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import { faGlobe } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { Button, Layout, SEO } from '../components';
+import { Button, Layout, SEO, StarCanvas } from '../components';
 
 const BlockButton = styled(Button)`
   display: inline-block;
@@ -62,6 +62,12 @@ const StyledImage = styled.div`
 const StyledIcon = styled(FontAwesomeIcon)`
   margin-right: 1rem;
 `;
+const StyledStarCanvas = styled(StarCanvas)`
+  left: 0;
+  position: absolute;
+  top: 0;
+  z-index: -1;
+`;
 const Subtitle = styled.span`
   font-size: 1.5rem;
   vertical-align: top;
@@ -75,6 +81,7 @@ export default function ProjectsPage({ ...restProps }) {
   return (
     <Layout {...restProps}>
       <SEO title="Projects" />
+      <StyledStarCanvas coveredElementSelector="body" filter></StyledStarCanvas>
       <section>
         <Title>Projects</Title>
         <Project
