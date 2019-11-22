@@ -18,7 +18,7 @@ Project.propTypes = {
   name: PropTypes.string.isRequired,
 };
 
-export default function Project({
+export function Project({
   children,
   githubSlug,
   image,
