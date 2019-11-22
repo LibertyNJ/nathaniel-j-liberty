@@ -1,8 +1,7 @@
 import { Link } from 'gatsby';
 import React from 'react';
 
-import Layout from '../components/Layout';
-import SEO from '../components/SEO';
+import { Button, Layout, SEO } from '../components';
 
 export default function NotFoundPage({ ...restProps }) {
   return (
@@ -18,7 +17,7 @@ export default function NotFoundPage({ ...restProps }) {
         <em>How embarrassing…</em>
       </p>
       <Link to="/">
-        <button type="button">Go to homepage</button>
+        <Button type="button">Go to homepage</Button>
       </Link>
     </Layout>
   );

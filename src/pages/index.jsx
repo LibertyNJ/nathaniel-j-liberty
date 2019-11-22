@@ -5,15 +5,33 @@ import { faRocket, faSatellite } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { Button, Layout, SEO, StarCanvas } from '../components';
+import { variables as styleVariables } from '../components/GlobalStyle';
 
 const BlockButton = styled(Button)`
-  display: inline-block;
-  margin-left: 1rem;
+  display: block;
+  font-size: ${styleVariables.h4.xs.rem}rem;
+  line-height: ${styleVariables.h4.xs.lh};
+  margin: 0 auto ${2 * styleVariables.baselinePixels}px auto;
   white-space: nowrap;
+  width: 100%;
+  @media (min-width: ${styleVariables.breakpoint.sm}px) {
+    margin: 0 0 0 ${2 * styleVariables.baselinePixels}px;
+    width: auto;
+  }
+  @media (min-width: ${styleVariables.breakpoint.md}px) {
+    font-size: ${styleVariables.h4.md.rem}rem;
+    line-height: ${styleVariables.h4.md.lh};
+  }
+  @media (min-width: ${styleVariables.breakpoint.lg}px) {
+    font-size: ${styleVariables.h4.lg.rem}rem;
+    line-height: ${styleVariables.h4.lg.lh};
+  }
 `;
 const ButtonContainer = styled.div`
-  display: flex;
-  justify-content: flex-end;
+  @media (min-width: ${styleVariables.breakpoint.sm}px) {
+    display: flex;
+    justify-content: flex-end;
+  }
 `;
 const Container = styled.div`
   display: flex;
@@ -21,28 +39,47 @@ const Container = styled.div`
   justify-content: center;
   margin: 0 auto;
 `;
-const Paragraph = styled.p`
-  font-size: 1.25rem;
-  line-height: 1.6;
-  margin-bottom: 3rem;
+const Lead = styled.p`
+  font-size: ${styleVariables.h5.xs.rem}rem;
+  line-height: ${styleVariables.h5.xs.lh};
+  margin-bottom: ${2 * styleVariables.baselinePixels}px;
   max-width: 33em;
+  @media (min-width: ${styleVariables.breakpoint.md}px) {
+    font-size: ${styleVariables.h5.md.rem}rem;
+    line-height: ${styleVariables.h5.md.lg};
+  }
 `;
 const Title = styled.h1`
   font-family: 'Fira Mono', monospace;
+  margin-bottom: ${2 * styleVariables.baselinePixels}px;
 `;
 const StyledStarCanvas = styled(StarCanvas)`
+  left: 0;
   position: absolute;
+  top: 0;
   z-index: -1;
 `;
 const StyledIcon = styled(FontAwesomeIcon)`
   margin-right: 1rem;
 `;
+const StyledLink = styled(Link)`
+  text-decoration: none;
+`;
 const Subtitle = styled.span`
-  font-size: 1.5rem;
-  vertical-align: top;
+  display: block;
+  font-size: ${styleVariables.h4.xs.rem}rem;
+  line-height: ${styleVariables.h4.xs.lh};
   white-space: nowrap;
   ::before {
     content: '// ';
+  }
+  @media (min-width: ${styleVariables.breakpoint.md}px) {
+    font-size: ${styleVariables.h3.md.rem}rem;
+    line-height: ${styleVariables.h3.md.lh};
+  }
+  @media (min-width: ${styleVariables.breakpoint.lg}px) {
+    font-size: ${styleVariables.h3.lg.rem}rem;
+    line-height: ${styleVariables.h3.lg.lh};
   }
 `;
 
@@ -50,29 +87,29 @@ export default function IndexPage({ ...restProps }) {
   return (
     <Layout mainDisplay="flex" {...restProps}>
       <SEO title="Home" />
-      <StyledStarCanvas></StyledStarCanvas>
+      <StyledStarCanvas coveredElementSelector="body"></StyledStarCanvas>
       <Container>
         <Title>
           Nathaniel&nbsp;J. Liberty <br />
           <Subtitle>Software Developer</Subtitle>
         </Title>
-        <Paragraph>
+        <Lead>
           Driven software developer using JavaScript and web technologies to
           build creative solutions for the healthcare industry and more.
-        </Paragraph>
+        </Lead>
         <ButtonContainer>
-          <Link to="/contact">
+          <StyledLink to="/contact">
             <BlockButton type="button">
               <StyledIcon icon={faSatellite} />
               Make contact
             </BlockButton>
-          </Link>
-          <Link to="/projects">
+          </StyledLink>
+          <StyledLink to="/projects">
             <BlockButton type="button">
               <StyledIcon icon={faRocket} />
               Explore my work
             </BlockButton>
-          </Link>
+          </StyledLink>
         </ButtonContainer>
       </Container>
     </Layout>
