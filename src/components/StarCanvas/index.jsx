@@ -189,18 +189,20 @@ function drawFilter() {
   topGradient.addColorStop(1, 'rgba(0, 0, 0, 1)');
   context.fillStyle = topGradient;
   context.fillRect(0, 0, _canvas.width, window.innerHeight);
-  context.fillStyle = 'black';
-  context.fillRect(
-    0,
-    window.innerHeight,
-    _canvas.width,
-    _canvas.height - 2 * window.innerHeight
-  );
+  if (_canvas.height > 2 * window.innerHeight) {
+    context.fillStyle = 'black';
+    context.fillRect(
+      0,
+      window.innerHeight,
+      _canvas.width,
+      _canvas.height - 2 * window.innerHeight
+    );
+  }
   const bottomGradient = context.createLinearGradient(
     0,
     _canvas.height - window.innerHeight,
     _canvas.width,
-    _canvas.height,
+    _canvas.height
   );
   bottomGradient.addColorStop(0, 'rgba(0, 0, 0, 1)');
   bottomGradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
