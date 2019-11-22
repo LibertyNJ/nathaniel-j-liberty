@@ -1,16 +1,23 @@
 import PropTypes from 'prop-types';
 import React, { useEffect, useRef } from 'react';
 
-let _canvas;
 let _animationRequestId;
+let _canvas;
 let _coveredElementSelector;
+let _twinkle;
 
 StarCanvas.propTypes = {
   coveredElementSelector: PropTypes.string.isRequired,
+  twinkle: PropTypes.bool,
 };
 
-export function StarCanvas({ coveredElementSelector, ...restProps }) {
+StarCanvas.defaultProps = {
+  twinkle: false,
+};
+
+export function StarCanvas({ coveredElementSelector, twinkle, ...restProps }) {
   setCoveredElementSelector(coveredElementSelector);
+  setTwinkle(twinkle);
   const canvasRef = useRef();
   useEffect(() => {
     setCanvas(canvasRef.current);
@@ -22,6 +29,10 @@ export function StarCanvas({ coveredElementSelector, ...restProps }) {
 
 function setCoveredElementSelector(coveredElementSelector) {
   _coveredElementSelector = coveredElementSelector;
+}
+
+function setTwinkle(twinkle) {
+  _twinkle = twinkle;
 }
 
 function setCanvas(canvas) {
@@ -46,9 +57,7 @@ function initStarField() {
   spreadCanvas();
   const numberOfStars = getNumberOfStars();
   const stars = createStars(numberOfStars);
-  _animationRequestId = requestAnimationFrame(() => {
-    drawFrame(stars);
-  });
+  drawFrame(stars);
   return () => {
     cancelAnimationFrame(_animationRequestId);
   };
@@ -124,9 +133,11 @@ function randomizeStarSize() {
 function drawFrame(stars) {
   clearCanvas();
   drawStars(stars);
-  _animationRequestId = requestAnimationFrame(() => {
-    drawFrame(stars);
-  });
+  if (_twinkle) {
+    _animationRequestId = requestAnimationFrame(() => {
+      drawFrame(stars);
+    });
+  }
 }
 
 function clearCanvas() {

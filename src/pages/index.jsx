@@ -87,7 +87,7 @@ export default function IndexPage({ ...restProps }) {
   return (
     <Layout mainDisplay="flex" {...restProps}>
       <SEO title="Home" />
-      <StyledStarCanvas coveredElementSelector="body"></StyledStarCanvas>
+      <StyledStarCanvas coveredElementSelector="body" twinkle></StyledStarCanvas>
       <Container>
         <Title>
           Nathaniel&nbsp;J. Liberty <br />
