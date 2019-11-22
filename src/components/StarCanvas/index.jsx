@@ -1,9 +1,16 @@
+import PropTypes from 'prop-types';
 import React, { useEffect, useRef } from 'react';
 
 let _canvas;
 let _animationRequestId;
+let _coveredElementSelector;
 
-export function StarCanvas({ ...restProps }) {
+StarCanvas.propTypes = {
+  coveredElementSelector: PropTypes.string.isRequired,
+};
+
+export function StarCanvas({ coveredElementSelector, ...restProps }) {
+  setCoveredElementSelector(coveredElementSelector);
   const canvasRef = useRef();
   useEffect(() => {
     setCanvas(canvasRef.current);
@@ -11,6 +18,10 @@ export function StarCanvas({ ...restProps }) {
   useEffect(listenForWindowResize, []);
   useEffect(initStarField, []);
   return <canvas ref={canvasRef} {...restProps}></canvas>;
+}
+
+function setCoveredElementSelector(coveredElementSelector) {
+  _coveredElementSelector = coveredElementSelector;
 }
 
 function setCanvas(canvas) {
@@ -33,7 +44,8 @@ function stopListeningForWindowResize() {
 
 function initStarField() {
   spreadCanvas();
-  const stars = createStars(200);
+  const numberOfStars = getNumberOfStars();
+  const stars = createStars(numberOfStars);
   _animationRequestId = requestAnimationFrame(() => {
     drawFrame(stars);
   });
@@ -43,16 +55,22 @@ function initStarField() {
 }
 
 function spreadCanvas() {
-  const { height, width } = getMainElementDimensions();
+  const { height, width } = getCoveredElementDimensions();
   _canvas.height = height;
   _canvas.width = width;
 }
 
-function getMainElementDimensions() {
-  const mainElement = document.querySelector('main');
-  const height = mainElement.offsetHeight;
-  const width = mainElement.offsetWidth;
+function getCoveredElementDimensions() {
+  const coveredElement = document.querySelector(_coveredElementSelector);
+  const height = coveredElement.offsetHeight;
+  const width = coveredElement.offsetWidth;
   return { height, width };
+}
+
+function getNumberOfStars() {
+  const SQUARE_PIXELS_PER_STAR = 2000;
+  const canvasArea = _canvas.width * _canvas.height;
+  return canvasArea / SQUARE_PIXELS_PER_STAR;
 }
 
 function createStars(numberOfStars) {
