@@ -15,25 +15,12 @@ import { variables as styleVariables } from '../components/GlobalStyle';
 
 const BlockButton = styled(Button)`
   display: block;
-  font-size: ${styleVariables.h4.xs.rem}rem;
-  line-height: ${styleVariables.h4.xs.lh};
   margin: 0 auto ${2 * styleVariables.baselinePixels}px auto;
-  white-space: nowrap;
   width: 100%;
 
   @media (min-width: ${styleVariables.breakpoint.sm}px) {
     margin: 0 0 0 auto;
     width: auto;
-  }
-
-  @media (min-width: ${styleVariables.breakpoint.md}px) {
-    font-size: ${styleVariables.h4.md.rem}rem;
-    line-height: ${styleVariables.h4.md.lh};
-  }
-
-  @media (min-width: ${styleVariables.breakpoint.lg}px) {
-    font-size: ${styleVariables.h4.lg.rem}rem;
-    line-height: ${styleVariables.h4.lg.lh};
   }
 `;
 
@@ -92,6 +79,9 @@ const Title = styled.h1`
   font-family: 'Fira Mono', monospace;
   text-align: center;
 `;
+const StyledLink = styled(Link)`
+  text-decoration: none;
+`;
 
 export default function AboutPage({ data, ...restProps }) {
   return (
@@ -103,12 +93,15 @@ export default function AboutPage({ data, ...restProps }) {
         <Container>
           <Profile>
             <Frame>
-              <Image fluid={data.file.childImageSharp.fluid} />
+              <Image
+                fluid={data.file.childImageSharp.fluid}
+                alt="Nathaniel J. Liberty in the hall of rockets at the National Air and Space Museum in Washington, DC."
+              />
             </Frame>
             <p>Nathaniel J. Liberty</p>
           </Profile>
           <a href="../../nathaniel-j-liberty-resume.pdf" download>
-            <Button type="button">
+            <Button size="small" type="button">
               <StyledIcon icon={faFileDownload} />
               Resume
             </Button>
@@ -122,18 +115,18 @@ export default function AboutPage({ data, ...restProps }) {
           </Paragraph>
           <Paragraph>Your project could be next.</Paragraph>
           <ButtonContainer>
-            <Link to="/contact">
-              <BlockButton type="button">
+            <StyledLink to="/contact">
+              <BlockButton size="large" type="button">
                 <StyledIcon icon={faSatellite} />
                 Make contact
               </BlockButton>
-            </Link>
-            <Link to="/projects">
-              <BlockButton type="button">
+            </StyledLink>
+            <StyledLink to="/projects">
+              <BlockButton size="large" type="button">
                 <StyledIcon icon={faRocket} />
                 Explore my work
               </BlockButton>
-            </Link>
+            </StyledLink>
           </ButtonContainer>
         </Container>
       </section>

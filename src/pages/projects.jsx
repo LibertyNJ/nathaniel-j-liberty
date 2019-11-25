@@ -3,19 +3,32 @@ import Image from 'gatsby-image';
 import React from 'react';
 import styled from 'styled-components';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
-import { faGlobe } from '@fortawesome/free-solid-svg-icons';
+import {
+  faGlobe,
+  faSatellite,
+  faUserAstronaut,
+} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { Button, Layout, SEO, StarCanvas } from '../components';
+import { variables as styleVariables } from '../components/GlobalStyle';
 
 const BlockButton = styled(Button)`
-  display: inline-block;
-  margin-left: 1rem;
-  white-space: nowrap;
+  display: block;
+  margin: 0 auto ${2 * styleVariables.baselinePixels}px auto;
+  width: 100%;
+
+  @media (min-width: ${styleVariables.breakpoint.sm}px) {
+    margin: 0 0 0 ${2 * styleVariables.baselinePixels}px;
+    width: auto;
+  }
 `;
+
 const ButtonContainer = styled.div`
-  display: flex;
-  justify-content: flex-end;
+  @media (min-width: ${styleVariables.breakpoint.sm}px) {
+    display: flex;
+    justify-content: flex-end;
+  }
 `;
 const Container = styled.div`
   display: flex;
@@ -75,6 +88,9 @@ const Subtitle = styled.span`
   ::before {
     content: '// ';
   }
+`;
+const StyledLink = styled(Link)`
+  text-decoration: none;
 `;
 
 export default function ProjectsPage({ ...restProps }) {
@@ -349,12 +365,20 @@ export default function ProjectsPage({ ...restProps }) {
           </section>
         </Project>
       </section>
-      <Link to="/contact">
-        <button type="button"></button>
-      </Link>
-      <Link to="/about">
-        <button type="button">Learn more</button>
-      </Link>
+      <ButtonContainer>
+        <StyledLink to="/contact">
+          <BlockButton size="large" type="button">
+            <StyledIcon icon={faSatellite} />
+            Make contact
+          </BlockButton>
+        </StyledLink>
+        <StyledLink to="/about">
+          <BlockButton size="large" type="button">
+            <StyledIcon icon={faUserAstronaut} />
+            Learn about me
+          </BlockButton>
+        </StyledLink>
+      </ButtonContainer>
     </Layout>
   );
 }

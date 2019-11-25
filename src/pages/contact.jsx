@@ -8,25 +8,12 @@ import { variables as styleVariables } from '../components/GlobalStyle';
 
 const BlockButton = styled(Button)`
   display: block;
-  font-size: ${styleVariables.h4.xs.rem}rem;
-  line-height: ${styleVariables.h4.xs.lh};
   margin: 0 auto ${2 * styleVariables.baselinePixels}px auto;
-  white-space: nowrap;
   width: 100%;
 
   @media (min-width: ${styleVariables.breakpoint.sm}px) {
     margin: 0 0 0 auto;
     width: auto;
-  }
-
-  @media (min-width: ${styleVariables.breakpoint.md}px) {
-    font-size: ${styleVariables.h4.md.rem}rem;
-    line-height: ${styleVariables.h4.md.lh};
-  }
-
-  @media (min-width: ${styleVariables.breakpoint.lg}px) {
-    font-size: ${styleVariables.h4.lg.rem}rem;
-    line-height: ${styleVariables.h4.lg.lh};
   }
 `;
 
@@ -127,7 +114,7 @@ export default function ContactPage({ ...restProps }) {
               <Label htmlFor="message">Message</Label>
               <Input as="textarea" id="message" form="contact-form" required />
             </FormGroup>
-            <BlockButton form="contact-form" type="submit">
+            <BlockButton form="contact-form" size="medium" type="submit">
               <StyledIcon icon={faSatelliteDish} />
               Transmit
             </BlockButton>
