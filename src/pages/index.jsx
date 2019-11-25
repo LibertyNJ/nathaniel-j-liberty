@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { faRocket, faSatellite } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { Button, Layout, SEO, StarCanvas } from '../components';
+import { Button, Layout, Lead, SEO, StarCanvas } from '../components';
 import { variables as styleVariables } from '../components/GlobalStyle';
 
 const BlockButton = styled(Button)`
@@ -32,39 +32,9 @@ const Container = styled.div`
   margin: 0 auto;
 `;
 
-// const Container = styled.div`
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: center;
-//   margin: 0 auto;
-//   width: 100%;
-
-//   @media (min-width: ${styleVariables.breakpoint.sm}px) {
-//     max-width: 540px;
-//   }
-
-//   @media (min-width: ${styleVariables.breakpoint.md}px) {
-//     max-width: 720px;
-//   }
-
-//   @media (min-width: ${styleVariables.breakpoint.lg}px) {
-//     max-width: 960px;
-//   }
-
-//   @media (min-width: ${styleVariables.breakpoint.xl}px) {
-//     max-width: 1140px;
-//   }
-// `;
-const Lead = styled.p`
-  font-size: ${styleVariables.h5.xs.rem}rem;
-  line-height: ${styleVariables.h5.xs.lh};
+const StyledLead = styled(Lead)`
   margin-bottom: ${2 * styleVariables.baselinePixels}px;
   max-width: 33em;
-
-  @media (min-width: ${styleVariables.breakpoint.md}px) {
-    font-size: ${styleVariables.h5.md.rem}rem;
-    line-height: ${styleVariables.h5.md.lg};
-  }
 `;
 
 const Title = styled.h1`
@@ -118,10 +88,10 @@ export default function IndexPage({ ...restProps }) {
           Nathaniel&nbsp;J. Liberty <br />
           <Subtitle>Software Developer</Subtitle>
         </Title>
-        <Lead>
+        <StyledLead>
           Driven software developer using JavaScript and web technologies to
           build creative solutions for the healthcare industry and more.
-        </Lead>
+        </StyledLead>
         <ButtonContainer>
           <StyledLink to="/contact">
             <BlockButton size="large" type="button">

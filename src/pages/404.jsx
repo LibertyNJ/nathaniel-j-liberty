@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { faGlobeAmericas } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { Button, Layout, SEO, StarCanvas } from '../components';
+import { Button, Layout, Lead, SEO, StarCanvas } from '../components';
 import { variables as styleVariables } from '../components/GlobalStyle';
 
 const BlockButton = styled(Button)`
@@ -30,6 +30,11 @@ const StyledIcon = styled(FontAwesomeIcon)`
   margin-right: 1rem;
 `;
 
+const StyledLead = styled(Lead)`
+  margin-bottom: ${2 * styleVariables.baselinePixels}px;
+  max-width: 33em;
+`;
+
 const StyledStarCanvas = styled(StarCanvas)`
   left: 0;
   position: absolute;
@@ -44,7 +49,7 @@ export default function NotFoundPage({ ...restProps }) {
       <StyledStarCanvas coveredElementSelector="body" twinkle />
       <Container>
         <h1>404 Error: Page Not Found</h1>
-        <p>Oops!</p>
+        <StyledLead>Oops!</StyledLead>
         <p>
           You have requested a resource that does not exist, or worse, have
           wandered into a black hole.
