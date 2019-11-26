@@ -1,4 +1,3 @@
-import { Link } from 'gatsby';
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
@@ -6,23 +5,6 @@ import styled from 'styled-components';
 import { CopyrightWidget, GlobalStyle } from '..';
 import { NavBar } from '../NavBar'; // Issue with styling a component imported from an index
 import { variables as styleVariables } from '../GlobalStyle';
-
-const Brand = styled.div`
-  font-size: ${styleVariables.h5.xs.rem}rem;
-  line-height: ${styleVariables.h5.xs.lh};
-  padding: ${styleVariables.baselinePixels}px 0;
-  white-space: nowrap;
-  flex: initial;
-  transition: filter 500ms;
-
-  :focus {
-    filter: drop-shadow(0 0 10px white);
-  }
-
-  :hover {
-    cursor: pointer;
-  }
-`;
 
 const LayoutContainer = styled.div`
   display: flex;
@@ -41,24 +23,7 @@ const Footer = styled.footer`
   margin-top: auto;
   padding: ${styleVariables.baselinePixels}px
     ${2 * styleVariables.baselinePixels}px;
-  transition: background 1000ms;
-`;
-
-const Header = styled.header`
-  background: ${props => (props.isWindowScrolled ? 'black' : 'none')};
-  display: flex;
-  flex: initial;
-  justify-content: space-between;
-  padding: 0 ${2 * styleVariables.baselinePixels}px;
-  position: sticky;
-  top: 0;
-  transition: background 1000ms;
-  z-index: 1;
-
-  a {
-    color: inherit;
-    text-decoration: none;
-  }
+  transition: background 500ms;
 `;
 
 const Main = styled.main`
@@ -68,17 +33,13 @@ const Main = styled.main`
 `;
 
 const StyledNavBar = styled(NavBar)`
+  background: ${props => props.isWindowScrolled && 'black'};
   flex: initial;
-`;
-
-const Tagline = styled.span`
-  display: block;
-  font-size: ${styleVariables.small.xs.rem}rem;
-  line-height: ${styleVariables.small.xs.lh};
-
-  ::before {
-    content: '// ';
-  }
+  padding: 0 ${2 * styleVariables.baselinePixels}px;
+  position: sticky;
+  top: 0;
+  transition: background 500ms;
+  z-index: 1;
 `;
 
 Layout.propTypes = {
@@ -93,13 +54,7 @@ export function Layout({ children, mainDisplay, ...restProps }) {
     <>
       <GlobalStyle />
       <LayoutContainer {...restProps}>
-        <Header isWindowScrolled={isWindowScrolled}>
-          <Brand as={Link} to="/">
-            Nathaniel J. Liberty <br />
-            <Tagline>Software Developer</Tagline>
-          </Brand>
-          <StyledNavBar />
-        </Header>
+        <StyledNavBar isWindowScrolled={isWindowScrolled} />
         <Main mainDisplay={mainDisplay}>{children}</Main>
         <Footer isWindowScrolled={isWindowScrolled}>
           <CopyrightWidget holder="Nathaniel J. Liberty" initialYear={2019} />

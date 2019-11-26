@@ -1,81 +1,90 @@
 import { Link } from 'gatsby';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { variables as styleVariables } from '../GlobalStyle';
 
+const Brand = styled.div`
+  font-size: ${styleVariables.h5.xs.rem}rem;
+  line-height: ${styleVariables.h5.xs.lh};
+  padding: ${styleVariables.baselinePixels}px 0;
+  white-space: nowrap;
+  flex: initial;
+  transition: filter 500ms;
+
+  :focus {
+    filter: drop-shadow(0 0 10px white);
+  }
+
+  :hover {
+    cursor: pointer;
+  }
+`;
+
 const Nav = styled.nav`
+  background: ${props => (props.isNavListShown ? 'black' : 'none')};
   display: flex;
   font-family: 'Fira Mono', monospace;
+  justify-content: space-between;
+  transition: background 500ms;
 
   a {
     color: inherit;
     text-decoration: none;
   }
+
+  @media (min-width: ${styleVariables.breakpoint.md}px) {
+    background: none;
+  }
+
 `;
 
 const NavList = styled.ul`
-  align-items: stretch;
-  display: none;
-  flex: auto;
-  justify-content: flex-end;
+  background: black;
+  height: calc(100vh - ${props => props.navHeight}px);
+  left: 0;
   list-style: none;
-  margin-bottom: 0;
-  padding-inline-start: 0;
-  transition: right 500ms;
-
-  &.preshow,
-  &.show {
-    background: black;
-    border: 1px white solid;
-    border-radius: 0.25rem;
-    border-right: none;
-    display: block;
-    padding: ${2 * styleVariables.baselinePixels}px 0
-      ${2 * styleVariables.baselinePixels}px
-      ${2 * styleVariables.baselinePixels}px;
-    position: absolute;
-    top: ${props => props.navHeight}px;
-  }
-
-  &.preshow {
-    right: -${props => props.navListWidth}px;
-  }
+  margin-bottom: 0px;
+  opacity: 0;
+  padding: ${2 * styleVariables.baselinePixels}px;
+  position: absolute;
+  top: ${props => props.navHeight}px;
+  transition: opacity 500ms;
+  visibility: hidden;
+  width: 100%;
 
   &.show {
-    right: 0px;
+    visibility: visible;
+    opacity: 1;
+  }
+
+  &.hiding {
+    visibility: visible;
+    opacity: 0;
   }
 
   @media (min-width: ${styleVariables.breakpoint.md}px) {
-    &,
-    &.show {
-      background: none;
-      display: flex;
-      position: static;
-    }
+    background: none;
+    display: flex;
+    height: auto;
+    opacity: 1;
+    padding: ${styleVariables.baselinePixels}px;
+    position: static;
+    visibility: visible;
+    width: auto;
   }
 `;
 
 const NavItem = styled.li`
-  align-items: center;
-  display: flex;
-  font-size: ${styleVariables.body.xs.rem}rem;
-  line-height: ${styleVariables.body.xs.lh};
-  margin-left: ${2 * styleVariables.baselinePixels}px;
+  font-size: ${styleVariables.h5.xs.rem}rem;
+  line-height: ${styleVariables.h5.xs.lh};
+  margin-bottom: ${2 * styleVariables.baselinePixels}px;
+  text-align: center;
 
-  .preshow &,
-  .show & {
-    margin: ${2 * styleVariables.baselinePixels}px 0;
-
-    :first-child {
-      margin-top: 0;
-    }
-
-    :last-child {
-      margin-bottom: 0;
-    }
+  @media (min-width: ${styleVariables.breakpoint.md}px) {
+    margin: 0 0 0 ${2 * styleVariables.baselinePixels}px;
   }
 `;
 
@@ -104,52 +113,79 @@ const NavListToggle = styled.button`
 `;
 
 const NavLink = styled(Link)`
-  border: 1px black solid;
+  border: none;
   border-radius: 0.25rem;
   display: block;
-  padding: ${2 * styleVariables.baselinePixels - 1}px;
-  transition: background 500ms, border-color 500ms;
-  width: 100%;
+  padding: ${2 * styleVariables.baselinePixels}px;
+  transition: background 500ms, color 500ms, filter 500ms;
 
-  :focus,
-  :hover {
-    border: 1px white solid;
+  :focus {
+    background: black;
+    filter: drop-shadow(0 0 5px white);
   }
 
-  :active,
-  &.active {
+  :hover {
     background: white;
     color: black;
   }
 
-  .preshow &,
-  .show & {
-    border-right: none;
+  :active,
+  &.active {
+    border: 1px white solid;
+    padding: ${2 * styleVariables.baselinePixels - 1}px;
+  }
+
+  @media (min-width: ${styleVariables.breakpoint.md}px) {
+    padding: ${styleVariables.baselinePixels}px;
+
+    :active,
+    &.active {
+      padding: ${styleVariables.baselinePixels - 1}px;
+    }
+  }
+`;
+
+const Tagline = styled.span`
+  display: block;
+  font-size: ${styleVariables.small.xs.rem}rem;
+  line-height: ${styleVariables.small.xs.lh};
+
+  ::before {
+    content: '// ';
   }
 `;
 
 export function NavBar({ ...restProps }) {
-  const [navListIsShown, setNavListIsShown] = useState(false);
-  const navHeight = getNavHeight();
+  const [navHeight, setNavHeight] = useState();
+  const [isNavListHiding, setisNavListHiding] = useState(false);
+  const [isNavListShown, setisNavListShown] = useState(false);
+  useEffect(() => {
+    getAndSetNavHeight(setNavHeight);
+  }, []);
   const navListWidth = getNavListWidth();
   return (
-    <Nav {...restProps}>
+    <Nav isNavListShown={isNavListShown} {...restProps}>
+      <Brand as={Link} to="/">
+        Nathaniel J. Liberty <br />
+        <Tagline>Software Developer</Tagline>
+      </Brand>
       <NavListToggle
         onClick={() => {
-          const navListElement = document.querySelector('nav > ul');
-          if (navListIsShown) {
-            navListElement.classList.replace('show', 'preshow');
-            setTimeout(() => setNavListIsShown(!navListIsShown), 500);
+          if (isNavListShown) {
+            setisNavListShown(false);
+            setisNavListHiding(true);
+            setTimeout(() => {
+              setisNavListHiding(false);
+            }, 500);
           } else {
-            navListElement.classList.add('preshow');
-            setNavListIsShown(!navListIsShown);
+            setisNavListShown(true);
           }
         }}
       >
-        <FontAwesomeIcon icon={navListIsShown ? faTimes : faBars} />
+        <FontAwesomeIcon icon={isNavListShown ? faTimes : faBars} />
       </NavListToggle>
       <NavList
-        className={navListIsShown && 'show'}
+        className={`${isNavListShown && 'show'} ${isNavListHiding && 'hiding'}`}
         navHeight={navHeight}
         navListWidth={navListWidth}
       >
@@ -173,9 +209,11 @@ export function NavBar({ ...restProps }) {
   );
 }
 
-function getNavHeight() {
+function getAndSetNavHeight(setNavHeight) {
   const navElement = document.querySelector('nav');
-  return navElement ? navElement.offsetHeight : null;
+  if (navElement) {
+    setNavHeight(navElement.offsetHeight);
+  }
 }
 
 function getNavListWidth() {

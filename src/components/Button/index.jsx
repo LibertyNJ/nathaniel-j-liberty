@@ -66,7 +66,6 @@ const StyledButton = styled.button`
     background: white;
     color: black;
     cursor: pointer;
-    outline: none;
   }
 
   @media (min-width: ${styleVariables.breakpoint.md}px) {
