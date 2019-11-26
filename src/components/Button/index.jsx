@@ -52,6 +52,8 @@ const StyledButton = styled.button`
         );
     }
   }}px;
+  text-align: center;
+  text-decoration: none;
   transition: background 500ms, color 500ms, filter 500ms;
   white-space: nowrap;
 

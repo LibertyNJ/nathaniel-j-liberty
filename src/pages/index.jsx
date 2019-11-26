@@ -47,10 +47,6 @@ const StyledIcon = styled(FontAwesomeIcon)`
   margin-right: 1rem;
 `;
 
-const StyledLink = styled(Link)`
-  text-decoration: none;
-`;
-
 const Subtitle = styled.span`
   display: block;
   font-size: ${styleVariables.h4.xs.rem}rem;
@@ -92,18 +88,14 @@ export default function IndexPage({ ...restProps }) {
           build creative solutions for the healthcare industry and more.
         </StyledLead>
         <ButtonContainer>
-          <StyledLink to="/contact">
-            <BlockButton size="large" type="button">
-              <StyledIcon icon={faSatellite} />
-              Make contact
-            </BlockButton>
-          </StyledLink>
-          <StyledLink to="/projects">
-            <BlockButton size="large" type="button">
-              <StyledIcon icon={faRocket} />
-              Explore my work
-            </BlockButton>
-          </StyledLink>
+          <BlockButton forwardedAs={Link} size="large" to="/contact">
+            <StyledIcon icon={faSatellite} />
+            Make contact
+          </BlockButton>
+          <BlockButton forwardedAs={Link} size="large" to="/projects">
+            <StyledIcon icon={faRocket} />
+            Explore my work
+          </BlockButton>
         </ButtonContainer>
       </Container>
     </Layout>

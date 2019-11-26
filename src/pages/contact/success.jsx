@@ -29,10 +29,6 @@ const StyledIcon = styled(FontAwesomeIcon)`
   margin-right: 1rem;
 `;
 
-const StyledLink = styled(Link)`
-  text-decoration: none;
-`;
-
 const StyledStarCanvas = styled(StarCanvas)`
   left: 0;
   position: absolute;
@@ -60,12 +56,10 @@ export default function ContactSuccessPage({ ...restProps }) {
           <Lead>Thank you!</Lead>
           <p>I’ll be in touch.</p>
         </TextContainer>
-        <StyledLink to="/">
-          <BlockButton size="large" type="button">
-            <StyledIcon icon={faGlobeAmericas} />
-            Go home
-          </BlockButton>
-        </StyledLink>
+        <BlockButton forwardedAs={Link} size="large" to="/">
+          <StyledIcon icon={faGlobeAmericas} />
+          Go home
+        </BlockButton>
       </Container>
     </Layout>
   );

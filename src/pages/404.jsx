@@ -30,10 +30,6 @@ const StyledIcon = styled(FontAwesomeIcon)`
   margin-right: 1rem;
 `;
 
-const StyledLink = styled(Link)`
-  text-decoration: none;
-`;
-
 const StyledStarCanvas = styled(StarCanvas)`
   left: 0;
   position: absolute;
@@ -59,12 +55,10 @@ export default function NotFoundPage({ ...restProps }) {
           somehow sent you to the edge of a black hole.
         </p>
         <p>…Either way, you should probably go back.</p>
-        <StyledLink to="/">
-          <BlockButton size="large" type="button">
-            <StyledIcon icon={faGlobeAmericas} />
-            Go home
-          </BlockButton>
-        </StyledLink>
+        <BlockButton forwardedAs={Link} size="large">
+          <StyledIcon icon={faGlobeAmericas} />
+          Go home
+        </BlockButton>
       </Container>
     </Layout>
   );

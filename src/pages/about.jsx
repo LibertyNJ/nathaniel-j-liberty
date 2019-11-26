@@ -22,6 +22,10 @@ const BlockButton = styled(Button)`
     margin: 0 ${2 * styleVariables.baselinePixels}px
       ${2 * styleVariables.baselinePixels}px 0;
     width: auto;
+
+    :last-of-type {
+      margin-right: 0;
+    }
   }
 `;
 
@@ -115,10 +119,6 @@ const StyledImage = styled(Image)`
   width: 100%;
 `;
 
-const StyledLink = styled(Link)`
-  text-decoration: none;
-`;
-
 const StyledStarCanvas = styled(StarCanvas)`
   left: 0;
   position: absolute;
@@ -170,32 +170,35 @@ export default function AboutPage({ data, ...restProps }) {
             fluid={data.file.childImageSharp.fluid}
           />
           <ProfileButtonContainer>
-            <a href="../../nathaniel-j-liberty-resume.pdf" download>
-              <ProfileButton size="small" type="button">
-                <StyledIcon icon={faFileDownload} />
-                Resume
-              </ProfileButton>
-            </a>
-            <a
+            <ProfileButton
+              download
+              forwardedAs="a"
+              href="../../nathaniel-j-liberty-resume.pdf"
+              size="small"
+            >
+              <StyledIcon icon={faFileDownload} />
+              Resume
+            </ProfileButton>
+            <ProfileButton
+              forwardedAs="a"
               href="https://github.com/LibertyNJ"
               rel="noopener noreferrer"
+              size="small"
               target="_blank"
             >
-              <ProfileButton size="small" type="button">
-                <StyledIcon icon={faGithub} />
-                GitHub
-              </ProfileButton>
-            </a>
-            <a
+              <StyledIcon icon={faGithub} />
+              GitHub
+            </ProfileButton>
+            <ProfileButton
+              forwardedAs="a"
               href="https://linkedin.com/in/nathanieljliberty"
               rel="noopener noreferrer"
+              size="small"
               target="_blank"
             >
-              <ProfileButton size="small" type="button">
-                <StyledIcon icon={faLinkedin} />
-                LinkedIn
-              </ProfileButton>
-            </a>
+              <StyledIcon icon={faLinkedin} />
+              LinkedIn
+            </ProfileButton>
           </ProfileButtonContainer>
         </ProfileContainer>
         <ContentContainer>
@@ -261,18 +264,14 @@ export default function AboutPage({ data, ...restProps }) {
             <Lead>Let’s discover how we can help each other grow.</Lead>
           </TextContainer>
           <ButtonContainer>
-            <StyledLink to="/contact">
-              <BlockButton size="large" type="button">
-                <StyledIcon icon={faSatellite} />
-                Make contact
-              </BlockButton>
-            </StyledLink>
-            <StyledLink to="/projects">
-              <BlockButton size="large" type="button">
-                <StyledIcon icon={faRocket} />
-                Explore my work
-              </BlockButton>
-            </StyledLink>
+            <BlockButton forwardedAs={Link} size="large" to="/contact">
+              <StyledIcon icon={faSatellite} />
+              Make contact
+            </BlockButton>
+            <BlockButton forwardedAs={Link} size="large" to="/projects">
+              <StyledIcon icon={faRocket} />
+              Explore my work
+            </BlockButton>
           </ButtonContainer>
         </ContentContainer>
       </Container>

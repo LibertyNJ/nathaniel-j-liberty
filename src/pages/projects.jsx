@@ -23,6 +23,10 @@ const BlockButton = styled(Button)`
     margin: 0 ${2 * styleVariables.baselinePixels}px
       ${2 * styleVariables.baselinePixels}px 0;
     width: auto;
+
+    &:last-of-type {
+      margin-right: 0;
+    }
   }
 `;
 
@@ -160,19 +164,10 @@ const ProjectDetailsButton = styled(Button)`
   width: 100%;
 `;
 
-const ProjectDetailsButtonContainer = styled.div`
-  a {
-    color: inherit;
-    text-decoration: none;
-  }
-`;
+const ProjectDetailsButtonContainer = styled.div``;
 
 const StyledIcon = styled(FontAwesomeIcon)`
   margin-right: 1rem;
-`;
-
-const StyledLink = styled(Link)`
-  text-decoration: none;
 `;
 
 const StyledStarCanvas = styled(StarCanvas)`
@@ -210,15 +205,15 @@ export default function ProjectsPage({ data, ...restProps }) {
                 fluid={getImageFluidFromData('c2-auditing-tools', data)}
               />
               <ProjectDetailsButtonContainer>
-                <ProjectDetailsButton size="small" type="button">
-                  <a
-                    href="https://github.com/LibertyNJ/c2-auditing-tools"
-                    rel="noopener noreferrer"
-                    target="_blank"
-                  >
-                    <StyledIcon icon={faGithub} />
-                    View on GitHub
-                  </a>
+                <ProjectDetailsButton
+                  forwardedAs="a"
+                  href="https://github.com/LibertyNJ/c2-auditing-tools"
+                  rel="noopener noreferrer"
+                  size="small"
+                  target="_blank"
+                >
+                  <StyledIcon icon={faGithub} />
+                  View on GitHub
                 </ProjectDetailsButton>
               </ProjectDetailsButtonContainer>
               <div>
@@ -286,25 +281,25 @@ export default function ProjectsPage({ data, ...restProps }) {
                 fluid={getImageFluidFromData('abigail-and-nathaniel', data)}
               />
               <ProjectDetailsButtonContainer>
-                <ProjectDetailsButton size="small" type="button">
-                  <a
-                    href="https://github.com/LibertyNJ/abigail-and-nathaniel"
-                    rel="noopener noreferrer"
-                    target="_blank"
-                  >
-                    <StyledIcon icon={faGithub} />
-                    View on GitHub
-                  </a>
+                <ProjectDetailsButton
+                  forwardedAs="a"
+                  href="https://github.com/LibertyNJ/abigail-and-nathaniel"
+                  rel="noopener noreferrer"
+                  size="small"
+                  target="_blank"
+                >
+                  <StyledIcon icon={faGithub} />
+                  View on GitHub
                 </ProjectDetailsButton>
-                <ProjectDetailsButton size="small" type="button">
-                  <a
-                    href="https://www.abigailandnathaniel.com/"
-                    rel="noopener noreferrer"
-                    target="_blank"
-                  >
-                    <StyledIcon icon={faGlobe} />
-                    Visit live site
-                  </a>
+                <ProjectDetailsButton
+                  forwardedAs="a"
+                  href="https://www.abigailandnathaniel.com/"
+                  rel="noopener noreferrer"
+                  size="small"
+                  target="_blank"
+                >
+                  <StyledIcon icon={faGlobe} />
+                  Visit live site
                 </ProjectDetailsButton>
               </ProjectDetailsButtonContainer>
               <div>
@@ -355,25 +350,25 @@ export default function ProjectsPage({ data, ...restProps }) {
             <ProjectDetails>
               <MobileImage fluid={getImageFluidFromData('vacctrac', data)} />
               <ProjectDetailsButtonContainer>
-                <ProjectDetailsButton size="small" type="button">
-                  <a
-                    href="https://github.com/LibertyNJ/vacctrac"
-                    rel="noopener noreferrer"
-                    target="_blank"
-                  >
-                    <StyledIcon icon={faGithub} />
-                    View on GitHub
-                  </a>
+                <ProjectDetailsButton
+                  forwardedAs="a"
+                  href="https://github.com/LibertyNJ/vacctrac"
+                  rel="noopener noreferrer"
+                  size="small"
+                  target="_blank"
+                >
+                  <StyledIcon icon={faGithub} />
+                  View on GitHub
                 </ProjectDetailsButton>
-                <ProjectDetailsButton size="small" type="button">
-                  <a
-                    href="https://exp-shell-app-assets.s3.us-west-1.amazonaws.com/android/%40libertynj/vacctrac-poc-4be840ba42244fc592a9f88f90745734-signed.apk"
-                    rel="noopener noreferrer"
-                    target="_blank"
-                  >
-                    <StyledIcon icon={faDownload} />
-                    Download for Android
-                  </a>
+                <ProjectDetailsButton
+                  forwardedAs="a"
+                  href="https://exp-shell-app-assets.s3.us-west-1.amazonaws.com/android/%40libertynj/vacctrac-poc-4be840ba42244fc592a9f88f90745734-signed.apk"
+                  rel="noopener noreferrer"
+                  size="small"
+                  target="_blank"
+                >
+                  <StyledIcon icon={faDownload} />
+                  Download for Android
                 </ProjectDetailsButton>
               </ProjectDetailsButtonContainer>
               <div>
@@ -429,15 +424,15 @@ export default function ProjectsPage({ data, ...restProps }) {
                 fluid={getImageFluidFromData('study-drug-label-maker', data)}
               />
               <ProjectDetailsButtonContainer>
-                <ProjectDetailsButton size="small" type="button">
-                  <a
-                    href="https://github.com/LibertyNJ/study-drug-label-maker"
-                    rel="noopener noreferrer"
-                    target="_blank"
-                  >
-                    <StyledIcon icon={faGithub} />
-                    View on GitHub
-                  </a>
+                <ProjectDetailsButton
+                  forwardedAs="a"
+                  href="https://github.com/LibertyNJ/study-drug-label-maker"
+                  rel="noopener noreferrer"
+                  size="small"
+                  target="_blank"
+                >
+                  <StyledIcon icon={faGithub} />
+                  View on GitHub
                 </ProjectDetailsButton>
               </ProjectDetailsButtonContainer>
               <div>
@@ -497,15 +492,15 @@ export default function ProjectsPage({ data, ...restProps }) {
                 fluid={getImageFluidFromData('cytoxan-label-maker', data)}
               />
               <ProjectDetailsButtonContainer>
-                <ProjectDetailsButton size="small" type="button">
-                  <a
-                    href="https://github.com/LibertyNJ/cytoxan-label-maker"
-                    rel="noopener noreferrer"
-                    target="_blank"
-                  >
-                    <StyledIcon icon={faGithub} />
-                    View on GitHub
-                  </a>
+                <ProjectDetailsButton
+                  forwardedAs="a"
+                  href="https://github.com/LibertyNJ/cytoxan-label-maker"
+                  rel="noopener noreferrer"
+                  size="small"
+                  target="_blank"
+                >
+                  <StyledIcon icon={faGithub} />
+                  View on GitHub
                 </ProjectDetailsButton>
               </ProjectDetailsButtonContainer>
               <div>
@@ -554,18 +549,14 @@ export default function ProjectsPage({ data, ...restProps }) {
           <CtaContainer>
             <Lead>Your project is next.</Lead>
             <ButtonContainer>
-              <StyledLink to="/contact">
-                <BlockButton size="large" type="button">
-                  <StyledIcon icon={faSatellite} />
-                  Make contact
-                </BlockButton>
-              </StyledLink>
-              <StyledLink to="/about">
-                <BlockButton size="large" type="button">
-                  <StyledIcon icon={faUserAstronaut} />
-                  Learn about me
-                </BlockButton>
-              </StyledLink>
+              <BlockButton forwardedAs={Link} size="large" to="/contact">
+                <StyledIcon icon={faSatellite} />
+                Make contact
+              </BlockButton>
+              <BlockButton forwardedAs={Link} size="large" to="/about">
+                <StyledIcon icon={faUserAstronaut} />
+                Learn about me
+              </BlockButton>
             </ButtonContainer>
           </CtaContainer>
         </Container>
