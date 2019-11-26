@@ -33,13 +33,7 @@ const Container = styled.div`
 `;
 
 const StyledLead = styled(Lead)`
-  margin-bottom: ${2 * styleVariables.baselinePixels}px;
   max-width: 33em;
-`;
-
-const Title = styled.h1`
-  font-family: 'Fira Mono', monospace;
-  margin-bottom: ${2 * styleVariables.baselinePixels}px;
 `;
 
 const StyledStarCanvas = styled(StarCanvas)`
@@ -76,6 +70,11 @@ const Subtitle = styled.span`
     font-size: ${styleVariables.h3.lg.rem}rem;
     line-height: ${styleVariables.h3.lg.lh};
   }
+`;
+
+const Title = styled.h1`
+  font-family: 'Fira Mono', monospace;
+  margin-bottom: ${2 * styleVariables.baselinePixels}px;
 `;
 
 export default function IndexPage({ ...restProps }) {

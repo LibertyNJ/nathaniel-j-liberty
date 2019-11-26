@@ -2,12 +2,18 @@ import { Link } from 'gatsby';
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { CopyrightWidget, GlobalStyle } from '..';
 import { NavBar } from '../NavBar'; // Issue with styling a component imported from an index
 import { variables as styleVariables } from '../GlobalStyle';
+
+const Brand = styled.div`
+  font-size: ${styleVariables.h5.xs.rem}rem;
+  line-height: ${styleVariables.h5.xs.lh};
+  padding: ${styleVariables.baselinePixels}px 0;
+  white-space: nowrap;
+  flex: initial;
+`;
 
 const LayoutContainer = styled.div`
   display: flex;
@@ -15,6 +21,7 @@ const LayoutContainer = styled.div`
   flex-wrap: nowrap;
   min-height: 100vh;
 `;
+
 const Footer = styled.footer`
   background: ${props => (props.isWindowScrolled ? 'black' : 'none')};
   display: flex;
@@ -27,6 +34,7 @@ const Footer = styled.footer`
     ${2 * styleVariables.baselinePixels}px;
   transition: background 1000ms;
 `;
+
 const Header = styled.header`
   background: ${props => (props.isWindowScrolled ? 'black' : 'none')};
   display: flex;
@@ -37,52 +45,28 @@ const Header = styled.header`
   top: 0;
   transition: background 1000ms;
   z-index: 1;
+
   a {
     color: inherit;
     text-decoration: none;
   }
 `;
+
 const Main = styled.main`
   display: ${props => props.mainDisplay || 'block'};
   flex: auto;
   padding: 0 ${2 * styleVariables.baselinePixels}px;
 `;
+
 const StyledNavBar = styled(NavBar)`
   flex: initial;
 `;
-const IconLink = styled.a`
-  color: white;
-  display: block;
-  font-size: ${styleVariables.h2.xs.rem}rem;
-  line-height: ${styleVariables.h2.xs.lh};
-  transition: color 250ms, filter 250ms;
-  :hover {
-    color: ${props => props.color};
-  }
-  :active {
-    filter: drop-shadow(0 0 3px white);
-  }
-`;
-const StyledIcon = styled(FontAwesomeIcon)`
-  margin: 0 ${0.5 * styleVariables.baselinePixels}px;
-`;
-const SocialMedia = styled.div`
-  align-items: center;
-  display: flex;
-  flex: initial;
-  justify-content: space-around;
-`;
-const Brand = styled.div`
-  font-size: ${styleVariables.h5.xs.rem}rem;
-  line-height: ${styleVariables.h5.xs.lh};
-  padding: ${styleVariables.baselinePixels}px 0;
-  white-space: nowrap;
-  flex: initial;
-`;
+
 const Tagline = styled.span`
   display: block;
   font-size: ${styleVariables.small.xs.rem}rem;
   line-height: ${styleVariables.small.xs.lh};
+  
   ::before {
     content: '// ';
   }
@@ -107,24 +91,6 @@ export function Layout({ children, mainDisplay, ...restProps }) {
               <Tagline>Software Developer</Tagline>
             </Brand>
           </Link>
-          <SocialMedia>
-            <IconLink
-              color="#333"
-              href="https://github.com/LibertyNJ"
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              <StyledIcon icon={faGithub} />
-            </IconLink>
-            <IconLink
-              color="#2867b2"
-              href="https://linkedin.com/in/nathanieljliberty"
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              <StyledIcon icon={faLinkedin} />
-            </IconLink>
-          </SocialMedia>
           <StyledNavBar />
         </Header>
         <Main mainDisplay={mainDisplay}>{children}</Main>

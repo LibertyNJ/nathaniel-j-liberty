@@ -23,16 +23,15 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   margin: 0 auto;
-  max-width: 33em;
+  max-width: 33rem;
 `;
 
 const StyledIcon = styled(FontAwesomeIcon)`
   margin-right: 1rem;
 `;
 
-const StyledLead = styled(Lead)`
-  margin-bottom: ${2 * styleVariables.baselinePixels}px;
-  max-width: 33em;
+const StyledLink = styled(Link)`
+  text-decoration: none;
 `;
 
 const StyledStarCanvas = styled(StarCanvas)`
@@ -42,24 +41,30 @@ const StyledStarCanvas = styled(StarCanvas)`
   z-index: -1;
 `;
 
+const Title = styled.h1`
+  font-family: 'Fira Mono', monospace;
+  margin-bottom: ${2 * styleVariables.baselinePixels}px;
+`;
+
 export default function NotFoundPage({ ...restProps }) {
   return (
-    <Layout mainDisplay="flex">
+    <Layout mainDisplay="flex" {...restProps}>
       <SEO title="404 Error: Page Not Found" />
       <StyledStarCanvas coveredElementSelector="body" twinkle />
       <Container>
-        <h1>404 Error: Page Not Found</h1>
-        <StyledLead>Oops!</StyledLead>
+        <Title>404 Error: Page&nbsp;Not&nbsp;Found</Title>
+        <Lead>Oops!</Lead>
         <p>
-          You have requested a resource that does not exist, or worse, have
-          wandered into a black hole.
+          You have requested a resource that does not exist; or worse, I have
+          somehow sent you to the edge of a black hole.
         </p>
-        <Link to="/">
+        <p>…Either way, you should probably go back.</p>
+        <StyledLink to="/">
           <BlockButton size="large" type="button">
             <StyledIcon icon={faGlobeAmericas} />
             Go home
           </BlockButton>
-        </Link>
+        </StyledLink>
       </Container>
     </Layout>
   );
