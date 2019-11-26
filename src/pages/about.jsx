@@ -1,6 +1,6 @@
 import { graphql, Link } from 'gatsby';
 import Image from 'gatsby-image';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons';
 import {
@@ -10,7 +10,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { Button, Layout, SEO, StarCanvas } from '../components';
+import { Button, Layout, Lead, SEO, StarCanvas } from '../components';
 import { variables as styleVariables } from '../components/GlobalStyle';
 
 const BlockButton = styled(Button)`
@@ -18,16 +18,17 @@ const BlockButton = styled(Button)`
   margin: 0 auto ${2 * styleVariables.baselinePixels}px auto;
   width: 100%;
 
-  @media (min-width: ${styleVariables.breakpoint.sm}px) {
-    margin: 0 0 0 auto;
+  @media (min-width: ${styleVariables.breakpoint.lg}px) {
+    margin: 0 ${2 * styleVariables.baselinePixels}px
+      ${2 * styleVariables.baselinePixels}px 0;
     width: auto;
   }
 `;
 
 const ButtonContainer = styled.div`
-  @media (min-width: ${styleVariables.breakpoint.sm}px) {
+  @media (min-width: ${styleVariables.breakpoint.lg}px) {
     display: flex;
-    justify-content: flex-end;
+    justify-content: flex-start;
   }
 `;
 
@@ -43,6 +44,10 @@ const Container = styled.div`
   }
 
   @media (min-width: ${styleVariables.breakpoint.md}px) {
+    column-gap: ${4 * styleVariables.baselinePixels}px;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-template-rows: auto auto;
     max-width: 720px;
   }
 
@@ -55,65 +60,206 @@ const Container = styled.div`
   }
 `;
 
-const Frame = styled.div`
-  border: 1px solid white;
-  width: 300px;
+const ContentContainer = styled.div`
+  grid-column: 2 / 3;
+  grid-row: 1 / 3;
 `;
-const Paragraph = styled.p`
-  font-size: 1.25rem;
-  line-height: 1.6;
-  margin-bottom: 3rem;
-  max-width: 33em;
+
+const ListHeading = styled.p`
+  font-size: ${styleVariables.h5.rem}rem;
+  font-weight: bold;
+  line-height: ${styleVariables.h5.lh};
+  margin-bottom: 0;
+
+  @media (min-width: ${styleVariables.breakpoint.md}px) {
+    font-size: ${styleVariables.h5.md.rem}rem;
+    line-height: ${styleVariables.h5.md.lh};
+  }
+
+  @media (min-width: ${styleVariables.breakpoint.lg}px) {
+    font-size: ${styleVariables.h5.lg.rem}rem;
+    line-height: ${styleVariables.h5.lg.lh};
+  }
 `;
-const Profile = styled.div``;
+
+const ProfileButton = styled(Button)`
+  display: block;
+  margin: 0 auto ${2 * styleVariables.baselinePixels}px auto;
+  width: 100%;
+`;
+
+const ProfileButtonContainer = styled.div``;
+
+const ProfileContainer = styled.div`
+  grid-column: 1 / 2;
+  grid-row: 1 / 2;
+
+  a {
+    text-decoration: none;
+  }
+
+  @media (min-width: ${styleVariables.breakpoint.md}px) {
+    position: sticky;
+    top: ${props => props.headerHeight + 2 * styleVariables.baselinePixels}px;
+  }
+`;
+
 const StyledIcon = styled(FontAwesomeIcon)`
   margin-right: 1rem;
 `;
+
+const StyledImage = styled(Image)`
+  border: 1px solid white;
+  border-radius: 50%;
+  margin-bottom: ${2 * styleVariables.baselinePixels}px;
+  width: 100%;
+`;
+
+const StyledLink = styled(Link)`
+  text-decoration: none;
+`;
+
 const StyledStarCanvas = styled(StarCanvas)`
   left: 0;
   position: absolute;
   top: 0;
   z-index: -1;
 `;
+
+const TechnologiesSection = styled.section`
+  column-gap: ${2 * styleVariables.baselinePixels}px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+
+  h2 {
+    grid-column: span 2;
+  }
+
+  @media (min-width: ${styleVariables.breakpoint.md}px) {
+    grid-template-columns: repeat(3, 1fr);
+
+    h2 {
+      grid-column: span 3;
+    }
+  }
+`;
+
+const TextContainer = styled.div`
+  max-width: 33rem;
+`;
+
 const Title = styled.h1`
   font-family: 'Fira Mono', monospace;
   text-align: center;
 `;
-const StyledLink = styled(Link)`
-  text-decoration: none;
-`;
 
 export default function AboutPage({ data, ...restProps }) {
+  const [headerHeight, setHeaderHeight] = useState();
+  useEffect(() => {
+    getAndSetHeaderHeight(setHeaderHeight);
+  }, []);
   return (
     <Layout {...restProps}>
       <SEO title="About" />
-      <StyledStarCanvas coveredElementSelector="body"></StyledStarCanvas>
-      <section>
-        <Title>About</Title>
-        <Container>
-          <Profile>
-            <Frame>
-              <Image
-                fluid={data.file.childImageSharp.fluid}
-                alt="Nathaniel J. Liberty in the hall of rockets at the National Air and Space Museum in Washington, DC."
-              />
-            </Frame>
-            <p>Nathaniel J. Liberty</p>
-          </Profile>
-          <a href="../../nathaniel-j-liberty-resume.pdf" download>
-            <Button size="small" type="button">
-              <StyledIcon icon={faFileDownload} />
-              Resume
-            </Button>
-          </a>
-          <Paragraph>
-            I’m a software developer with a love of learning new technologies
-            and tackling new challenges. My passion is building creative
-            solutions for problems in data analysis and analytics, workflow
-            automation, and website design. I’m always looking for new
-            opportunities to apply my skills.
-          </Paragraph>
-          <Paragraph>Your project could be next.</Paragraph>
+      <StyledStarCanvas coveredElementSelector="body" shroud />
+      <Title>About</Title>
+      <Container>
+        <ProfileContainer headerHeight={headerHeight}>
+          <StyledImage
+            alt="Nathaniel J. Liberty in the hall of rockets at the National Air and Space Museum in Washington, DC."
+            fluid={data.file.childImageSharp.fluid}
+          />
+          <ProfileButtonContainer>
+            <a href="../../nathaniel-j-liberty-resume.pdf" download>
+              <ProfileButton size="small" type="button">
+                <StyledIcon icon={faFileDownload} />
+                Resume
+              </ProfileButton>
+            </a>
+            <a
+              href="https://github.com/LibertyNJ"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              <ProfileButton size="small" type="button">
+                <StyledIcon icon={faGithub} />
+                GitHub
+              </ProfileButton>
+            </a>
+            <a
+              href="https://linkedin.com/in/nathanieljliberty"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              <ProfileButton size="small" type="button">
+                <StyledIcon icon={faLinkedin} />
+                LinkedIn
+              </ProfileButton>
+            </a>
+          </ProfileButtonContainer>
+        </ProfileContainer>
+        <ContentContainer>
+          <TextContainer>
+            <section>
+              <h2>About me</h2>
+              <p>
+                I’m a software developer passionate about learning novel
+                technologies and tackling unfamiliar challenges. I build
+                creative solutions for problems in data analysis and analytics,
+                workflow automation, and website design. I believe that
+                continuous learning and growth is the key to a life of
+                fulfillment, and as such I’m always looking for new
+                opportunities to expand and apply my skills.
+              </p>
+            </section>
+            <TechnologiesSection>
+              <h2>Technologies</h2>
+              <div>
+                <ListHeading>Core</ListHeading>
+                <ul>
+                  <li>HTML5</li>
+                  <li>CSS3</li>
+                  <li>JavaScript</li>
+                  <li>SQL</li>
+                </ul>
+              </div>
+              <div>
+                <ListHeading>Front-end</ListHeading>
+                <ul>
+                  <li>Bootstrap</li>
+                  <li>GraphQL</li>
+                  <li>React</li>
+                  <li>Redux</li>
+                  <li>Sass</li>
+                  <li>Styled Components</li>
+                </ul>
+              </div>
+              <div>
+                <ListHeading>Back-end</ListHeading>
+                <ul>
+                  <li>Node.js</li>
+                  <li>SQLite</li>
+                </ul>
+              </div>
+              <div>
+                <ListHeading>Testing</ListHeading>
+                <ul>
+                  <li>Jest</li>
+                </ul>
+              </div>
+              <div>
+                <ListHeading>Platforms</ListHeading>
+                <ul>
+                  <li>Electron</li>
+                  <li>Expo</li>
+                  <li>Gatsby</li>
+                  <li>Netlify</li>
+                  <li>React Native</li>
+                </ul>
+              </div>
+            </TechnologiesSection>
+            <Lead>Let’s discover how we can help each other grow.</Lead>
+          </TextContainer>
           <ButtonContainer>
             <StyledLink to="/contact">
               <BlockButton size="large" type="button">
@@ -128,8 +274,8 @@ export default function AboutPage({ data, ...restProps }) {
               </BlockButton>
             </StyledLink>
           </ButtonContainer>
-        </Container>
-      </section>
+        </ContentContainer>
+      </Container>
     </Layout>
   );
 }
@@ -145,3 +291,9 @@ export const query = graphql`
     }
   }
 `;
+
+function getAndSetHeaderHeight(setHeaderHeight) {
+  const headerElement = document.querySelector('header');
+  const headerHeight = headerElement ? headerElement.offsetHeight : null;
+  setHeaderHeight(headerHeight);
+}
