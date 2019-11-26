@@ -4,13 +4,14 @@ import React from 'react';
 import styled from 'styled-components';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import {
+  faDownload,
   faGlobe,
   faSatellite,
   faUserAstronaut,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { Button, Layout, SEO, StarCanvas } from '../components';
+import { Button, Layout, Lead, SEO, StarCanvas } from '../components';
 import { variables as styleVariables } from '../components/GlobalStyle';
 
 const BlockButton = styled(Button)`
@@ -19,7 +20,8 @@ const BlockButton = styled(Button)`
   width: 100%;
 
   @media (min-width: ${styleVariables.breakpoint.sm}px) {
-    margin: 0 0 0 ${2 * styleVariables.baselinePixels}px;
+    margin: 0 ${2 * styleVariables.baselinePixels}px
+      ${2 * styleVariables.baselinePixels}px 0;
     width: auto;
   }
 `;
@@ -27,358 +29,569 @@ const BlockButton = styled(Button)`
 const ButtonContainer = styled.div`
   @media (min-width: ${styleVariables.breakpoint.sm}px) {
     display: flex;
-    justify-content: flex-end;
+    justify-content: flex-start;
   }
 `;
+
 const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   margin: 0 auto;
+  width: 100%;
+
+  @media (min-width: ${styleVariables.breakpoint.sm}px) {
+    max-width: 540px;
+  }
+
+  @media (min-width: ${styleVariables.breakpoint.md}px) {
+    max-width: 720px;
+  }
+
+  @media (min-width: ${styleVariables.breakpoint.lg}px) {
+    max-width: 960px;
+  }
+
+  @media (min-width: ${styleVariables.breakpoint.xl}px) {
+    max-width: 1140px;
+  }
 `;
-const Paragraph = styled.p`
-  font-size: 1.25rem;
-  line-height: 1.6;
-  margin-bottom: 3rem;
-  max-width: 33em;
+
+const CtaContainer = styled.div`
+  @media (min-width: ${styleVariables.breakpoint.md}px) {
+    margin: 0 auto;
+  }
 `;
+
+const DesktopImage = styled(Image)`
+  border: 1px solid white;
+  border-radius: 0.25rem;
+  margin-bottom: ${2 * styleVariables.baselinePixels}px;
+  width: 100%;
+`;
+
+const ListHeading = styled.p`
+  font-size: ${styleVariables.h5.rem}rem;
+  font-weight: bold;
+  line-height: ${styleVariables.h5.lh};
+  margin-bottom: 0;
+
+  @media (min-width: ${styleVariables.breakpoint.md}px) {
+    font-size: ${styleVariables.h5.md.rem}rem;
+    line-height: ${styleVariables.h5.md.lh};
+  }
+
+  @media (min-width: ${styleVariables.breakpoint.lg}px) {
+    font-size: ${styleVariables.h5.lg.rem}rem;
+    line-height: ${styleVariables.h5.lg.lh};
+  }
+`;
+
+const MobileImage = styled(Image)`
+  border: 1px solid white;
+  border-radius: 0.25rem;
+  margin: 0 auto ${2 * styleVariables.baselinePixels}px auto;
+  width: 25%;
+`;
+
 const Project = styled.section`
-  border: 1px solid white;
-  border-radius: 0.25rem;
-  display: grid;
-  column-gap: 2rem;
-  grid-template-columns: 1fr 2fr;
-  grid-template-rows: auto auto;
-  margin: 0 auto 3rem auto;
-  padding: 1rem;
-  width: 75%;
+  @media (min-width: ${styleVariables.breakpoint.md}px) {
+    display: grid;
+    column-gap: ${4 * styleVariables.baselinePixels}px;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto auto;
+  }
 `;
-const ProjectDetails = styled.div``;
-const ProjectStory = styled.div``;
+
+const ProjectDetails = styled.div`
+  grid-column: 1 / 2;
+  grid-row: 2 / 3;
+`;
+
 const ProjectHeader = styled.header`
-  grid-column: 1 / 3;
+  grid-column: 1 / 2;
 `;
-const ProjectTitle = styled.h2`
-  font-family: 'Fira Mono', monospace;
+
+const ProjectStory = styled.div`
+  grid-column: 2 / 3;
+  grid-row: 2 / 3;
+  max-width: 33rem;
 `;
-const ProjectSubtitle = styled.p``;
-const Title = styled.h1`
-  font-family: 'Fira Mono', monospace;
-  text-align: center;
+
+const ProjectSubtitle = styled.span`
+  display: block;
+  font-size: ${styleVariables.h4.xs.rem}rem;
+  line-height: ${styleVariables.h4.xs.lh};
+
+  @media (min-width: ${styleVariables.breakpoint.md}px) {
+    font-size: ${styleVariables.h4.md.rem}rem;
+    line-height: ${styleVariables.h4.md.lh};
+  }
+
+  @media (min-width: ${styleVariables.breakpoint.lg}px) {
+    font-size: ${styleVariables.h4.lg.rem}rem;
+    line-height: ${styleVariables.h4.lg.lh};
+  }
 `;
-const StyledImage = styled.div`
-  border: 1px solid white;
-  border-radius: 0.25rem;
-  height: 200px;
-  width: 200px;
+
+const ProjectTitle = styled.h2``;
+
+const TechnologyList = styled.ul`
+  column-gap: 1rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+
+  @media (min-width: ${styleVariables.breakpoint.sm}px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @media (min-width: ${styleVariables.breakpoint.md}px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (min-width: ${styleVariables.breakpoint.lg}px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
 `;
+
+const ProjectDetailsButton = styled(Button)`
+  display: block;
+  margin: 0 auto ${2 * styleVariables.baselinePixels}px auto;
+  width: 100%;
+`;
+
+const ProjectDetailsButtonContainer = styled.div`
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+`;
+
 const StyledIcon = styled(FontAwesomeIcon)`
   margin-right: 1rem;
 `;
+
+const StyledLink = styled(Link)`
+  text-decoration: none;
+`;
+
 const StyledStarCanvas = styled(StarCanvas)`
   left: 0;
   position: absolute;
   top: 0;
   z-index: -1;
 `;
-const Subtitle = styled.span`
-  font-size: 1.5rem;
-  vertical-align: top;
-  white-space: nowrap;
-  ::before {
-    content: '// ';
-  }
-`;
-const StyledLink = styled(Link)`
-  text-decoration: none;
+
+const Title = styled.h1`
+  font-family: 'Fira Mono', monospace;
+  text-align: center;
 `;
 
-export default function ProjectsPage({ ...restProps }) {
+export default function ProjectsPage({ data, ...restProps }) {
   return (
     <Layout {...restProps}>
       <SEO title="Projects" />
-      <StyledStarCanvas coveredElementSelector="body" filter></StyledStarCanvas>
+      <StyledStarCanvas coveredElementSelector="body" shroud />
       <section>
         <Title>Projects</Title>
-        <Project
-          githubSlug="/LibertyNJ/c2-auditing-tools"
-          name="C2 Auditing Tools"
-        >
-          <ProjectHeader>
-            <ProjectTitle>C2 Auditing Tools</ProjectTitle>
-            <ProjectSubtitle>Full stack desktop application</ProjectSubtitle>
-          </ProjectHeader>
-          <ProjectDetails>
-            <StyledImage />
-            <div>
-              <StyledIcon icon={faGithub} />
-              <a
-                href="https://github.com/LibertyNJ/c2-auditing-tools"
-                rel="noopener noreferrer"
-                target="_blank"
-              >
-                View on GitHub
-              </a>
-            </div>
-            <div>
-              <StyledIcon icon={faGlobe} />
-              <a href="#" rel="noopener noreferrer" target="_blank">
-                Visit live project
-              </a>
-            </div>
-            <div>
-              <p>Technologies</p>
-              <ul>
-                <li>Bootstrap</li>
-                <li>Electron</li>
-                <li>Jest</li>
-                <li>Node.js</li>
-                <li>React</li>
-                <li>Redux</li>
-                <li>Sass</li>
-                <li>SQLite</li>
-              </ul>
-            </div>
-          </ProjectDetails>
-          <ProjectStory>
-            <section>
-              <h3>My role</h3>
-              <p>
-                I served as the sole developer and managed all aspects of the
-                project.
-              </p>
-            </section>
-            <section>
-              <h3>Problem</h3>
-              <p>
-                A hospital was using a time-intensive manual review process to
-                detect controlled substance diversion. The review process took
-                two weeks to complete every month.
-              </p>
-            </section>
-            <section>
-              <h3>Solution</h3>
-              <p>
-                A local desktop application deployed to a secure network drive
-                to ensure use of protected health information was within company
-                policy. Data is parsed from company data analytics reports and
-                imported to a SQL database. The application takes user defined
-                search parameters and creates a ledger that traces the
-                controlled substance chain of custody from withdrawal to
-                administration or other disposition.
-              </p>
-              <p>
-                The controlled substance auditing process for the hospital is
-                now completed in less than an hour a month.
-              </p>
-            </section>
-          </ProjectStory>
-        </Project>
-        <Project
-          githubSlug="/LibertyNJ/abigail-and-nathaniel"
-          liveUrl="https://www.abigailandnathaniel.com/"
-          name="abigailandnathaniel.com"
-        >
-          <ProjectHeader>
-            <ProjectTitle>abigailandnathaniel.com</ProjectTitle>
-            <ProjectSubtitle>Wedding website</ProjectSubtitle>
-          </ProjectHeader>
-          <ProjectDetails>
-            <StyledImage />
-            <div>
-              <StyledIcon icon={faGithub} />
-              <a
-                href="https://github.com/LibertyNJ/abigail-and-nathaniel"
-                rel="noopener noreferrer"
-                target="_blank"
-              >
-                View on GitHub
-              </a>
-            </div>
-            <div>
-              <StyledIcon icon={faGlobe} />
-              <a
-                href="https://www.abigailandnathaniel.com/"
-                rel="noopener noreferrer"
-                target="_blank"
-              >
-                Visit live project
-              </a>
-            </div>
-            <div>
-              <p>Technologies</p>
-              <ul>
-                <li>Bootstrap</li>
-                <li>Gatsby.js</li>
-                <li>GraphQL</li>
-                <li>Jest</li>
-                <li>Netlify</li>
-                <li>React</li>
-                <li>Sass</li>
-              </ul>
-            </div>
-          </ProjectDetails>
-          <ProjectStory>
-            <section>
-              <h3>My role</h3>
-              <p>
-                I collaborated with a designer who provided wireframes and art
-                assets.
-              </p>
-            </section>
-            <section>
-              <h3>Problem</h3>
-              <p>
-                The creation of an informational website for an upcoming
-                wedding.
-              </p>
-            </section>
-            <section>
-              <h3>Solution</h3>
-              <p>
-                We worked closely together past the initial wireframes to
-                implement a graceful degredation of the desktop design for
-                tablet and smartphone sized viewports.
-              </p>
-            </section>
-          </ProjectStory>
-        </Project>
-        <Project githubSlug="/LibertyNJ/vacctrac" name="VaccTrac">
-          <section>
-            <h3>My role</h3>
-            <p>
-              I served as the sole developer and managed all aspects of the
-              project.
-            </p>
-          </section>
-          <section>
-            <h3>Problem</h3>
-            <p>
-              A discussion with a pharmacist revealed the need for a tool
-              patients can use to track their vaccination history.
-            </p>
-          </section>
-          <section>
-            <h3>Solution</h3>
-            <p>
-              A proof of concept mobile application to show the feasibility of
-              patients tracking vaccination history on their smartphones. The
-              application allows patients to enter dates and manage follow-up
-              doses for vaccinations they have received or are scheduled to
-              receive. A vaccine info screen provides images of common vaccines
-              and links to up-to-date information maintained by the Centers for
-              Disease Control.
-            </p>
-          </section>
-          <section>
-            <h3>Technologies used</h3>
-            <ul>
-              <li>Expo</li>
-              <li>React Native</li>
-              <li>Redux</li>
-            </ul>
-          </section>
-        </Project>
-        <Project
-          githubSlug="/LibertyNJ/study-drug-label-maker"
-          name="Study Drug Label Maker"
-        >
-          <section>
-            <h3>My role</h3>
-            <p>
-              I served as the sole developer and managed all aspects of the
-              project.
-            </p>
-          </section>
-          <section>
-            <h3>Problem</h3>
-            <p>
-              An application that a hospital pharmacy depended on to make
-              outpatient medication labels was being sunset by the health
-              system. This left the research pharmacy program without a way to
-              create labels for study drugs.
-            </p>
-          </section>
-          <section>
-            <h3>Solution</h3>
-            <p>
-              A local desktop application deployed to a shared network drive.
-              The application allows users to select from several label types
-              suited for different medication products and adjusts form fields
-              accordingly. Prescription numbers and dispensed date are generated
-              automatically to expedite the workflow.
-            </p>
-          </section>
-          <section>
-            <h3>Technologies used</h3>
-            <ul>
-              <li>Bootstrap</li>
-              <li>Electron</li>
-              <li>Jest</li>
-              <li>React</li>
-              <li>Redux</li>
-              <li>Sass</li>
-            </ul>
-          </section>
-        </Project>
-        <Project
-          githubSlug="/LibertyNJ/cytoxan-label-maker"
-          name="Cytoxan Label Maker"
-        >
-          <section>
-            <h3>My role</h3>
-            <p>
-              I served as the sole developer and managed all aspects of the
-              project.
-            </p>
-          </section>
-          <section>
-            <h3>Problem</h3>
-            <p>
-              An application that a hospital pharmacy depended on to make
-              outpatient medication labels was being sunset by the health
-              system. This left the oncology pharmacy team without a way to
-              create labels for chemotherapy medications used by off-site
-              clinics.
-            </p>
-          </section>
-          <section>
-            <h3>Solution</h3>
-            <p>
-              A local desktop application deployed to a shared network drive.
-              The application was developed as a specialized iteration on the
-              earlier Study Drug Label Maker. Medication volumes and expiration
-              dates are automatically calculated from user input and formatted
-              according to best practices in medication safety.
-            </p>
-          </section>
-          <section>
-            <h3>Technologies used</h3>
-            <ul>
-              <li>Bootstrap</li>
-              <li>Electron</li>
-              <li>Jest</li>
-              <li>React</li>
-              <li>Redux</li>
-              <li>Sass</li>
-            </ul>
-          </section>
-        </Project>
+        <Container>
+          <Project
+            githubSlug="/LibertyNJ/c2-auditing-tools"
+            name="C2 Auditing Tools"
+          >
+            <ProjectHeader>
+              <ProjectTitle>
+                C2 Auditing Tools <br />
+                <ProjectSubtitle>Desktop application</ProjectSubtitle>
+              </ProjectTitle>
+            </ProjectHeader>
+            <ProjectDetails>
+              <DesktopImage
+                fluid={getImageFluidFromData('c2-auditing-tools', data)}
+              />
+              <ProjectDetailsButtonContainer>
+                <ProjectDetailsButton size="small" type="button">
+                  <a
+                    href="https://github.com/LibertyNJ/c2-auditing-tools"
+                    rel="noopener noreferrer"
+                    target="_blank"
+                  >
+                    <StyledIcon icon={faGithub} />
+                    View on GitHub
+                  </a>
+                </ProjectDetailsButton>
+              </ProjectDetailsButtonContainer>
+              <div>
+                <ListHeading>Technologies</ListHeading>
+                <TechnologyList>
+                  <li>Bootstrap</li>
+                  <li>Electron</li>
+                  <li>Jest</li>
+                  <li>Node.js</li>
+                  <li>React</li>
+                  <li>Redux</li>
+                  <li>Sass</li>
+                  <li>SQLite</li>
+                  <li>Node.js</li>
+                </TechnologyList>
+              </div>
+            </ProjectDetails>
+            <ProjectStory>
+              <section>
+                <h3>My role</h3>
+                <p>
+                  I served as the sole developer and managed all aspects of the
+                  project.
+                </p>
+              </section>
+              <section>
+                <h3>Problem</h3>
+                <p>
+                  A hospital was using a time-intensive manual review process to
+                  detect controlled substance diversion. The review process took
+                  two weeks to complete every month.
+                </p>
+              </section>
+              <section>
+                <h3>Solution</h3>
+                <p>
+                  A local desktop application deployed to a secure network drive
+                  to ensure use of protected health information was within
+                  company policy. Data is parsed from company data analytics
+                  reports and imported to a SQL database. The application takes
+                  user defined search parameters and creates a ledger that
+                  traces the controlled substance chain of custody from
+                  withdrawal to administration or other disposition.
+                </p>
+                <p>
+                  The controlled substance auditing process for the hospital is
+                  now completed in less than an hour a month.
+                </p>
+              </section>
+            </ProjectStory>
+          </Project>
+          <Project
+            githubSlug="/LibertyNJ/abigail-and-nathaniel"
+            liveUrl="https://www.abigailandnathaniel.com/"
+            name="abigailandnathaniel.com"
+          >
+            <ProjectHeader>
+              <ProjectTitle>
+                Abigail &amp; Nathaniel <br />
+                <ProjectSubtitle>Wedding website</ProjectSubtitle>
+              </ProjectTitle>
+            </ProjectHeader>
+            <ProjectDetails>
+              <DesktopImage
+                fluid={getImageFluidFromData('abigail-and-nathaniel', data)}
+              />
+              <ProjectDetailsButtonContainer>
+                <ProjectDetailsButton size="small" type="button">
+                  <a
+                    href="https://github.com/LibertyNJ/abigail-and-nathaniel"
+                    rel="noopener noreferrer"
+                    target="_blank"
+                  >
+                    <StyledIcon icon={faGithub} />
+                    View on GitHub
+                  </a>
+                </ProjectDetailsButton>
+                <ProjectDetailsButton size="small" type="button">
+                  <a
+                    href="https://www.abigailandnathaniel.com/"
+                    rel="noopener noreferrer"
+                    target="_blank"
+                  >
+                    <StyledIcon icon={faGlobe} />
+                    Visit live site
+                  </a>
+                </ProjectDetailsButton>
+              </ProjectDetailsButtonContainer>
+              <div>
+                <ListHeading>Technologies</ListHeading>
+                <TechnologyList>
+                  <li>Bootstrap</li>
+                  <li>Gatsby.js</li>
+                  <li>GraphQL</li>
+                  <li>Jest</li>
+                  <li>Netlify</li>
+                  <li>React</li>
+                  <li>Sass</li>
+                </TechnologyList>
+              </div>
+            </ProjectDetails>
+            <ProjectStory>
+              <section>
+                <h3>My role</h3>
+                <p>
+                  I collaborated with a designer who provided wireframes and art
+                  assets.
+                </p>
+              </section>
+              <section>
+                <h3>Problem</h3>
+                <p>
+                  The creation of an informational website for an upcoming
+                  wedding.
+                </p>
+              </section>
+              <section>
+                <h3>Solution</h3>
+                <p>
+                  We worked closely together past the initial wireframes to
+                  implement a graceful degredation of the desktop design for
+                  tablet and smartphone sized viewports.
+                </p>
+              </section>
+            </ProjectStory>
+          </Project>
+          <Project githubSlug="/LibertyNJ/vacctrac" name="VaccTrac">
+            <ProjectHeader>
+              <ProjectTitle>
+                VaccTrac <br />
+                <ProjectSubtitle>Mobile application</ProjectSubtitle>
+              </ProjectTitle>
+            </ProjectHeader>
+            <ProjectDetails>
+              <MobileImage fluid={getImageFluidFromData('vacctrac', data)} />
+              <ProjectDetailsButtonContainer>
+                <ProjectDetailsButton size="small" type="button">
+                  <a
+                    href="https://github.com/LibertyNJ/vacctrac"
+                    rel="noopener noreferrer"
+                    target="_blank"
+                  >
+                    <StyledIcon icon={faGithub} />
+                    View on GitHub
+                  </a>
+                </ProjectDetailsButton>
+                <ProjectDetailsButton size="small" type="button">
+                  <a
+                    href="https://exp-shell-app-assets.s3.us-west-1.amazonaws.com/android/%40libertynj/vacctrac-poc-4be840ba42244fc592a9f88f90745734-signed.apk"
+                    rel="noopener noreferrer"
+                    target="_blank"
+                  >
+                    <StyledIcon icon={faDownload} />
+                    Download for Android
+                  </a>
+                </ProjectDetailsButton>
+              </ProjectDetailsButtonContainer>
+              <div>
+                <ListHeading>Technologies</ListHeading>
+                <TechnologyList>
+                  <li>Expo</li>
+                  <li>React Native</li>
+                  <li>Redux</li>
+                </TechnologyList>
+              </div>
+            </ProjectDetails>
+            <ProjectStory>
+              <section>
+                <h3>My role</h3>
+                <p>
+                  I served as the sole developer and managed all aspects of the
+                  project.
+                </p>
+              </section>
+              <section>
+                <h3>Problem</h3>
+                <p>
+                  A discussion with a pharmacist revealed the need for a tool
+                  patients can use to track their vaccination history.
+                </p>
+              </section>
+              <section>
+                <h3>Solution</h3>
+                <p>
+                  A proof of concept mobile application to show the feasibility
+                  of patients tracking vaccination history on their smartphones.
+                  The application allows patients to enter dates and manage
+                  follow-up doses for vaccinations they have received or are
+                  scheduled to receive. A vaccine info screen provides images of
+                  common vaccines and links to up-to-date information maintained
+                  by the Centers for Disease Control.
+                </p>
+              </section>
+            </ProjectStory>
+          </Project>
+          <Project
+            githubSlug="/LibertyNJ/study-drug-label-maker"
+            name="Study Drug Label Maker"
+          >
+            <ProjectHeader>
+              <ProjectTitle>
+                Study Drug Label Maker <br />
+                <ProjectSubtitle>Desktop application</ProjectSubtitle>
+              </ProjectTitle>
+            </ProjectHeader>
+            <ProjectDetails>
+              <DesktopImage
+                fluid={getImageFluidFromData('study-drug-label-maker', data)}
+              />
+              <ProjectDetailsButtonContainer>
+                <ProjectDetailsButton size="small" type="button">
+                  <a
+                    href="https://github.com/LibertyNJ/study-drug-label-maker"
+                    rel="noopener noreferrer"
+                    target="_blank"
+                  >
+                    <StyledIcon icon={faGithub} />
+                    View on GitHub
+                  </a>
+                </ProjectDetailsButton>
+              </ProjectDetailsButtonContainer>
+              <div>
+                <ListHeading>Technologies</ListHeading>
+                <TechnologyList>
+                  <li>Bootstrap</li>
+                  <li>Electron</li>
+                  <li>Jest</li>
+                  <li>React</li>
+                  <li>Redux</li>
+                  <li>Sass</li>
+                </TechnologyList>
+              </div>
+            </ProjectDetails>
+            <ProjectStory>
+              <section>
+                <h3>My role</h3>
+                <p>
+                  I served as the sole developer and managed all aspects of the
+                  project.
+                </p>
+              </section>
+              <section>
+                <h3>Problem</h3>
+                <p>
+                  An application that a hospital pharmacy depended on to make
+                  outpatient medication labels was being sunset by the health
+                  system. This left the research pharmacy program without a way
+                  to create labels for study drugs.
+                </p>
+              </section>
+              <section>
+                <h3>Solution</h3>
+                <p>
+                  A local desktop application deployed to a shared network
+                  drive. The application allows users to select from several
+                  label types suited for different medication products and
+                  adjusts form fields accordingly. Prescription numbers and
+                  dispensed date are generated automatically to expedite the
+                  workflow.
+                </p>
+              </section>
+            </ProjectStory>
+          </Project>
+          <Project
+            githubSlug="/LibertyNJ/cytoxan-label-maker"
+            name="Cytoxan Label Maker"
+          >
+            <ProjectHeader>
+              <ProjectTitle>
+                Cytoxan Label Maker <br />
+                <ProjectSubtitle>Desktop application</ProjectSubtitle>
+              </ProjectTitle>
+            </ProjectHeader>
+            <ProjectDetails>
+              <DesktopImage
+                fluid={getImageFluidFromData('cytoxan-label-maker', data)}
+              />
+              <ProjectDetailsButtonContainer>
+                <ProjectDetailsButton size="small" type="button">
+                  <a
+                    href="https://github.com/LibertyNJ/cytoxan-label-maker"
+                    rel="noopener noreferrer"
+                    target="_blank"
+                  >
+                    <StyledIcon icon={faGithub} />
+                    View on GitHub
+                  </a>
+                </ProjectDetailsButton>
+              </ProjectDetailsButtonContainer>
+              <div>
+                <ListHeading>Technologies</ListHeading>
+                <TechnologyList>
+                  <li>Bootstrap</li>
+                  <li>Electron</li>
+                  <li>Jest</li>
+                  <li>React</li>
+                  <li>Redux</li>
+                  <li>Sass</li>
+                </TechnologyList>
+              </div>
+            </ProjectDetails>
+            <ProjectStory>
+              <section>
+                <h3>My role</h3>
+                <p>
+                  I served as the sole developer and managed all aspects of the
+                  project.
+                </p>
+              </section>
+              <section>
+                <h3>Problem</h3>
+                <p>
+                  An application that a hospital pharmacy depended on to make
+                  outpatient medication labels was being sunset by the health
+                  system. This left the oncology pharmacy team without a way to
+                  create labels for chemotherapy medications used by off-site
+                  clinics.
+                </p>
+              </section>
+              <section>
+                <h3>Solution</h3>
+                <p>
+                  A local desktop application deployed to a shared network
+                  drive. The application was developed as a specialized
+                  iteration on the earlier Study Drug Label Maker. Medication
+                  volumes and expiration dates are automatically calculated from
+                  user input and formatted according to best practices in
+                  medication safety.
+                </p>
+              </section>
+            </ProjectStory>
+          </Project>
+          <CtaContainer>
+            <Lead>Your project is next.</Lead>
+            <ButtonContainer>
+              <StyledLink to="/contact">
+                <BlockButton size="large" type="button">
+                  <StyledIcon icon={faSatellite} />
+                  Make contact
+                </BlockButton>
+              </StyledLink>
+              <StyledLink to="/about">
+                <BlockButton size="large" type="button">
+                  <StyledIcon icon={faUserAstronaut} />
+                  Learn about me
+                </BlockButton>
+              </StyledLink>
+            </ButtonContainer>
+          </CtaContainer>
+        </Container>
       </section>
-      <ButtonContainer>
-        <StyledLink to="/contact">
-          <BlockButton size="large" type="button">
-            <StyledIcon icon={faSatellite} />
-            Make contact
-          </BlockButton>
-        </StyledLink>
-        <StyledLink to="/about">
-          <BlockButton size="large" type="button">
-            <StyledIcon icon={faUserAstronaut} />
-            Learn about me
-          </BlockButton>
-        </StyledLink>
-      </ButtonContainer>
     </Layout>
   );
+}
+
+export const query = graphql`
+  query {
+    allFile(filter: { relativeDirectory: { eq: "projects" } }) {
+      edges {
+        node {
+          childImageSharp {
+            fluid {
+              ...GatsbyImageSharpFluid
+            }
+          }
+          name
+        }
+      }
+    }
+  }
+`;
+
+function getImageFluidFromData(name, data) {
+  const edge = data.allFile.edges.find(edge => edge.node.name === name);
+  return edge.node.childImageSharp.fluid;
 }
