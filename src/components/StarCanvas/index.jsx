@@ -4,28 +4,28 @@ import React, { useEffect, useRef } from 'react';
 let _animationRequestId;
 let _canvas;
 let _coveredElementSelector;
-let _filter;
+let _shroud;
 let _twinkle;
 
 StarCanvas.propTypes = {
   coveredElementSelector: PropTypes.string.isRequired,
-  filter: PropTypes.bool,
+  shroud: PropTypes.bool,
   twinkle: PropTypes.bool,
 };
 
 StarCanvas.defaultProps = {
-  filter: false,
+  shroud: false,
   twinkle: false,
 };
 
 export function StarCanvas({
   coveredElementSelector,
-  filter,
+  shroud,
   twinkle,
   ...restProps
 }) {
   setCoveredElementSelector(coveredElementSelector);
-  setFilter(filter);
+  setShroud(shroud);
   setTwinkle(twinkle);
   const canvasRef = useRef();
   useEffect(() => {
@@ -40,8 +40,8 @@ function setCoveredElementSelector(coveredElementSelector) {
   _coveredElementSelector = coveredElementSelector;
 }
 
-function setFilter(filter) {
-  _filter = filter;
+function setShroud(shroud) {
+  _shroud = shroud;
 }
 
 function setTwinkle(twinkle) {
@@ -146,8 +146,8 @@ function randomizeStarSize() {
 function drawFrame(stars) {
   clearCanvas();
   drawStars(stars);
-  if (_filter) {
-    drawFilter();
+  if (_shroud) {
+    drawShroud();
   }
   if (_twinkle) {
     animateStars(stars);
@@ -177,12 +177,12 @@ function randomizeLuminosity(luminosity) {
   return Math.floor(Math.random() * (luminosity + 1));
 }
 
-function drawFilter() {
+function drawShroud() {
   const context = _canvas.getContext('2d');
   const topGradient = context.createLinearGradient(
+    0.5 * _canvas.width,
     0,
-    0,
-    _canvas.width,
+    0.5 * _canvas.width,
     window.innerHeight
   );
   topGradient.addColorStop(0, 'rgba(0, 0, 0, 0)');
@@ -199,9 +199,9 @@ function drawFilter() {
     );
   }
   const bottomGradient = context.createLinearGradient(
-    0,
+    0.5 * _canvas.width,
     _canvas.height - window.innerHeight,
-    _canvas.width,
+    0.5 * _canvas.width,
     _canvas.height
   );
   bottomGradient.addColorStop(0, 'rgba(0, 0, 0, 1)');
