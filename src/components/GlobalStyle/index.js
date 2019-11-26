@@ -12,6 +12,7 @@ export const GlobalStyle = createGlobalStyle`
   * {
     box-sizing: border-box;
     margin: 0;
+    outline: none;
     padding: 0;
   }
   

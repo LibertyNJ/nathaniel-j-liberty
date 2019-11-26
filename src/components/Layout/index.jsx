@@ -13,6 +13,15 @@ const Brand = styled.div`
   padding: ${styleVariables.baselinePixels}px 0;
   white-space: nowrap;
   flex: initial;
+  transition: filter 500ms;
+
+  :focus {
+    filter: drop-shadow(0 0 10px white);
+  }
+
+  :hover {
+    cursor: pointer;
+  }
 `;
 
 const LayoutContainer = styled.div`
@@ -66,7 +75,7 @@ const Tagline = styled.span`
   display: block;
   font-size: ${styleVariables.small.xs.rem}rem;
   line-height: ${styleVariables.small.xs.lh};
-  
+
   ::before {
     content: '// ';
   }
@@ -85,12 +94,10 @@ export function Layout({ children, mainDisplay, ...restProps }) {
       <GlobalStyle />
       <LayoutContainer {...restProps}>
         <Header isWindowScrolled={isWindowScrolled}>
-          <Link to="/">
-            <Brand>
-              Nathaniel J. Liberty <br />
-              <Tagline>Software Developer</Tagline>
-            </Brand>
-          </Link>
+          <Brand as={Link} to="/">
+            Nathaniel J. Liberty <br />
+            <Tagline>Software Developer</Tagline>
+          </Brand>
           <StyledNavBar />
         </Header>
         <Main mainDisplay={mainDisplay}>{children}</Main>

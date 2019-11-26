@@ -43,6 +43,11 @@ const Input = styled.input`
   font-size: ${styleVariables.body.xs.rem}rem;
   line-height: ${styleVariables.body.xs.lh};
   padding: ${styleVariables.baselinePixels - 1}px;
+  transition: filter 500ms;
+
+  :focus {
+    filter: drop-shadow(0 0 5px white);
+  }
 
   @media (min-width: ${styleVariables.breakpoint.md}px) {
     font-size: ${styleVariables.body.md.rem}rem;
@@ -95,7 +100,13 @@ export default function ContactPage({ ...restProps }) {
       <Container>
         <Title>Contact</Title>
         <Lead>Let’s build something out of this world.</Lead>
-        <form action="/contact/success" id="contact-form" method="POST" name="contact" netlify>
+        <form
+          action="/contact/success"
+          id="contact-form"
+          method="POST"
+          name="contact"
+          netlify
+        >
           <FormGroup>
             <Label htmlFor="name">Name</Label>
             <Input id="name" form="contact-form" type="text" required />

@@ -87,7 +87,16 @@ const NavListToggle = styled.button`
   line-height: ${styleVariables.h1.xs.lh};
   margin-left: auto;
   padding: ${styleVariables.baselinePixels}px 0;
+  transition: filter 500ms;
   width: ${styleVariables.h1.xs.rem}rem;
+
+  :focus {
+    filter: drop-shadow(0 0 10px white);
+  }
+
+  :hover {
+    cursor: pointer;
+  }
 
   @media (min-width: ${styleVariables.breakpoint.md}px) {
     display: none;

@@ -57,15 +57,16 @@ const StyledButton = styled.button`
   transition: background 500ms, color 500ms, filter 500ms;
   white-space: nowrap;
 
+  :focus {
+    background: black;
+    filter: drop-shadow(0 0 5px white);
+  }
+
   :hover {
     background: white;
     color: black;
     cursor: pointer;
     outline: none;
-  }
-
-  :focus {
-    filter: drop-shadow(0 0 3px white);
   }
 
   @media (min-width: ${styleVariables.breakpoint.md}px) {
