@@ -1,5 +1,10 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import styled from 'styled-components';
+
+const StyledDiv = styled.div`
+  text-align: center;
+`;
 
 CopyrightWidget.propTypes = {
   holder: PropTypes.string.isRequired,
@@ -9,10 +14,10 @@ CopyrightWidget.propTypes = {
 export function CopyrightWidget({ holder, initialYear, ...restProps }) {
   const currentYear = new Date().getFullYear();
   return (
-    <div {...restProps}>
+    <StyledDiv {...restProps}>
       © {holder} {initialYear}
       {isPastInitialYear(currentYear, initialYear) && `–${currentYear}`}
-    </div>
+    </StyledDiv>
   );
 }
 
