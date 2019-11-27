@@ -243,20 +243,20 @@ export default function ProjectsPage({ data, ...restProps }) {
                 <h3>Problem</h3>
                 <p>
                   A hospital was using a time-intensive manual review process to
-                  detect controlled substance diversion. The review process took
-                  two weeks to complete every month.
+                  investigate controlled substance diversion. The review process
+                  took two weeks to complete every month.
                 </p>
               </section>
               <section>
                 <h3>Solution</h3>
                 <p>
-                  A local desktop application deployed to a secure network drive
-                  to ensure use of protected health information was within
-                  company policy. Data is parsed from company data analytics
-                  reports and imported to a SQL database. The application takes
-                  user defined search parameters and creates a ledger that
-                  traces the controlled substance chain of custody from
-                  withdrawal to administration or other disposition.
+                  A desktop application deployed to a secure network drive to
+                  ensure safe use of protected health information. Data is
+                  parsed from data analytics reports and imported to a SQL
+                  database. The application takes user defined search parameters
+                  and creates a ledger that traces the controlled substance
+                  chain of custody from withdrawal to administration or other
+                  disposition.
                 </p>
                 <p>
                   The controlled substance auditing process for the hospital is
@@ -326,16 +326,19 @@ export default function ProjectsPage({ data, ...restProps }) {
               <section>
                 <h3>Problem</h3>
                 <p>
-                  The creation of an informational website for an upcoming
-                  wedding.
+                  The creation of a wedding website. The client desired a
+                  countdown, photo galleries, and convenient access to
+                  information regarding accommodations, travel arrangements, and
+                  other services surrounding the wedding.
                 </p>
               </section>
               <section>
                 <h3>Solution</h3>
                 <p>
-                  We worked closely together past the initial wireframes to
-                  implement a graceful degredation of the desktop design for
-                  tablet and smartphone sized viewports.
+                  A single-page scrolling site featuring images of the couple as
+                  backdrops. A responsive mobile experience was created via
+                  graceful degredation of the designer’s wireframes, which were
+                  envisioned for a desktop device.
                 </p>
               </section>
             </ProjectStory>
@@ -391,14 +394,14 @@ export default function ProjectsPage({ data, ...restProps }) {
               <section>
                 <h3>Problem</h3>
                 <p>
-                  A discussion with a pharmacist revealed the need for a tool
-                  patients can use to track their vaccination history.
+                  A discussion with a clinical pharmacist revealed the need for
+                  a tool patients can use to track their vaccination history.
                 </p>
               </section>
               <section>
                 <h3>Solution</h3>
                 <p>
-                  A proof of concept mobile application to show the feasibility
+                  A proof-of-concept mobile application to show the feasibility
                   of patients tracking vaccination history on their smartphones.
                   The application allows patients to enter dates and manage
                   follow-up doses for vaccinations they have received or are
@@ -467,12 +470,10 @@ export default function ProjectsPage({ data, ...restProps }) {
               <section>
                 <h3>Solution</h3>
                 <p>
-                  A local desktop application deployed to a shared network
-                  drive. The application allows users to select from several
-                  label types suited for different medication products and
-                  adjusts form fields accordingly. Prescription numbers and
-                  dispensed date are generated automatically to expedite the
-                  workflow.
+                  A desktop application that allows users to create a variety of
+                  label types suited for different medication products.
+                  Prescription numbers and dispensed date are generated
+                  automatically to expedite the workflow.
                 </p>
               </section>
             </ProjectStory>
@@ -536,12 +537,11 @@ export default function ProjectsPage({ data, ...restProps }) {
               <section>
                 <h3>Solution</h3>
                 <p>
-                  A local desktop application deployed to a shared network
-                  drive. The application was developed as a specialized
-                  iteration on the earlier Study Drug Label Maker. Medication
-                  volumes and expiration dates are automatically calculated from
-                  user input and formatted according to best practices in
-                  medication safety.
+                  A desktop application developed as a specialized iteration on
+                  the earlier Study Drug Label Maker. Medication volumes and
+                  expiration dates are automatically calculated from user input
+                  and formatted according to best practices in medication
+                  safety.
                 </p>
               </section>
             </ProjectStory>
