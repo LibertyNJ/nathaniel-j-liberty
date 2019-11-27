@@ -159,7 +159,6 @@ export function NavBar({ ...restProps }) {
   const [isNavListHiding, setisNavListHiding] = useState(false);
   const [isNavListShown, setisNavListShown] = useState(false);
   useEffect(() => getAndSetNavHeight(setNavHeight), []);
-  const navListWidth = getNavListWidth();
   return (
     <Nav isNavListShown={isNavListShown} {...restProps}>
       <Brand as={Link} to="/">
@@ -184,7 +183,6 @@ export function NavBar({ ...restProps }) {
       <NavList
         className={`${isNavListShown && 'show'} ${isNavListHiding && 'hiding'}`}
         navHeight={navHeight}
-        navListWidth={navListWidth}
       >
         <NavItem>
           <NavLink activeClassName="active" to="/projects">
@@ -211,9 +209,4 @@ function getAndSetNavHeight(setNavHeight) {
   if (navElement) {
     setNavHeight(navElement.offsetHeight);
   }
-}
-
-function getNavListWidth() {
-  const navListElement = document.querySelector('nav > ul');
-  return navListElement ? navListElement.offsetWidth : null;
 }
