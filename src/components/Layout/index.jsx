@@ -80,6 +80,8 @@ const StyledNavBar = styled(NavBar)`
   z-index: 1;
 `;
 
+let _listenForWindowScrollListener;
+
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
   mainDisplay: PropTypes.string,
@@ -123,16 +125,9 @@ export function Layout({ children, mainDisplay, ...restProps }) {
 }
 
 function listenForWindowScroll(setIsWindowScrolled) {
-  window.addEventListener('scroll', () =>
-    handleWindowScroll(setIsWindowScrolled)
-  );
-  return stopListeningForWindowScroll;
-}
-
-function handleWindowScroll(setIsWindowScrolled) {
-  window.scrollY > 0 ? setIsWindowScrolled(true) : setIsWindowScrolled(false);
-}
-
-function stopListeningForWindowScroll() {
-  window.removeEventListener('scroll', listenForWindowScroll);
+  const handleWindowScroll = () => {
+    window.scrollY > 0 ? setIsWindowScrolled(true) : setIsWindowScrolled(false);
+  };
+  window.addEventListener('scroll', handleWindowScroll);
+  return () => window.removeEventListener('scroll', handleWindowScroll);
 }

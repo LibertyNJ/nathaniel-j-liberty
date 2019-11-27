@@ -38,7 +38,6 @@ const Nav = styled.nav`
   @media (min-width: ${styleVariables.breakpoint.md}px) {
     background: none;
   }
-
 `;
 
 const NavList = styled.ul`
@@ -159,9 +158,7 @@ export function NavBar({ ...restProps }) {
   const [navHeight, setNavHeight] = useState();
   const [isNavListHiding, setisNavListHiding] = useState(false);
   const [isNavListShown, setisNavListShown] = useState(false);
-  useEffect(() => {
-    getAndSetNavHeight(setNavHeight);
-  }, []);
+  useEffect(() => getAndSetNavHeight(setNavHeight), []);
   const navListWidth = getNavListWidth();
   return (
     <Nav isNavListShown={isNavListShown} {...restProps}>

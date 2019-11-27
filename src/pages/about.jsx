@@ -155,9 +155,7 @@ const Title = styled.h1`
 
 export default function AboutPage({ data, ...restProps }) {
   const [headerHeight, setHeaderHeight] = useState();
-  useEffect(() => {
-    getAndSetHeaderHeight(setHeaderHeight);
-  }, []);
+  useEffect(() => getAndSetHeaderHeight(setHeaderHeight), []);
   return (
     <Layout {...restProps}>
       <SEO title="About" />

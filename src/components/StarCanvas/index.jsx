@@ -28,9 +28,7 @@ export function StarCanvas({
   setShroud(shroud);
   setTwinkle(twinkle);
   const canvasRef = useRef();
-  useEffect(() => {
-    setCanvas(canvasRef.current);
-  }, []);
+  useEffect(() => setCanvas(canvasRef.current), []);
   useEffect(listenForWindowResize, []);
   useEffect(initStarField, []);
   return <canvas ref={canvasRef} {...restProps}></canvas>;
