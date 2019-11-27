@@ -80,8 +80,6 @@ const StyledNavBar = styled(NavBar)`
   z-index: 1;
 `;
 
-let _listenForWindowScrollListener;
-
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
   mainDisplay: PropTypes.string,

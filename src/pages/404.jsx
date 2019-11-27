@@ -45,7 +45,7 @@ const Title = styled.h1`
 export default function NotFoundPage({ ...restProps }) {
   return (
     <Layout mainDisplay="flex" {...restProps}>
-      <SEO title="404 Error: Page Not Found" />
+      <SEO title="404" />
       <StyledStarCanvas coveredElementSelector="body" twinkle />
       <Container>
         <Title>404 Error: Page&nbsp;Not&nbsp;Found</Title>
@@ -55,7 +55,7 @@ export default function NotFoundPage({ ...restProps }) {
           somehow sent you to the edge of a black hole.
         </p>
         <p>…Either way, you should probably go back.</p>
-        <BlockButton forwardedAs={Link} size="large">
+        <BlockButton forwardedAs={Link} size="large" to="/">
           <StyledIcon icon={faGlobeAmericas} />
           Go home
         </BlockButton>

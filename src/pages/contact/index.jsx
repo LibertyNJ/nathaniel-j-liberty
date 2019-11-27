@@ -102,10 +102,10 @@ export default function ContactPage({ ...restProps }) {
         <Lead>Let’s build something out of this world.</Lead>
         <form
           action="/contact/success"
+          data-netlify="true"
           id="contact-form"
           method="POST"
           name="contact"
-          netlify
         >
           <FormGroup>
             <Label htmlFor="name">Name</Label>

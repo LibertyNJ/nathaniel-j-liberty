@@ -143,8 +143,3 @@ export const variables = {
   remPixels,
   small,
 };
-
-function calculateLineHeight(rems, baselines = 1) {
-  const lineHeight = (baselines * baselinePixels) / (rems * remPixels);
-  return lineHeight > 1 ? lineHeight : calculateLineHeight(rems, baselines + 1);
-}

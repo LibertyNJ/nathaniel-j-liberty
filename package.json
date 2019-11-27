@@ -2,7 +2,7 @@
   "name": "nathaniel-j-liberty",
   "private": true,
   "description": "Portfolio website of Nathaniel J. Liberty, Software Developer.",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "author": "Nathaniel J. Liberty <nathaniel.liberty@gmail.com>",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.25",
@@ -32,10 +32,7 @@
     "jest": "^24.9.0",
     "prettier": "^1.18.2"
   },
-  "keywords": [
-    "gatsby"
-  ],
-  "license": "MIT",
+  "license": "UNLICENSED",
   "scripts": {
     "build": "gatsby build",
     "develop": "gatsby develop",
@@ -43,12 +40,5 @@
     "start": "npm run develop",
     "serve": "gatsby serve",
     "test": "jest --coverage"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/gatsbyjs/gatsby-starter-default"
-  },
-  "bugs": {
-    "url": "https://github.com/gatsbyjs/gatsby/issues"
   }
 }
