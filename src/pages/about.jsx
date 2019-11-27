@@ -1,6 +1,6 @@
 import { graphql, Link } from 'gatsby';
 import Image from 'gatsby-image';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons';
 import {
@@ -165,8 +165,6 @@ const Title = styled.h1`
 `;
 
 export default function AboutPage({ data, ...restProps }) {
-  const [headerHeight, setHeaderHeight] = useState();
-  useEffect(() => getAndSetHeaderHeight(setHeaderHeight), []);
   return (
     <Layout {...restProps}>
       <SEO title="About" />
@@ -174,7 +172,7 @@ export default function AboutPage({ data, ...restProps }) {
       <Title>About</Title>
       <Container>
         <GridContainer>
-          <ProfileContainer headerHeight={headerHeight}>
+          <ProfileContainer>
             <StyledImage
               alt="Nathaniel J. Liberty in the hall of rockets at the National Air and Space Museum in Washington, DC."
               fluid={data.file.childImageSharp.fluid}
@@ -303,9 +301,3 @@ export const query = graphql`
     }
   }
 `;
-
-function getAndSetHeaderHeight(setHeaderHeight) {
-  const headerElement = document.querySelector('header');
-  const headerHeight = headerElement ? headerElement.offsetHeight : null;
-  setHeaderHeight(headerHeight);
-}
