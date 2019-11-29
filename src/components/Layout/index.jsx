@@ -5,8 +5,12 @@ import styled from 'styled-components';
 import { CopyrightWidget, GlobalStyle } from '..';
 import { NavBar } from '../NavBar'; // Issue with styling a component imported from an index
 import { variables as styleVariables } from '../GlobalStyle';
+import '@fortawesome/fontawesome-svg-core/styles.css';
+import { config as fontAwesomeConfig } from '@fortawesome/fontawesome-svg-core';
 import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+fontAwesomeConfig.autoAddCss = false;
 
 const Footer = styled.footer`
   background: ${props => (props.isWindowScrolled ? 'black' : 'none')};
