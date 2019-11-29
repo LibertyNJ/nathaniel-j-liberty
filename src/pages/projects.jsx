@@ -63,7 +63,7 @@ const Container = styled.div`
 
 const CtaContainer = styled.div`
   @media (min-width: ${styleVariables.breakpoint.md}px) {
-    margin: 0 auto;
+    margin: ${4 * styleVariables.baselinePixels}px auto;
   }
 `;
 
