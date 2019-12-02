@@ -107,17 +107,36 @@ export default function ContactPage({ ...restProps }) {
           method="POST"
           name="contact"
         >
+          <input type="hidden" name="form-name" value="contact" />
           <FormGroup>
             <Label htmlFor="name">Name</Label>
-            <Input id="name" form="contact-form" name="name" type="text" required />
+            <Input
+              id="name"
+              form="contact-form"
+              name="name"
+              type="text"
+              required
+            />
           </FormGroup>
           <FormGroup>
             <Label htmlFor="email">Email</Label>
-            <Input id="email" form="contact-form" name="email" type="email" required />
+            <Input
+              id="email"
+              form="contact-form"
+              name="email"
+              type="email"
+              required
+            />
           </FormGroup>
           <FormGroup>
             <Label htmlFor="message">Message</Label>
-            <Input as="textarea" id="message" form="contact-form" name="message" required />
+            <Input
+              as="textarea"
+              id="message"
+              form="contact-form"
+              name="message"
+              required
+            />
           </FormGroup>
           <BlockButton form="contact-form" size="large" type="submit">
             <StyledIcon icon={faSatelliteDish} />
