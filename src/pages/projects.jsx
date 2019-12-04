@@ -4,6 +4,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import {
+  faDesktop,
   faDownload,
   faGlobe,
   faSatellite,
@@ -299,7 +300,7 @@ export default function ProjectsPage({ data, ...restProps }) {
                   target="_blank"
                 >
                   <StyledIcon icon={faGlobe} />
-                  Visit live site
+                  Visit site
                 </ProjectDetailsButton>
               </ProjectDetailsButtonContainer>
               <div>
@@ -502,6 +503,16 @@ export default function ProjectsPage({ data, ...restProps }) {
                 >
                   <StyledIcon icon={faGithub} />
                   View on GitHub
+                </ProjectDetailsButton>
+                <ProjectDetailsButton
+                  forwardedAs="a"
+                  href="https://nathanieljliberty-clm.netlify.com/"
+                  rel="noopener noreferrer"
+                  size="small"
+                  target="_blank"
+                >
+                  <StyledIcon icon={faDesktop} />
+                  Try it
                 </ProjectDetailsButton>
               </ProjectDetailsButtonContainer>
               <div>
