@@ -438,6 +438,16 @@ export default function ProjectsPage({ data, ...restProps }) {
                   <StyledIcon icon={faGithub} />
                   View on GitHub
                 </ProjectDetailsButton>
+                <ProjectDetailsButton
+                  forwardedAs="a"
+                  href="https://nathanieljliberty-sdlm.netlify.com/"
+                  rel="noopener noreferrer"
+                  size="small"
+                  target="_blank"
+                >
+                  <StyledIcon icon={faDesktop} />
+                  Try it
+                </ProjectDetailsButton>
               </ProjectDetailsButtonContainer>
               <div>
                 <ListHeading>Technologies</ListHeading>

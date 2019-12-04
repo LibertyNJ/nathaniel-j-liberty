@@ -259,6 +259,13 @@ export default function AboutPage({ data, ...restProps }) {
                   </ul>
                 </div>
                 <div>
+                  <ListHeading>Tools</ListHeading>
+                  <ul>
+                    <li>Babel</li>
+                    <li>Webpack</li>
+                  </ul>
+                </div>
+                <div>
                   <ListHeading>Platforms</ListHeading>
                   <ul>
                     <li>Electron</li>
