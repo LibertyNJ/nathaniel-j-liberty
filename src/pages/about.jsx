@@ -248,6 +248,7 @@ export default function AboutPage({ data, ...restProps }) {
                 <div>
                   <ListHeading>Back-end</ListHeading>
                   <ul>
+                    <li>Express</li>
                     <li>Node.js</li>
                     <li>SQLite</li>
                   </ul>
