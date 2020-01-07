@@ -384,7 +384,7 @@ export default function ProjectsPage({ data, ...restProps }) {
                 </ProjectDetailsButton>
                 <ProjectDetailsButton
                   forwardedAs="a"
-                  href="https://github.com/LibertyNJ/vacctrac"
+                  href="https://github.com/LibertyNJ/vacctrac-poc"
                   rel="noopener noreferrer"
                   size="small"
                   target="_blank"
