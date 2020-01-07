@@ -165,6 +165,14 @@ const ProjectDetailsButton = styled(Button)`
   width: 100%;
 `;
 
+const DesktopProjectDetailsButton = styled(ProjectDetailsButton)`
+  display: none;
+
+  @media (min-width: ${styleVariables.breakpoint.lg}px) {
+    display: block;
+  }
+`;
+
 const ProjectDetailsButtonContainer = styled.div``;
 
 const StyledIcon = styled(FontAwesomeIcon)`
@@ -206,6 +214,16 @@ export default function ProjectsPage({ data, ...restProps }) {
                 fluid={getImageFluidFromData('c2-auditing-tools', data)}
               />
               <ProjectDetailsButtonContainer>
+                <DesktopProjectDetailsButton
+                  forwardedAs="a"
+                  href="https://c2-auditing-tools-web.herokuapp.com/"
+                  rel="noopener noreferrer"
+                  size="small"
+                  target="_blank"
+                >
+                  <StyledIcon icon={faDesktop} />
+                  Try it
+                </DesktopProjectDetailsButton>
                 <ProjectDetailsButton
                   forwardedAs="a"
                   href="https://github.com/LibertyNJ/c2-auditing-tools"
@@ -284,16 +302,6 @@ export default function ProjectsPage({ data, ...restProps }) {
               <ProjectDetailsButtonContainer>
                 <ProjectDetailsButton
                   forwardedAs="a"
-                  href="https://github.com/LibertyNJ/abigail-and-nathaniel"
-                  rel="noopener noreferrer"
-                  size="small"
-                  target="_blank"
-                >
-                  <StyledIcon icon={faGithub} />
-                  View on GitHub
-                </ProjectDetailsButton>
-                <ProjectDetailsButton
-                  forwardedAs="a"
                   href="https://www.abigailandnathaniel.com/"
                   rel="noopener noreferrer"
                   size="small"
@@ -301,6 +309,16 @@ export default function ProjectsPage({ data, ...restProps }) {
                 >
                   <StyledIcon icon={faGlobe} />
                   Visit site
+                </ProjectDetailsButton>
+                <ProjectDetailsButton
+                  forwardedAs="a"
+                  href="https://github.com/LibertyNJ/abigail-and-nathaniel"
+                  rel="noopener noreferrer"
+                  size="small"
+                  target="_blank"
+                >
+                  <StyledIcon icon={faGithub} />
+                  View on GitHub
                 </ProjectDetailsButton>
               </ProjectDetailsButtonContainer>
               <div>
@@ -356,16 +374,6 @@ export default function ProjectsPage({ data, ...restProps }) {
               <ProjectDetailsButtonContainer>
                 <ProjectDetailsButton
                   forwardedAs="a"
-                  href="https://github.com/LibertyNJ/vacctrac"
-                  rel="noopener noreferrer"
-                  size="small"
-                  target="_blank"
-                >
-                  <StyledIcon icon={faGithub} />
-                  View on GitHub
-                </ProjectDetailsButton>
-                <ProjectDetailsButton
-                  forwardedAs="a"
                   href="https://exp-shell-app-assets.s3.us-west-1.amazonaws.com/android/%40libertynj/vacctrac-poc-4be840ba42244fc592a9f88f90745734-signed.apk"
                   rel="noopener noreferrer"
                   size="small"
@@ -373,6 +381,16 @@ export default function ProjectsPage({ data, ...restProps }) {
                 >
                   <StyledIcon icon={faDownload} />
                   Download for Android
+                </ProjectDetailsButton>
+                <ProjectDetailsButton
+                  forwardedAs="a"
+                  href="https://github.com/LibertyNJ/vacctrac"
+                  rel="noopener noreferrer"
+                  size="small"
+                  target="_blank"
+                >
+                  <StyledIcon icon={faGithub} />
+                  View on GitHub
                 </ProjectDetailsButton>
               </ProjectDetailsButtonContainer>
               <div>
@@ -428,6 +446,16 @@ export default function ProjectsPage({ data, ...restProps }) {
                 fluid={getImageFluidFromData('study-drug-label-maker', data)}
               />
               <ProjectDetailsButtonContainer>
+                <DesktopProjectDetailsButton
+                  forwardedAs="a"
+                  href="https://nathanieljliberty-sdlm.netlify.com/"
+                  rel="noopener noreferrer"
+                  size="small"
+                  target="_blank"
+                >
+                  <StyledIcon icon={faDesktop} />
+                  Try it
+                </DesktopProjectDetailsButton>
                 <ProjectDetailsButton
                   forwardedAs="a"
                   href="https://github.com/LibertyNJ/study-drug-label-maker"
@@ -437,16 +465,6 @@ export default function ProjectsPage({ data, ...restProps }) {
                 >
                   <StyledIcon icon={faGithub} />
                   View on GitHub
-                </ProjectDetailsButton>
-                <ProjectDetailsButton
-                  forwardedAs="a"
-                  href="https://nathanieljliberty-sdlm.netlify.com/"
-                  rel="noopener noreferrer"
-                  size="small"
-                  target="_blank"
-                >
-                  <StyledIcon icon={faDesktop} />
-                  Try it
                 </ProjectDetailsButton>
               </ProjectDetailsButtonContainer>
               <div>
@@ -504,6 +522,16 @@ export default function ProjectsPage({ data, ...restProps }) {
                 fluid={getImageFluidFromData('cytoxan-label-maker', data)}
               />
               <ProjectDetailsButtonContainer>
+                <DesktopProjectDetailsButton
+                  forwardedAs="a"
+                  href="https://nathanieljliberty-clm.netlify.com/"
+                  rel="noopener noreferrer"
+                  size="small"
+                  target="_blank"
+                >
+                  <StyledIcon icon={faDesktop} />
+                  Try it
+                </DesktopProjectDetailsButton>
                 <ProjectDetailsButton
                   forwardedAs="a"
                   href="https://github.com/LibertyNJ/cytoxan-label-maker"
@@ -513,16 +541,6 @@ export default function ProjectsPage({ data, ...restProps }) {
                 >
                   <StyledIcon icon={faGithub} />
                   View on GitHub
-                </ProjectDetailsButton>
-                <ProjectDetailsButton
-                  forwardedAs="a"
-                  href="https://nathanieljliberty-clm.netlify.com/"
-                  rel="noopener noreferrer"
-                  size="small"
-                  target="_blank"
-                >
-                  <StyledIcon icon={faDesktop} />
-                  Try it
                 </ProjectDetailsButton>
               </ProjectDetailsButtonContainer>
               <div>
