@@ -250,6 +250,8 @@ export default function AboutPage({ data, ...restProps }) {
                   <ul>
                     <li>Express</li>
                     <li>Node.js</li>
+                    <li>PostgreSQL</li>
+                    <li>Sequelize</li>
                     <li>SQLite</li>
                   </ul>
                 </div>
@@ -263,6 +265,8 @@ export default function AboutPage({ data, ...restProps }) {
                   <ListHeading>Tools</ListHeading>
                   <ul>
                     <li>Babel</li>
+                    <li>Git</li>
+                    <li>NPM</li>
                     <li>Webpack</li>
                   </ul>
                 </div>
@@ -272,6 +276,7 @@ export default function AboutPage({ data, ...restProps }) {
                     <li>Electron</li>
                     <li>Expo</li>
                     <li>Gatsby</li>
+                    <li>Heroku</li>
                     <li>Netlify</li>
                     <li>React Native</li>
                   </ul>
