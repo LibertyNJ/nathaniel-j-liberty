@@ -1,31 +1,42 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'gatsby';
 import React from 'react';
 import styled from 'styled-components';
-import { faRocket, faSatellite } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { Button, Layout, Lead, SEO, StarCanvas } from '../components';
-import { variables as styleVariables } from '../components/GlobalStyle';
+import Button from '../components/Button';
+import Layout from '../components/Layout';
+import Lead from '../components/Lead';
+import SEO from '../components/SEO';
+import StarCanvas from '../components/StarCanvas';
+import { baseline, breakpoint, typography } from '../style';
 
 const BlockButton = styled(Button)`
   display: block;
-  margin: 0 auto ${2 * styleVariables.baselinePixels}px auto;
+  margin: 0 auto calc(6 * ${baseline});
   width: 100%;
 
-  @media (min-width: ${styleVariables.breakpoint.sm}px) {
-    margin: 0 0 0 ${2 * styleVariables.baselinePixels}px;
-    width: auto;
+  @media (min-width: ${breakpoint.sm}) {
+    margin: 0 calc(3 * ${baseline}) calc(6 * ${baseline});
+
+    &:first-child {
+      margin-left: 0;
+    }
+
+    &:last-child {
+      margin-right: 0;
+    }
   }
 `;
 
 const ButtonContainer = styled.div`
-  @media (min-width: ${styleVariables.breakpoint.sm}px) {
+  @media (min-width: ${breakpoint.sm}) {
     display: flex;
     justify-content: flex-end;
   }
 `;
 
 const Container = styled.div`
+  align-content: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -44,33 +55,32 @@ const StyledStarCanvas = styled(StarCanvas)`
 `;
 
 const StyledIcon = styled(FontAwesomeIcon)`
-  margin-right: 1rem;
+  margin-right: 1em;
 `;
 
 const Subtitle = styled.span`
   display: block;
-  font-size: ${styleVariables.h4.xs.rem}rem;
-  line-height: ${styleVariables.h4.xs.lh};
-  white-space: nowrap;
+  font-size: ${typography.fontSize.h4.xs};
+  line-height: ${typography.lineHeight.h4.xs};
 
   ::before {
     content: '// ';
   }
 
-  @media (min-width: ${styleVariables.breakpoint.md}px) {
-    font-size: ${styleVariables.h3.md.rem}rem;
-    line-height: ${styleVariables.h3.md.lh};
+  @media (min-width: ${breakpoint.md}) {
+    font-size: ${typography.fontSize.h3.md};
+    line-height: ${typography.lineHeight.h3.md};
   }
 
-  @media (min-width: ${styleVariables.breakpoint.lg}px) {
-    font-size: ${styleVariables.h3.lg.rem}rem;
-    line-height: ${styleVariables.h3.lg.lh};
+  @media (min-width: ${breakpoint.lg}) {
+    font-size: ${typography.fontSize.h3.lg};
+    line-height: ${typography.lineHeight.h3.lg};
   }
 `;
 
 const Title = styled.h1`
-  font-family: 'Fira Mono', monospace;
-  margin-bottom: ${2 * styleVariables.baselinePixels}px;
+  font-family: ${typography.font.monospace};
+  margin-bottom: calc(6 * ${baseline});
 `;
 
 export default function IndexPage({ ...restProps }) {
@@ -81,19 +91,19 @@ export default function IndexPage({ ...restProps }) {
       <Container>
         <Title>
           Nathaniel&nbsp;J. Liberty <br />
-          <Subtitle>Software Developer</Subtitle>
+          <Subtitle>Full-Stack Web&nbsp;Developer</Subtitle>
         </Title>
         <StyledLead>
-          Driven software developer using JavaScript and web technologies to
-          build creative solutions for the healthcare industry and more.
+          A stellar full-stack web developer building things that are out of
+          this world.
         </StyledLead>
         <ButtonContainer>
           <BlockButton forwardedAs={Link} size="large" to="/contact">
-            <StyledIcon icon={faSatellite} />
+            <StyledIcon icon="satellite" />
             Make contact
           </BlockButton>
           <BlockButton forwardedAs={Link} size="large" to="/projects">
-            <StyledIcon icon={faRocket} />
+            <StyledIcon icon="rocket" />
             Explore my work
           </BlockButton>
         </ButtonContainer>

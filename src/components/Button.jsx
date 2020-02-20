@@ -2,36 +2,39 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import styled from 'styled-components';
 
-import { variables as styleVariables } from '../GlobalStyle';
+import { baseline, breakpoint, color, typography } from '../style';
+
+const BORDER_THICKNESS = '1px';
+const TRANSITION_TIME = '500ms';
 
 const StyledButton = styled.button`
   background: none;
-  border: 1px solid white;
-  border-radius: 0.25rem;
-  color: white;
-  font-family: 'Fira Mono', monospace;
+  border: ${BORDER_THICKNESS} solid ${color.white};
+  border-radius: ${baseline};
+  color: ${color.white};
+  font-family: ${typography.font.monospace};
   font-size: ${props => {
     switch (props.size) {
       case 'large':
-        return styleVariables.h4.xs.rem;
+        return typography.fontSize.h4.xs;
       case 'medium':
-        return styleVariables.h5.xs.rem;
+        return typography.fontSize.h5.xs;
       case 'small':
-        return styleVariables.h6.xs.rem;
+        return typography.fontSize.h6.xs;
       default:
         throw new Error(
           `Button component received invalid size prop: ${props.size}`
         );
     }
-  }}rem;
+  }};
   line-height: ${props => {
     switch (props.size) {
       case 'large':
-        return styleVariables.h4.xs.lh;
+        return typography.lineHeight.h4.xs;
       case 'medium':
-        return styleVariables.h5.xs.lh;
+        return typography.lineHeight.h5.xs;
       case 'small':
-        return styleVariables.h6.xs.lh;
+        return typography.lineHeight.h6.xs;
       default:
         throw new Error(
           `Button component received invalid size prop: ${props.size}`
@@ -41,56 +44,57 @@ const StyledButton = styled.button`
   padding: ${props => {
     switch (props.size) {
       case 'large':
-        return 2 * styleVariables.baselinePixels - 1;
+        return `calc(6 * ${baseline} - ${BORDER_THICKNESS})`;
       case 'medium':
-        return styleVariables.baselinePixels - 1;
+        return `calc(3 * ${baseline} - ${BORDER_THICKNESS})`;
       case 'small':
-        return styleVariables.baselinePixels - 1;
+        return `calc(3 * ${baseline} - ${BORDER_THICKNESS})`;
       default:
         throw new Error(
           `Button component received invalid size prop: ${props.size}`
         );
     }
-  }}px;
+  }};
   text-align: center;
   text-decoration: none;
-  transition: background 500ms, color 500ms, filter 500ms;
+  transition: background ${TRANSITION_TIME}, color ${TRANSITION_TIME},
+    filter ${TRANSITION_TIME};
   white-space: nowrap;
 
   :focus {
-    background: black;
-    filter: drop-shadow(0 0 5px white);
+    background: ${color.black};
+    filter: drop-shadow(0 0 5px ${color.white});
   }
 
   :hover {
-    background: white;
-    color: black;
+    background: ${color.white};
+    color: ${color.black};
     cursor: pointer;
   }
 
-  @media (min-width: ${styleVariables.breakpoint.md}px) {
+  @media (min-width: ${breakpoint.md}) {
     font-size: ${props => {
       switch (props.size) {
         case 'large':
-          return styleVariables.h4.md.rem;
+          return typography.fontSize.h4.md;
         case 'medium':
-          return styleVariables.h5.md.rem;
+          return typography.fontSize.h5.md;
         case 'small':
-          return styleVariables.h6.md.rem;
+          return typography.fontSize.h6.md;
         default:
           throw new Error(
             `Button component received invalid size prop: ${props.size}`
           );
       }
-    }}rem;
+    }};
     line-height: ${props => {
       switch (props.size) {
         case 'large':
-          return styleVariables.h4.md.lh;
+          return typography.lineHeight.h4.md;
         case 'medium':
-          return styleVariables.h5.md.lh;
+          return typography.lineHeight.h5.md;
         case 'small':
-          return styleVariables.h6.md.lh;
+          return typography.lineHeight.h6.md;
         default:
           throw new Error(
             `Button component received invalid size prop: ${props.size}`
@@ -99,29 +103,29 @@ const StyledButton = styled.button`
     }};
   }
 
-  @media (min-width: ${styleVariables.breakpoint.lg}px) {
+  @media (min-width: ${breakpoint.lg}) {
     font-size: ${props => {
       switch (props.size) {
         case 'large':
-          return styleVariables.h4.lg.rem;
+          return typography.fontSize.h4.lg;
         case 'medium':
-          return styleVariables.h5.lg.rem;
+          return typography.fontSize.h5.lg;
         case 'small':
-          return styleVariables.h6.lg.rem;
+          return typography.fontSize.h6.lg;
         default:
           throw new Error(
             `Button component received invalid size prop: ${props.size}`
           );
       }
-    }}rem;
+    }};
     line-height: ${props => {
       switch (props.size) {
         case 'large':
-          return styleVariables.h4.lg.lh;
+          return typography.lineHeight.h4.lg;
         case 'medium':
-          return styleVariables.h5.lg.lh;
+          return typography.lineHeight.h5.lg;
         case 'small':
-          return styleVariables.h6.lg.lh;
+          return typography.lineHeight.h6.lg;
         default:
           throw new Error(
             `Button component received invalid size prop: ${props.size}`
@@ -139,6 +143,6 @@ Button.defaultProps = {
   size: 'medium',
 };
 
-export function Button({ size, ...restProps }) {
+export default function Button({ size, ...restProps }) {
   return <StyledButton size={size} {...restProps} />;
 }

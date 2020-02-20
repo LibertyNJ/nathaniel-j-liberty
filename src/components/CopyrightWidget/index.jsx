@@ -11,7 +11,7 @@ CopyrightWidget.propTypes = {
   initialYear: PropTypes.number.isRequired,
 };
 
-export function CopyrightWidget({ holder, initialYear, ...restProps }) {
+export default function CopyrightWidget({ holder, initialYear, ...restProps }) {
   const currentYear = new Date().getFullYear();
   return (
     <StyledDiv {...restProps}>

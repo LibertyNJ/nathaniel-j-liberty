@@ -1,20 +1,22 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import styled from 'styled-components';
-import { faSatelliteDish } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { Button, Layout, Lead, SEO, StarCanvas } from '../../components';
-import { variables as styleVariables } from '../../components/GlobalStyle';
+import Button from '../../components/Button';
+import Layout from '../../components/Layout';
+import Lead from '../../components/Lead';
+import SEO from '../../components/SEO';
+import StarCanvas from '../../components/StarCanvas';
+
+import { baseline, breakpoint, color, typography } from '../../style';
+
+const BORDER_THICKNESS = '1px';
+const TRANSITION_DURATION = '500ms';
 
 const BlockButton = styled(Button)`
   display: block;
-  margin: 0 auto ${2 * styleVariables.baselinePixels}px auto;
+  margin-bottom: calc(6 * ${baseline});
   width: 100%;
-
-  @media (min-width: ${styleVariables.breakpoint.sm}px) {
-    margin: 0 0 0 auto;
-    width: auto;
-  }
 `;
 
 const Container = styled.div`
@@ -28,56 +30,56 @@ const Container = styled.div`
 const FormGroup = styled.div`
   display: flex;
   flex-direction: column;
-  margin-bottom: ${2 * styleVariables.baselinePixels}px;
+  margin-bottom: calc(6 * ${baseline});
 
   &:last-of-type {
-    margin-bottom: ${4 * styleVariables.baselinePixels}px;
+    margin-bottom: calc(12 * ${baseline});
   }
 `;
 
 const Input = styled.input`
-  background: black;
-  border: 1px solid white;
-  border-radius: 0.25rem;
-  color: white;
-  font-size: ${styleVariables.body.xs.rem}rem;
-  line-height: ${styleVariables.body.xs.lh};
-  padding: ${styleVariables.baselinePixels - 1}px;
-  transition: filter 500ms;
+  background: ${color.black};
+  border: ${BORDER_THICKNESS} solid ${color.white};
+  border-radius: ${baseline};
+  color: ${color.white};
+  font-size: ${typography.fontSize.body.xs};
+  line-height: ${typography.lineHeight.body.xs};
+  padding: calc(3 * ${baseline} - ${BORDER_THICKNESS});
+  transition: filter ${TRANSITION_DURATION};
 
   :focus {
-    filter: drop-shadow(0 0 5px white);
+    filter: drop-shadow(0 0 5px ${color.white});
   }
 
-  @media (min-width: ${styleVariables.breakpoint.md}px) {
-    font-size: ${styleVariables.body.md.rem}rem;
-    line-height: ${styleVariables.body.md.lh};
+  @media (min-width: ${breakpoint.md}) {
+    font-size: ${typography.fontSize.body.md};
+    line-height: ${typography.lineHeight.body.md};
   }
 
-  @media (min-width: ${styleVariables.breakpoint.lg}px) {
-    font-size: ${styleVariables.body.lg.rem}rem;
-    line-height: ${styleVariables.body.lg.lh};
+  @media (min-width: ${breakpoint.lg}) {
+    font-size: ${typography.fontSize.body.lg};
+    line-height: ${typography.lineHeight.body.lg};
   }
 `;
 
 const Label = styled.label`
-  font-family: 'Fira Mono', monospace;
-  font-size: ${styleVariables.h5.xs.rem}rem;
-  line-height: ${styleVariables.h5.xs.lh};
+  font-family: ${typography.monospace};
+  font-size: ${typography.fontSize.h5.xs};
+  line-height: ${typography.lineHeight.h5.xs};
 
-  @media (min-width: ${styleVariables.breakpoint.md}px) {
-    font-size: ${styleVariables.h5.md.rem}rem;
-    line-height: ${styleVariables.h5.md.lh};
+  @media (min-width: ${breakpoint.md}) {
+    font-size: ${typography.fontSize.h5.md};
+    line-height: ${typography.lineHeight.h5.md};
   }
 
-  @media (min-width: ${styleVariables.breakpoint.lg}px) {
-    font-size: ${styleVariables.h5.lg.rem}rem;
-    line-height: ${styleVariables.h5.lg.lh};
+  @media (min-width: ${breakpoint.lg}) {
+    font-size: ${typography.fontSize.h5.lg};
+    line-height: ${typography.lineHeight.h5.lg};
   }
 `;
 
 const StyledIcon = styled(FontAwesomeIcon)`
-  margin-right: 1rem;
+  margin-right: 1em;
 `;
 
 const StyledStarCanvas = styled(StarCanvas)`
@@ -88,7 +90,7 @@ const StyledStarCanvas = styled(StarCanvas)`
 `;
 
 const Title = styled.h1`
-  font-family: 'Fira Mono', monospace;
+  font-family: ${typography.font.monospace};
   text-align: center;
 `;
 
@@ -99,7 +101,7 @@ export default function ContactPage({ ...restProps }) {
       <StyledStarCanvas coveredElementSelector="body" />
       <Container>
         <Title>Contact</Title>
-        <Lead>Let’s build something out of this world.</Lead>
+        <Lead>Let’s discover what we can accomplish together.</Lead>
         <form
           action="/contact/success"
           data-netlify="true"
@@ -136,10 +138,12 @@ export default function ContactPage({ ...restProps }) {
               form="contact-form"
               name="message"
               required
+              rows="5"
+              spellcheck
             />
           </FormGroup>
           <BlockButton form="contact-form" size="large" type="submit">
-            <StyledIcon icon={faSatelliteDish} />
+            <StyledIcon icon="satellite-dish" />
             Transmit
           </BlockButton>
         </form>

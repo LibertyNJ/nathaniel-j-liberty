@@ -18,7 +18,7 @@ StarCanvas.defaultProps = {
   twinkle: false,
 };
 
-export function StarCanvas({
+export default function StarCanvas({
   coveredElementSelector,
   shroud,
   twinkle,
@@ -27,10 +27,13 @@ export function StarCanvas({
   setCoveredElementSelector(coveredElementSelector);
   setShroud(shroud);
   setTwinkle(twinkle);
+
   const canvasRef = useRef();
+
   useEffect(() => setCanvas(canvasRef.current), []);
   useEffect(listenForWindowResize, []);
   useEffect(initStarField, []);
+
   return <canvas ref={canvasRef} {...restProps}></canvas>;
 }
 
@@ -69,6 +72,7 @@ function initStarField() {
   const numberOfStars = getNumberOfStars();
   const stars = createStars(numberOfStars);
   drawFrame(stars);
+
   return () => {
     cancelAnimationFrame(_animationRequestId);
   };
@@ -95,10 +99,12 @@ function getNumberOfStars() {
 
 function createStars(numberOfStars) {
   const stars = [];
+
   for (let i = 0; i < numberOfStars; i++) {
     const star = createStar();
     stars.push(star);
   }
+
   return stars;
 }
 
@@ -144,9 +150,11 @@ function randomizeStarSize() {
 function drawFrame(stars) {
   clearCanvas();
   drawStars(stars);
+
   if (_shroud) {
     drawShroud();
   }
+
   if (_twinkle) {
     animateStars(stars);
   }
@@ -177,6 +185,7 @@ function randomizeLuminosity(luminosity) {
 
 function drawShroud() {
   const context = _canvas.getContext('2d');
+
   const topGradient = context.createLinearGradient(
     0.5 * _canvas.width,
     0,
@@ -185,8 +194,10 @@ function drawShroud() {
   );
   topGradient.addColorStop(0, 'rgba(0, 0, 0, 0)');
   topGradient.addColorStop(1, 'rgba(0, 0, 0, 1)');
+
   context.fillStyle = topGradient;
   context.fillRect(0, 0, _canvas.width, window.innerHeight);
+
   if (_canvas.height > 2 * window.innerHeight) {
     context.fillStyle = 'black';
     context.fillRect(
@@ -196,6 +207,7 @@ function drawShroud() {
       _canvas.height - 2 * window.innerHeight
     );
   }
+
   const bottomGradient = context.createLinearGradient(
     0.5 * _canvas.width,
     _canvas.height - window.innerHeight,
@@ -204,6 +216,7 @@ function drawShroud() {
   );
   bottomGradient.addColorStop(0, 'rgba(0, 0, 0, 1)');
   bottomGradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
+
   context.fillStyle = bottomGradient;
   context.fillRect(
     0,

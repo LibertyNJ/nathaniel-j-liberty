@@ -1,36 +1,39 @@
-import { graphql, Link } from 'gatsby';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { graphql, Link, useStaticQuery } from 'gatsby';
 import Image from 'gatsby-image';
 import React from 'react';
 import styled from 'styled-components';
-import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons';
-import {
-  faFileDownload,
-  faRocket,
-  faSatellite,
-} from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { Button, Layout, Lead, SEO, StarCanvas } from '../components';
-import { variables as styleVariables } from '../components/GlobalStyle';
+import Button from '../components/Button';
+import Layout from '../components/Layout';
+import SEO from '../components/SEO';
+import StarCanvas from '../components/StarCanvas';
+import { baseline, breakpoint, color, typography } from '../style';
+
+const BORDER_THICKNESS = '1px';
 
 const BlockButton = styled(Button)`
   display: block;
-  margin: 0 auto ${2 * styleVariables.baselinePixels}px auto;
+  margin: 0 auto calc(6 * ${baseline});
   width: 100%;
 
-  @media (min-width: ${styleVariables.breakpoint.sm}px) {
-    margin: 0 ${2 * styleVariables.baselinePixels}px
-      ${2 * styleVariables.baselinePixels}px 0;
-    width: auto;
+  @media (min-width: ${breakpoint.sm}) {
+    margin: 0 calc(3 * ${baseline}) calc(6 * ${baseline});
 
-    &:last-of-type {
+    &:first-child {
+      margin-left: 0;
+    }
+
+    &:last-child {
       margin-right: 0;
     }
   }
 `;
 
 const ButtonContainer = styled.div`
-  @media (min-width: ${styleVariables.breakpoint.sm}px) {
+  margin-top: calc(6 * ${baseline});
+
+  @media (min-width: ${breakpoint.sm}) {
     display: flex;
     justify-content: flex-start;
   }
@@ -43,19 +46,19 @@ const Container = styled.div`
   margin: 0 auto;
   width: 100%;
 
-  @media (min-width: ${styleVariables.breakpoint.sm}px) {
+  @media (min-width: ${breakpoint.sm}) {
     max-width: 540px;
   }
 
-  @media (min-width: ${styleVariables.breakpoint.md}px) {
+  @media (min-width: ${breakpoint.md}) {
     max-width: 720px;
   }
 
-  @media (min-width: ${styleVariables.breakpoint.lg}px) {
+  @media (min-width: ${breakpoint.lg}) {
     max-width: 960px;
   }
 
-  @media (min-width: ${styleVariables.breakpoint.xl}px) {
+  @media (min-width: ${breakpoint.xl}) {
     max-width: 1140px;
   }
 `;
@@ -66,8 +69,8 @@ const ContentContainer = styled.div`
 `;
 
 const CtaContainer = styled.div`
-  @media (min-width: ${styleVariables.breakpoint.md}px) {
-    margin: ${4 * styleVariables.baselinePixels}px auto;
+  @media (min-width: ${breakpoint.md}) {
+    margin: 0 auto calc(6 * ${baseline});
   }
 `;
 
@@ -77,8 +80,8 @@ const GridContainer = styled.div`
   justify-content: center;
   width: 100%;
 
-  @media (min-width: ${styleVariables.breakpoint.md}px) {
-    column-gap: ${4 * styleVariables.baselinePixels}px;
+  @media (min-width: ${breakpoint.md}) {
+    column-gap: calc(12 * ${baseline});
     display: grid;
     grid-template-columns: 1fr 2fr;
     grid-template-rows: auto auto;
@@ -86,29 +89,27 @@ const GridContainer = styled.div`
 `;
 
 const ListHeading = styled.p`
-  font-size: ${styleVariables.h5.rem}rem;
+  font-size: ${typography.fontSize.h5.xs};
   font-weight: bold;
-  line-height: ${styleVariables.h5.lh};
+  line-height: ${typography.lineHeight.h5.xs};
   margin-bottom: 0;
 
-  @media (min-width: ${styleVariables.breakpoint.md}px) {
-    font-size: ${styleVariables.h5.md.rem}rem;
-    line-height: ${styleVariables.h5.md.lh};
+  @media (min-width: ${breakpoint.md}) {
+    font-size: ${typography.fontSize.h5.md};
+    line-height: ${typography.lineHeight.h5.md};
   }
 
-  @media (min-width: ${styleVariables.breakpoint.lg}px) {
-    font-size: ${styleVariables.h5.lg.rem}rem;
-    line-height: ${styleVariables.h5.lg.lh};
+  @media (min-width: ${breakpoint.lg}) {
+    font-size: ${typography.fontSize.h5.lg};
+    line-height: ${typography.lineHeight.h5.lg};
   }
 `;
 
 const ProfileButton = styled(Button)`
   display: block;
-  margin: 0 auto ${2 * styleVariables.baselinePixels}px auto;
+  margin: 0 auto calc(6 * ${baseline}) auto;
   width: 100%;
 `;
-
-const ProfileButtonContainer = styled.div``;
 
 const ProfileContainer = styled.div`
   grid-column: 1 / 2;
@@ -120,13 +121,13 @@ const ProfileContainer = styled.div`
 `;
 
 const StyledIcon = styled(FontAwesomeIcon)`
-  margin-right: 1rem;
+  margin-right: 1em;
 `;
 
 const StyledImage = styled(Image)`
-  border: 1px solid white;
+  border: ${BORDER_THICKNESS} solid ${color.white};
   border-radius: 50%;
-  margin-bottom: ${2 * styleVariables.baselinePixels}px;
+  margin-bottom: calc(6 * ${baseline});
   width: 100%;
 `;
 
@@ -137,34 +138,48 @@ const StyledStarCanvas = styled(StarCanvas)`
   z-index: -1;
 `;
 
-const TechnologiesSection = styled.section`
-  column-gap: ${2 * styleVariables.baselinePixels}px;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+const TechnologyColumns = styled.div`
+  columns: 2;
+  margin-bottom: calc(6 * ${baseline});
 
-  h2 {
-    grid-column: span 2;
+  @media (min-width: ${breakpoint.md}) {
+    columns: 3;
+    margin-bottom: 0;
   }
+`;
 
-  @media (min-width: ${styleVariables.breakpoint.md}px) {
-    grid-template-columns: repeat(3, 1fr);
+const TechnologyList = styled.div`
+  break-inside: avoid;
+  margin-bottom: calc(6 * ${baseline});
 
-    h2 {
-      grid-column: span 3;
-    }
+  ul {
+    margin-bottom: 0;
   }
 `;
 
 const TextContainer = styled.div`
+  margin: 0 auto;
   max-width: 33rem;
 `;
 
 const Title = styled.h1`
-  font-family: 'Fira Mono', monospace;
+  font-family: ${typography.font.monospace};
   text-align: center;
 `;
 
-export default function AboutPage({ data, ...restProps }) {
+export default function AboutPage({ ...restProps }) {
+  const data = useStaticQuery(graphql`
+    query {
+      file(relativePath: { eq: "nathaniel-j-liberty.jpg" }) {
+        childImageSharp {
+          fluid {
+            ...GatsbyImageSharpFluid
+          }
+        }
+      }
+    }
+  `);
+
   return (
     <Layout {...restProps}>
       <SEO title="About" />
@@ -177,14 +192,14 @@ export default function AboutPage({ data, ...restProps }) {
               alt="Nathaniel J. Liberty in the hall of rockets at the National Air and Space Museum in Washington, DC."
               fluid={data.file.childImageSharp.fluid}
             />
-            <ProfileButtonContainer>
+            <div>
               <ProfileButton
                 download
                 forwardedAs="a"
                 href="../../nathaniel-j-liberty-resume.pdf"
                 size="small"
               >
-                <StyledIcon icon={faFileDownload} />
+                <StyledIcon icon="file-download" />
                 Resume
               </ProfileButton>
               <ProfileButton
@@ -194,7 +209,7 @@ export default function AboutPage({ data, ...restProps }) {
                 size="small"
                 target="_blank"
               >
-                <StyledIcon icon={faGithub} />
+                <StyledIcon icon={['fab', 'github']} />
                 GitHub
               </ProfileButton>
               <ProfileButton
@@ -204,96 +219,101 @@ export default function AboutPage({ data, ...restProps }) {
                 size="small"
                 target="_blank"
               >
-                <StyledIcon icon={faLinkedin} />
+                <StyledIcon icon={['fab', 'linkedin']} />
                 LinkedIn
               </ProfileButton>
-            </ProfileButtonContainer>
+            </div>
           </ProfileContainer>
           <ContentContainer>
             <TextContainer>
               <section>
-                <h2>About me</h2>
+                <h2>Profile</h2>
                 <p>
-                  I’m a software developer passionate about learning novel
-                  technologies and tackling unfamiliar challenges. I build
-                  creative solutions for problems in data analysis and
-                  analytics, workflow automation, and website design. I believe
-                  that continuous learning and growth is the key to a life of
-                  fulfillment, and as such I’m always looking for new
-                  opportunities to expand and apply my skills.
+                  As a data analyst with a passion for technology, I discovered
+                  programming out of a drive to improve efficiency in the
+                  workplace. I fell in love with the versatility of JavaScript,
+                  using it to create websites, mobile apps, and desktop
+                  applications. I now look forward to the daily adventure of
+                  exploring the latest web technologies and using them to build
+                  new and exciting projects.
                 </p>
+                <p>I’m also very much inspired by space.</p>
               </section>
-              <TechnologiesSection>
+              <section>
                 <h2>Technologies</h2>
-                <div>
-                  <ListHeading>Core</ListHeading>
-                  <ul>
-                    <li>HTML5</li>
-                    <li>CSS3</li>
-                    <li>JavaScript</li>
-                    <li>SQL</li>
-                  </ul>
-                </div>
-                <div>
-                  <ListHeading>Front-end</ListHeading>
-                  <ul>
-                    <li>Bootstrap</li>
-                    <li>GraphQL</li>
-                    <li>React</li>
-                    <li>Redux</li>
-                    <li>Sass</li>
-                    <li>Styled Components</li>
-                  </ul>
-                </div>
-                <div>
-                  <ListHeading>Back-end</ListHeading>
-                  <ul>
-                    <li>Express</li>
-                    <li>Node.js</li>
-                    <li>PostgreSQL</li>
-                    <li>Sequelize</li>
-                    <li>SQLite</li>
-                  </ul>
-                </div>
-                <div>
-                  <ListHeading>Testing</ListHeading>
-                  <ul>
-                    <li>Jest</li>
-                  </ul>
-                </div>
-                <div>
-                  <ListHeading>Tools</ListHeading>
-                  <ul>
-                    <li>Babel</li>
-                    <li>Git</li>
-                    <li>NPM</li>
-                    <li>Webpack</li>
-                  </ul>
-                </div>
-                <div>
-                  <ListHeading>Platforms</ListHeading>
-                  <ul>
-                    <li>Electron</li>
-                    <li>Expo</li>
-                    <li>Gatsby</li>
-                    <li>Heroku</li>
-                    <li>Netlify</li>
-                    <li>React Native</li>
-                  </ul>
-                </div>
-              </TechnologiesSection>
+                <TechnologyColumns>
+                  <TechnologyList>
+                    <ListHeading>Core</ListHeading>
+                    <ul>
+                      <li>HTML5</li>
+                      <li>CSS3</li>
+                      <li>JavaScript</li>
+                      <li>TypeScript</li>
+                      <li>SQL</li>
+                    </ul>
+                  </TechnologyList>
+                  <TechnologyList>
+                    <ListHeading>Front-end</ListHeading>
+                    <ul>
+                      <li>Bootstrap</li>
+                      <li>React</li>
+                      <li>Redux</li>
+                      <li>Sass</li>
+                      <li>Styled Components</li>
+                    </ul>
+                  </TechnologyList>
+                  <TechnologyList>
+                    <ListHeading>Back-end</ListHeading>
+                    <ul>
+                      <li>Express</li>
+                      <li>GraphQL</li>
+                      <li>Node.js</li>
+                      <li>PostgreSQL</li>
+                      <li>Sequelize</li>
+                      <li>SQLite</li>
+                    </ul>
+                  </TechnologyList>
+                  <TechnologyList>
+                    <ListHeading>Testing</ListHeading>
+                    <ul>
+                      <li>Jest</li>
+                    </ul>
+                  </TechnologyList>
+                  <TechnologyList>
+                    <ListHeading>Tools</ListHeading>
+                    <ul>
+                      <li>Babel</li>
+                      <li>Git</li>
+                      <li>NPM</li>
+                      <li>Webpack</li>
+                    </ul>
+                  </TechnologyList>
+                  <TechnologyList>
+                    <ListHeading>Platforms</ListHeading>
+                    <ul>
+                      <li>Contentful</li>
+                      <li>Electron</li>
+                      <li>Expo</li>
+                      <li>Gatsby</li>
+                      <li>Heroku</li>
+                      <li>Netlify</li>
+                      <li>React Native</li>
+                    </ul>
+                  </TechnologyList>
+                </TechnologyColumns>
+              </section>
             </TextContainer>
           </ContentContainer>
         </GridContainer>
         <CtaContainer>
-          <Lead>Let’s discover how we can help each other grow.</Lead>
+          <h2>Let’s discover new frontiers together</h2>
           <ButtonContainer>
             <BlockButton forwardedAs={Link} size="large" to="/contact">
-              <StyledIcon icon={faSatellite} />
+              <StyledIcon icon="satellite" />
               Make contact
             </BlockButton>
             <BlockButton forwardedAs={Link} size="large" to="/projects">
-              <StyledIcon icon={faRocket} />
+              <StyledIcon icon="rocket" />
               Explore my work
             </BlockButton>
           </ButtonContainer>
@@ -302,15 +322,3 @@ export default function AboutPage({ data, ...restProps }) {
     </Layout>
   );
 }
-
-export const query = graphql`
-  query {
-    file(relativePath: { eq: "nathaniel-j-liberty.jpg" }) {
-      childImageSharp {
-        fluid {
-          ...GatsbyImageSharpFluid
-        }
-      }
-    }
-  }
-`;

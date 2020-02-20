@@ -1,28 +1,24 @@
-import { graphql, Link } from 'gatsby';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { graphql, Link, useStaticQuery } from 'gatsby';
 import Image from 'gatsby-image';
 import React from 'react';
 import styled from 'styled-components';
-import { faGithub } from '@fortawesome/free-brands-svg-icons';
-import {
-  faDesktop,
-  faDownload,
-  faGlobe,
-  faSatellite,
-  faUserAstronaut,
-} from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { Button, Layout, Lead, SEO, StarCanvas } from '../components';
-import { variables as styleVariables } from '../components/GlobalStyle';
+import Button from '../components/Button';
+import Layout from '../components/Layout';
+import SEO from '../components/SEO';
+import StarCanvas from '../components/StarCanvas';
+import { baseline, breakpoint, color, typography } from '../style';
+
+const BORDER_THICKNESS = '1px';
 
 const BlockButton = styled(Button)`
   display: block;
-  margin: 0 auto ${2 * styleVariables.baselinePixels}px auto;
+  margin: 0 auto calc(6 * ${baseline});
   width: 100%;
 
-  @media (min-width: ${styleVariables.breakpoint.sm}px) {
-    margin: 0 ${2 * styleVariables.baselinePixels}px
-      ${2 * styleVariables.baselinePixels}px 0;
+  @media (min-width: ${breakpoint.sm}) {
+    margin: 0 calc(6 * ${baseline}) calc(6 * ${baseline}) 0;
     width: auto;
 
     &:last-of-type {
@@ -32,7 +28,9 @@ const BlockButton = styled(Button)`
 `;
 
 const ButtonContainer = styled.div`
-  @media (min-width: ${styleVariables.breakpoint.sm}px) {
+  margin-top: calc(6 * ${baseline});
+
+  @media (min-width: ${breakpoint.sm}) {
     display: flex;
     justify-content: flex-start;
   }
@@ -45,66 +43,67 @@ const Container = styled.div`
   margin: 0 auto;
   width: 100%;
 
-  @media (min-width: ${styleVariables.breakpoint.sm}px) {
+  @media (min-width: ${breakpoint.sm}) {
     max-width: 540px;
   }
 
-  @media (min-width: ${styleVariables.breakpoint.md}px) {
+  @media (min-width: ${breakpoint.md}) {
     max-width: 720px;
   }
 
-  @media (min-width: ${styleVariables.breakpoint.lg}px) {
+  @media (min-width: ${breakpoint.lg}) {
     max-width: 960px;
   }
 
-  @media (min-width: ${styleVariables.breakpoint.xl}px) {
+  @media (min-width: ${breakpoint.xl}) {
     max-width: 1140px;
   }
 `;
 
-const CtaContainer = styled.div`
-  @media (min-width: ${styleVariables.breakpoint.md}px) {
-    margin: ${4 * styleVariables.baselinePixels}px auto;
+const CtaContainer = styled.section`
+  @media (min-width: ${breakpoint.md}) {
+    margin: 0 auto calc(6 * ${baseline});
   }
 `;
 
 const DesktopImage = styled(Image)`
-  border: 1px solid white;
-  border-radius: 0.25rem;
-  margin-bottom: ${2 * styleVariables.baselinePixels}px;
+  border: ${BORDER_THICKNESS} solid ${color.white};
+  border-radius: ${baseline};
+  margin: calc(6 * ${baseline}) 0;
   width: 100%;
 `;
 
 const ListHeading = styled.p`
-  font-size: ${styleVariables.h5.rem}rem;
+  font-size: ${typography.fontSize.h5.xs};
   font-weight: bold;
-  line-height: ${styleVariables.h5.lh};
+  line-height: ${typography.lineHeight.h5.xs};
   margin-bottom: 0;
 
-  @media (min-width: ${styleVariables.breakpoint.md}px) {
-    font-size: ${styleVariables.h5.md.rem}rem;
-    line-height: ${styleVariables.h5.md.lh};
+  @media (min-width: ${breakpoint.md}) {
+    font-size: ${typography.fontSize.h5.md};
+    line-height: ${typography.lineHeight.h5.md};
   }
 
-  @media (min-width: ${styleVariables.breakpoint.lg}px) {
-    font-size: ${styleVariables.h5.lg.rem}rem;
-    line-height: ${styleVariables.h5.lg.lh};
+  @media (min-width: ${breakpoint.lg}) {
+    font-size: ${typography.fontSize.h5.lg};
+    line-height: ${typography.lineHeight.h5.lg};
   }
 `;
 
 const MobileImage = styled(Image)`
   border: 1px solid white;
   border-radius: 0.25rem;
-  margin: 0 auto ${2 * styleVariables.baselinePixels}px auto;
+  margin: calc(6 * ${baseline}) auto;
   width: 25%;
 `;
 
 const Project = styled.section`
-  @media (min-width: ${styleVariables.breakpoint.md}px) {
+  @media (min-width: ${breakpoint.md}) {
+    column-gap: calc(12 * ${baseline});
     display: grid;
-    column-gap: ${4 * styleVariables.baselinePixels}px;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: auto auto;
+    margin-bottom: calc(6 * ${baseline});
   }
 `;
 
@@ -114,7 +113,7 @@ const ProjectDetails = styled.div`
 `;
 
 const ProjectHeader = styled.header`
-  grid-column: 1 / 2;
+  grid-column: 1 / 3;
 `;
 
 const ProjectStory = styled.div`
@@ -125,58 +124,52 @@ const ProjectStory = styled.div`
 
 const ProjectSubtitle = styled.span`
   display: block;
-  font-size: ${styleVariables.h4.xs.rem}rem;
-  line-height: ${styleVariables.h4.xs.lh};
+  font-size: ${typography.fontSize.h4.xs};
+  line-height: ${typography.lineHeight.h4.xs};
 
-  @media (min-width: ${styleVariables.breakpoint.md}px) {
-    font-size: ${styleVariables.h4.md.rem}rem;
-    line-height: ${styleVariables.h4.md.lh};
+  @media (min-width: ${breakpoint.md}) {
+    font-size: ${typography.fontSize.h4.md};
+    line-height: ${typography.lineHeight.h4.md};
   }
 
-  @media (min-width: ${styleVariables.breakpoint.lg}px) {
-    font-size: ${styleVariables.h4.lg.rem}rem;
-    line-height: ${styleVariables.h4.lg.lh};
+  @media (min-width: ${breakpoint.lg}) {
+    font-size: ${typography.fontSize.h4.lg};
+    line-height: ${typography.lineHeight.h4.lg};
   }
 `;
 
-const ProjectTitle = styled.h2``;
-
 const TechnologyList = styled.ul`
-  column-gap: 1rem;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  columns: 2;
 
-  @media (min-width: ${styleVariables.breakpoint.sm}px) {
-    grid-template-columns: repeat(3, 1fr);
+  @media (min-width: ${breakpoint.sm}) {
+    columns: 3;
   }
 
-  @media (min-width: ${styleVariables.breakpoint.md}px) {
-    grid-template-columns: repeat(2, 1fr);
+  @media (min-width: ${breakpoint.md}) {
+    columns: 2;
   }
 
-  @media (min-width: ${styleVariables.breakpoint.lg}px) {
-    grid-template-columns: repeat(3, 1fr);
+  @media (min-width: ${breakpoint.lg}) {
+    columns: 3;
   }
 `;
 
 const ProjectDetailsButton = styled(Button)`
   display: block;
-  margin: 0 auto ${2 * styleVariables.baselinePixels}px auto;
+  margin: 0 auto calc(6 * ${baseline}) auto;
   width: 100%;
 `;
 
 const DesktopProjectDetailsButton = styled(ProjectDetailsButton)`
   display: none;
 
-  @media (min-width: ${styleVariables.breakpoint.lg}px) {
+  @media (min-width: ${breakpoint.lg}) {
     display: block;
   }
 `;
 
-const ProjectDetailsButtonContainer = styled.div``;
-
 const StyledIcon = styled(FontAwesomeIcon)`
-  margin-right: 1rem;
+  margin-right: 1em;
 `;
 
 const StyledStarCanvas = styled(StarCanvas)`
@@ -187,11 +180,28 @@ const StyledStarCanvas = styled(StarCanvas)`
 `;
 
 const Title = styled.h1`
-  font-family: 'Fira Mono', monospace;
+  font-family: ${typography.font.monospace};
   text-align: center;
 `;
 
-export default function ProjectsPage({ data, ...restProps }) {
+export default function ProjectsPage({ ...restProps }) {
+  const data = useStaticQuery(graphql`
+    query {
+      allFile(filter: { relativeDirectory: { eq: "projects" } }) {
+        edges {
+          node {
+            childImageSharp {
+              fluid {
+                ...GatsbyImageSharpFluid
+              }
+            }
+            name
+          }
+        }
+      }
+    }
+  `);
+
   return (
     <Layout {...restProps}>
       <SEO title="Projects" />
@@ -204,16 +214,16 @@ export default function ProjectsPage({ data, ...restProps }) {
             name="C2 Auditing Tools"
           >
             <ProjectHeader>
-              <ProjectTitle>
+              <h2>
                 C2 Auditing Tools <br />
-                <ProjectSubtitle>Desktop application</ProjectSubtitle>
-              </ProjectTitle>
+                <ProjectSubtitle>Data analysis application</ProjectSubtitle>
+              </h2>
             </ProjectHeader>
             <ProjectDetails>
               <DesktopImage
                 fluid={getImageFluidFromData('c2-auditing-tools', data)}
               />
-              <ProjectDetailsButtonContainer>
+              <div>
                 <DesktopProjectDetailsButton
                   forwardedAs="a"
                   href="https://c2-auditing-tools-web.herokuapp.com/"
@@ -221,7 +231,7 @@ export default function ProjectsPage({ data, ...restProps }) {
                   size="small"
                   target="_blank"
                 >
-                  <StyledIcon icon={faDesktop} />
+                  <StyledIcon icon="desktop" />
                   Try it
                 </DesktopProjectDetailsButton>
                 <ProjectDetailsButton
@@ -231,22 +241,35 @@ export default function ProjectsPage({ data, ...restProps }) {
                   size="small"
                   target="_blank"
                 >
-                  <StyledIcon icon={faGithub} />
-                  View on GitHub
+                  <StyledIcon icon={['fab', 'github']} />
+                  View desktop code
                 </ProjectDetailsButton>
-              </ProjectDetailsButtonContainer>
+                <ProjectDetailsButton
+                  forwardedAs="a"
+                  href="https://github.com/LibertyNJ/c2-auditing-tools-web"
+                  rel="noopener noreferrer"
+                  size="small"
+                  target="_blank"
+                >
+                  <StyledIcon icon={['fab', 'github']} />
+                  View web code
+                </ProjectDetailsButton>
+              </div>
               <div>
                 <ListHeading>Technologies</ListHeading>
                 <TechnologyList>
                   <li>Bootstrap</li>
                   <li>Electron</li>
+                  <li>Express</li>
+                  <li>Heroku</li>
                   <li>Jest</li>
                   <li>Node.js</li>
+                  <li>PostgreSQL</li>
                   <li>React</li>
                   <li>Redux</li>
                   <li>Sass</li>
+                  <li>Sequelize</li>
                   <li>SQLite</li>
-                  <li>Node.js</li>
                 </TechnologyList>
               </div>
             </ProjectDetails>
@@ -279,155 +302,15 @@ export default function ProjectsPage({ data, ...restProps }) {
                 </p>
                 <p>
                   The controlled substance auditing process for the hospital is
-                  now completed in less than an hour a month.
+                  now completed in less than an hour each month.
                 </p>
-              </section>
-            </ProjectStory>
-          </Project>
-          <Project
-            githubSlug="/LibertyNJ/abigail-and-nathaniel"
-            liveUrl="https://www.abigailandnathaniel.com/"
-            name="abigailandnathaniel.com"
-          >
-            <ProjectHeader>
-              <ProjectTitle>
-                Abigail &amp; Nathaniel <br />
-                <ProjectSubtitle>Wedding website</ProjectSubtitle>
-              </ProjectTitle>
-            </ProjectHeader>
-            <ProjectDetails>
-              <DesktopImage
-                fluid={getImageFluidFromData('abigail-and-nathaniel', data)}
-              />
-              <ProjectDetailsButtonContainer>
-                <ProjectDetailsButton
-                  forwardedAs="a"
-                  href="https://www.abigailandnathaniel.com/"
-                  rel="noopener noreferrer"
-                  size="small"
-                  target="_blank"
-                >
-                  <StyledIcon icon={faGlobe} />
-                  Visit site
-                </ProjectDetailsButton>
-                <ProjectDetailsButton
-                  forwardedAs="a"
-                  href="https://github.com/LibertyNJ/abigail-and-nathaniel"
-                  rel="noopener noreferrer"
-                  size="small"
-                  target="_blank"
-                >
-                  <StyledIcon icon={faGithub} />
-                  View on GitHub
-                </ProjectDetailsButton>
-              </ProjectDetailsButtonContainer>
-              <div>
-                <ListHeading>Technologies</ListHeading>
-                <TechnologyList>
-                  <li>Bootstrap</li>
-                  <li>Gatsby.js</li>
-                  <li>GraphQL</li>
-                  <li>Jest</li>
-                  <li>Netlify</li>
-                  <li>React</li>
-                  <li>Sass</li>
-                </TechnologyList>
-              </div>
-            </ProjectDetails>
-            <ProjectStory>
-              <section>
-                <h3>My role</h3>
-                <p>
-                  I collaborated with a designer who provided wireframes and art
-                  assets.
-                </p>
-              </section>
-              <section>
-                <h3>Problem</h3>
-                <p>
-                  The creation of a wedding website. The client desired a
-                  countdown, photo galleries, and convenient access to
-                  information regarding accommodations, travel arrangements, and
-                  other services surrounding the wedding.
-                </p>
-              </section>
-              <section>
-                <h3>Solution</h3>
-                <p>
-                  A single-page scrolling site featuring images of the couple as
-                  backdrops. A responsive mobile experience was created via
-                  graceful degredation of the designer’s wireframes, which were
-                  envisioned for a desktop device.
-                </p>
-              </section>
-            </ProjectStory>
-          </Project>
-          <Project githubSlug="/LibertyNJ/vacctrac" name="VaccTrac">
-            <ProjectHeader>
-              <ProjectTitle>
-                VaccTrac <br />
-                <ProjectSubtitle>Mobile application</ProjectSubtitle>
-              </ProjectTitle>
-            </ProjectHeader>
-            <ProjectDetails>
-              <MobileImage fluid={getImageFluidFromData('vacctrac', data)} />
-              <ProjectDetailsButtonContainer>
-                <ProjectDetailsButton
-                  forwardedAs="a"
-                  href="https://exp-shell-app-assets.s3.us-west-1.amazonaws.com/android/%40libertynj/vacctrac-poc-4be840ba42244fc592a9f88f90745734-signed.apk"
-                  rel="noopener noreferrer"
-                  size="small"
-                  target="_blank"
-                >
-                  <StyledIcon icon={faDownload} />
-                  Download for Android
-                </ProjectDetailsButton>
-                <ProjectDetailsButton
-                  forwardedAs="a"
-                  href="https://github.com/LibertyNJ/vacctrac-poc"
-                  rel="noopener noreferrer"
-                  size="small"
-                  target="_blank"
-                >
-                  <StyledIcon icon={faGithub} />
-                  View on GitHub
-                </ProjectDetailsButton>
-              </ProjectDetailsButtonContainer>
-              <div>
-                <ListHeading>Technologies</ListHeading>
-                <TechnologyList>
-                  <li>Expo</li>
-                  <li>React Native</li>
-                  <li>Redux</li>
-                </TechnologyList>
-              </div>
-            </ProjectDetails>
-            <ProjectStory>
-              <section>
-                <h3>My role</h3>
-                <p>
-                  I served as the sole developer and managed all aspects of the
-                  project.
-                </p>
-              </section>
-              <section>
-                <h3>Problem</h3>
-                <p>
-                  A discussion with a clinical pharmacist revealed the need for
-                  a tool patients can use to track their vaccination history.
-                </p>
-              </section>
-              <section>
-                <h3>Solution</h3>
-                <p>
-                  A proof-of-concept mobile application to show the feasibility
-                  of patients tracking vaccination history on their smartphones.
-                  The application allows patients to enter dates and manage
-                  follow-up doses for vaccinations they have received or are
-                  scheduled to receive. A vaccine info screen provides images of
-                  common vaccines and links to up-to-date information maintained
-                  by the Centers for Disease Control.
-                </p>
+                <section>
+                  <h4>Web client</h4>
+                  <p>
+                    A web client using a REST API and sample database was later
+                    created for demonstration purposes.
+                  </p>
+                </section>
               </section>
             </ProjectStory>
           </Project>
@@ -436,16 +319,16 @@ export default function ProjectsPage({ data, ...restProps }) {
             name="Study Drug Label Maker"
           >
             <ProjectHeader>
-              <ProjectTitle>
-                Study Drug Label Maker <br />
-                <ProjectSubtitle>Desktop application</ProjectSubtitle>
-              </ProjectTitle>
+              <h2>
+                Study Drug Label&nbsp;Maker <br />
+                <ProjectSubtitle>Productivity application</ProjectSubtitle>
+              </h2>
             </ProjectHeader>
             <ProjectDetails>
               <DesktopImage
                 fluid={getImageFluidFromData('study-drug-label-maker', data)}
               />
-              <ProjectDetailsButtonContainer>
+              <div>
                 <DesktopProjectDetailsButton
                   forwardedAs="a"
                   href="https://nathanieljliberty-sdlm.netlify.com/"
@@ -453,7 +336,7 @@ export default function ProjectsPage({ data, ...restProps }) {
                   size="small"
                   target="_blank"
                 >
-                  <StyledIcon icon={faDesktop} />
+                  <StyledIcon icon="desktop" />
                   Try it
                 </DesktopProjectDetailsButton>
                 <ProjectDetailsButton
@@ -463,10 +346,20 @@ export default function ProjectsPage({ data, ...restProps }) {
                   size="small"
                   target="_blank"
                 >
-                  <StyledIcon icon={faGithub} />
-                  View on GitHub
+                  <StyledIcon icon={['fab', 'github']} />
+                  View desktop code
                 </ProjectDetailsButton>
-              </ProjectDetailsButtonContainer>
+                <ProjectDetailsButton
+                  forwardedAs="a"
+                  href="https://github.com/LibertyNJ/study-drug-label-maker-web"
+                  rel="noopener noreferrer"
+                  size="small"
+                  target="_blank"
+                >
+                  <StyledIcon icon={['fab', 'github']} />
+                  View web code
+                </ProjectDetailsButton>
+              </div>
               <div>
                 <ListHeading>Technologies</ListHeading>
                 <TechnologyList>
@@ -504,6 +397,13 @@ export default function ProjectsPage({ data, ...restProps }) {
                   Prescription numbers and dispensed date are generated
                   automatically to expedite the workflow.
                 </p>
+                <section>
+                  <h4>Web client</h4>
+                  <p>
+                    A web client using was later created for remote use and
+                    demonstration purposes.
+                  </p>
+                </section>
               </section>
             </ProjectStory>
           </Project>
@@ -512,16 +412,16 @@ export default function ProjectsPage({ data, ...restProps }) {
             name="Cytoxan Label Maker"
           >
             <ProjectHeader>
-              <ProjectTitle>
-                Cytoxan Label Maker <br />
-                <ProjectSubtitle>Desktop application</ProjectSubtitle>
-              </ProjectTitle>
+              <h2>
+                Cytoxan Label&nbsp;Maker <br />
+                <ProjectSubtitle>Productivity application</ProjectSubtitle>
+              </h2>
             </ProjectHeader>
             <ProjectDetails>
               <DesktopImage
                 fluid={getImageFluidFromData('cytoxan-label-maker', data)}
               />
-              <ProjectDetailsButtonContainer>
+              <div>
                 <DesktopProjectDetailsButton
                   forwardedAs="a"
                   href="https://nathanieljliberty-clm.netlify.com/"
@@ -529,7 +429,7 @@ export default function ProjectsPage({ data, ...restProps }) {
                   size="small"
                   target="_blank"
                 >
-                  <StyledIcon icon={faDesktop} />
+                  <StyledIcon icon="desktop" />
                   Try it
                 </DesktopProjectDetailsButton>
                 <ProjectDetailsButton
@@ -539,10 +439,20 @@ export default function ProjectsPage({ data, ...restProps }) {
                   size="small"
                   target="_blank"
                 >
-                  <StyledIcon icon={faGithub} />
-                  View on GitHub
+                  <StyledIcon icon={['fab', 'github']} />
+                  View desktop code
                 </ProjectDetailsButton>
-              </ProjectDetailsButtonContainer>
+                <ProjectDetailsButton
+                  forwardedAs="a"
+                  href="https://github.com/LibertyNJ/cytoxan-label-maker-web"
+                  rel="noopener noreferrer"
+                  size="small"
+                  target="_blank"
+                >
+                  <StyledIcon icon={['fab', 'github']} />
+                  View web code
+                </ProjectDetailsButton>
+              </div>
               <div>
                 <ListHeading>Technologies</ListHeading>
                 <TechnologyList>
@@ -582,18 +492,253 @@ export default function ProjectsPage({ data, ...restProps }) {
                   and formatted according to best practices in medication
                   safety.
                 </p>
+                <section>
+                  <h4>Web client</h4>
+                  <p>
+                    A web client using was later created for remote use and
+                    demonstration purposes.
+                  </p>
+                </section>
+              </section>
+            </ProjectStory>
+          </Project>
+          <Project githubSlug="/LibertyNJ/vacctrac" name="VaccTrac">
+            <ProjectHeader>
+              <h2>
+                VaccTrac <br />
+                <ProjectSubtitle>Mobile application</ProjectSubtitle>
+              </h2>
+            </ProjectHeader>
+            <ProjectDetails>
+              <MobileImage fluid={getImageFluidFromData('vacctrac', data)} />
+              <div>
+                <ProjectDetailsButton
+                  forwardedAs="a"
+                  href="https://exp-shell-app-assets.s3.us-west-1.amazonaws.com/android/%40libertynj/vacctrac-poc-4be840ba42244fc592a9f88f90745734-signed.apk"
+                  rel="noopener noreferrer"
+                  size="small"
+                  target="_blank"
+                >
+                  <StyledIcon icon="download" />
+                  Download for Android
+                </ProjectDetailsButton>
+                <ProjectDetailsButton
+                  forwardedAs="a"
+                  href="https://github.com/LibertyNJ/vacctrac-poc"
+                  rel="noopener noreferrer"
+                  size="small"
+                  target="_blank"
+                >
+                  <StyledIcon icon={['fab', 'github']} />
+                  View code
+                </ProjectDetailsButton>
+              </div>
+              <div>
+                <ListHeading>Technologies</ListHeading>
+                <TechnologyList>
+                  <li>Expo</li>
+                  <li>React Native</li>
+                  <li>Redux</li>
+                </TechnologyList>
+              </div>
+            </ProjectDetails>
+            <ProjectStory>
+              <section>
+                <h3>My role</h3>
+                <p>
+                  I served as the sole developer and managed all aspects of the
+                  project.
+                </p>
+              </section>
+              <section>
+                <h3>Problem</h3>
+                <p>
+                  A discussion with a clinical pharmacist revealed the need for
+                  a tool patients can use to track their vaccination history.
+                </p>
+              </section>
+              <section>
+                <h3>Solution</h3>
+                <p>
+                  A proof-of-concept mobile application to show the feasibility
+                  of patients tracking vaccination history on their smartphones.
+                  The application allows patients to enter dates and manage
+                  follow-up doses for vaccinations they have received or are
+                  scheduled to receive. A vaccine info screen provides images of
+                  common vaccines and links to up-to-date information maintained
+                  by the Centers for Disease Control.
+                </p>
+              </section>
+            </ProjectStory>
+          </Project>
+          <Project
+            githubSlug="/LibertyNJ/abigail-and-nathaniel"
+            liveUrl="https://www.abigailandnathaniel.com/"
+            name="abigailandnathaniel.com"
+          >
+            <ProjectHeader>
+              <h2>
+                Abigail &amp; Nathaniel <br />
+                <ProjectSubtitle>Wedding website</ProjectSubtitle>
+              </h2>
+            </ProjectHeader>
+            <ProjectDetails>
+              <DesktopImage
+                fluid={getImageFluidFromData('abigail-and-nathaniel', data)}
+              />
+              <div>
+                <ProjectDetailsButton
+                  forwardedAs="a"
+                  href="https://www.abigailandnathaniel.com/"
+                  rel="noopener noreferrer"
+                  size="small"
+                  target="_blank"
+                >
+                  <StyledIcon icon="globe" />
+                  Visit site
+                </ProjectDetailsButton>
+                <ProjectDetailsButton
+                  forwardedAs="a"
+                  href="https://github.com/LibertyNJ/abigail-and-nathaniel"
+                  rel="noopener noreferrer"
+                  size="small"
+                  target="_blank"
+                >
+                  <StyledIcon icon={['fab', 'github']} />
+                  View code
+                </ProjectDetailsButton>
+              </div>
+              <div>
+                <ListHeading>Technologies</ListHeading>
+                <TechnologyList>
+                  <li>Bootstrap</li>
+                  <li>Gatsby</li>
+                  <li>GraphQL</li>
+                  <li>Jest</li>
+                  <li>Netlify</li>
+                  <li>React</li>
+                  <li>Sass</li>
+                </TechnologyList>
+              </div>
+            </ProjectDetails>
+            <ProjectStory>
+              <section>
+                <h3>My role</h3>
+                <p>
+                  I collaborated with a designer who provided wireframes and art
+                  assets.
+                </p>
+              </section>
+              <section>
+                <h3>Problem</h3>
+                <p>
+                  The creation of a wedding website. The client desired a
+                  countdown, photo galleries, and convenient access to
+                  information regarding accommodations, travel arrangements, and
+                  other services surrounding the wedding.
+                </p>
+              </section>
+              <section>
+                <h3>Solution</h3>
+                <p>
+                  A single-page scrolling site featuring full-screen background
+                  images. A responsive mobile experience was created via
+                  graceful degredation of the designer’s wireframes, which were
+                  envisioned for a desktop device.
+                </p>
+              </section>
+            </ProjectStory>
+          </Project>
+          <Project
+            githubSlug="/LibertyNJ/community-church-of-syosset"
+            name="Community Church of Syosset"
+          >
+            <ProjectHeader>
+              <h2>
+                Community Church of&nbsp;Syosset <br />
+                <ProjectSubtitle>Church website</ProjectSubtitle>
+              </h2>
+            </ProjectHeader>
+            <ProjectDetails>
+              <DesktopImage
+                fluid={getImageFluidFromData(
+                  'community-church-of-syosset',
+                  data
+                )}
+              />
+              <div>
+                <ProjectDetailsButton
+                  forwardedAs="a"
+                  href="https://uccsyosset.netlify.com/"
+                  rel="noopener noreferrer"
+                  size="small"
+                  target="_blank"
+                >
+                  <StyledIcon icon="globe" />
+                  Visit site
+                </ProjectDetailsButton>
+                <ProjectDetailsButton
+                  forwardedAs="a"
+                  href="https://github.com/LibertyNJ/community-church-of-syosset"
+                  rel="noopener noreferrer"
+                  size="small"
+                  target="_blank"
+                >
+                  <StyledIcon icon={['fab', 'github']} />
+                  View code
+                </ProjectDetailsButton>
+              </div>
+              <div>
+                <ListHeading>Technologies</ListHeading>
+                <TechnologyList>
+                  <li>Contentful</li>
+                  <li>Gatsby</li>
+                  <li>Google Maps API</li>
+                  <li>GraphQL</li>
+                  <li>Netlify</li>
+                  <li>React</li>
+                  <li>Styled components</li>
+                  <li>TypeScript</li>
+                </TechnologyList>
+              </div>
+            </ProjectDetails>
+            <ProjectStory>
+              <section>
+                <h3>My role</h3>
+                <p>
+                  I served as the sole developer and managed all aspects of the
+                  project.
+                </p>
+              </section>
+              <section>
+                <h3>Problem</h3>
+                <p>
+                  A church needed a modern, easy-to-use replacement for their
+                  aging website, with an emphasis on encouraging first-time
+                  contact and in-person visitation.
+                </p>
+              </section>
+              <section>
+                <h3>Solution</h3>
+                <p>
+                  A new, mobile-first, responsive design using Contentful as a
+                  content management system. Call to action buttons push users
+                  towards visitation and contact. Template-driven pages for
+                  events, sermons, and image galleries with dynamic pagination
+                  keep the site easy to maintain for the organization.
+                </p>
               </section>
             </ProjectStory>
           </Project>
           <CtaContainer>
-            <Lead>Your project is next.</Lead>
+            <h2>Your project is next</h2>
             <ButtonContainer>
               <BlockButton forwardedAs={Link} size="large" to="/contact">
-                <StyledIcon icon={faSatellite} />
+                <StyledIcon icon="satellite" />
                 Make contact
               </BlockButton>
               <BlockButton forwardedAs={Link} size="large" to="/about">
-                <StyledIcon icon={faUserAstronaut} />
+                <StyledIcon icon="user-astronaut" />
                 Learn about me
               </BlockButton>
             </ButtonContainer>
@@ -603,23 +748,6 @@ export default function ProjectsPage({ data, ...restProps }) {
     </Layout>
   );
 }
-
-export const query = graphql`
-  query {
-    allFile(filter: { relativeDirectory: { eq: "projects" } }) {
-      edges {
-        node {
-          childImageSharp {
-            fluid {
-              ...GatsbyImageSharpFluid
-            }
-          }
-          name
-        }
-      }
-    }
-  }
-`;
 
 function getImageFluidFromData(name, data) {
   const edge = data.allFile.edges.find(edge => edge.node.name === name);

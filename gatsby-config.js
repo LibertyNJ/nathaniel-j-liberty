@@ -2,8 +2,8 @@ module.exports = {
   siteMetadata: {
     author: `Nathaniel J. Liberty`,
     description:
-      'A driven software developer using JavaScript and web technologies to build creative solutions for the healthcare industry and more.',
-    title: `Nathaniel J. Liberty, Software Developer`,
+      'A stellar full-stack web developer building things that are out of this world.',
+    title: `Nathaniel J. Liberty, Full-Stack Web Developer`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -20,7 +20,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `Nathaniel J. Liberty, Software Developer`,
+        name: `Nathaniel J. Liberty, Full-Stack Web Developer`,
         short_name: `Nathaniel J. Liberty`,
         start_url: `/`,
         background_color: `#000`,

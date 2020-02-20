@@ -16,7 +16,7 @@ SEO.defaultProps = {
   description: ``,
 };
 
-export function SEO({ description, lang, meta, title }) {
+export default function SEO({ description, lang, meta, title }) {
   const { site } = useStaticQuery(
     graphql`
       query {

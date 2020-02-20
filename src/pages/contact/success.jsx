@@ -1,21 +1,19 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'gatsby';
 import React from 'react';
 import styled from 'styled-components';
-import { faGlobeAmericas } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { Button, Layout, Lead, SEO, StarCanvas } from '../../components';
-import { variables as styleVariables } from '../../components/GlobalStyle';
+import Button from '../../components/Button';
+import Layout from '../../components/Layout';
+import Lead from '../../components/Lead';
+import SEO from '../../components/SEO';
+import StarCanvas from '../../components/StarCanvas';
+import { baseline, breakpoint, typography } from '../../style';
 
 const BlockButton = styled(Button)`
   display: block;
-  margin: 0 auto ${2 * styleVariables.baselinePixels}px auto;
+  margin-bottom: calc(6 * ${baseline});
   width: 100%;
-
-  @media (min-width: ${styleVariables.breakpoint.sm}px) {
-    margin: 0 0 0 auto;
-    width: auto;
-  }
 `;
 
 const Container = styled.div`
@@ -26,7 +24,7 @@ const Container = styled.div`
 `;
 
 const StyledIcon = styled(FontAwesomeIcon)`
-  margin-right: 1rem;
+  margin-right: 1em;
 `;
 
 const StyledStarCanvas = styled(StarCanvas)`
@@ -41,8 +39,8 @@ const TextContainer = styled.div`
 `;
 
 const Title = styled.h1`
-  font-family: 'Fira Mono', monospace;
-  margin-bottom: ${2 * styleVariables.baselinePixels}px;
+  font-family: ${typography.font.monospace};
+  margin-bottom: calc(6 * ${baseline});
 `;
 
 export default function ContactSuccessPage({ ...restProps }) {
@@ -53,11 +51,10 @@ export default function ContactSuccessPage({ ...restProps }) {
       <Container>
         <Title>Transmission received</Title>
         <TextContainer>
-          <Lead>Thank you!</Lead>
-          <p>I’ll be in touch.</p>
+          <Lead>Thank you! I’ll be in touch.</Lead>
         </TextContainer>
         <BlockButton forwardedAs={Link} size="large" to="/">
-          <StyledIcon icon={faGlobeAmericas} />
+          <StyledIcon icon="globe-americas" />
           Go home
         </BlockButton>
       </Container>
