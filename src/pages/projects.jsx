@@ -209,10 +209,7 @@ export default function ProjectsPage({ ...restProps }) {
       <section>
         <Title>Projects</Title>
         <Container>
-          <Project
-            githubSlug="/LibertyNJ/c2-auditing-tools"
-            name="C2 Auditing Tools"
-          >
+          <Project>
             <ProjectHeader>
               <h2>
                 C2 Auditing Tools <br />
@@ -314,10 +311,85 @@ export default function ProjectsPage({ ...restProps }) {
               </section>
             </ProjectStory>
           </Project>
-          <Project
-            githubSlug="/LibertyNJ/study-drug-label-maker"
-            name="Study Drug Label Maker"
-          >
+          <Project>
+            <ProjectHeader>
+              <h2>
+                Community Church of&nbsp;Syosset <br />
+                <ProjectSubtitle>Church website</ProjectSubtitle>
+              </h2>
+            </ProjectHeader>
+            <ProjectDetails>
+              <DesktopImage
+                fluid={getImageFluidFromData(
+                  'community-church-of-syosset',
+                  data
+                )}
+              />
+              <div>
+                <ProjectDetailsButton
+                  forwardedAs="a"
+                  href="https://uccsyosset.netlify.com/"
+                  rel="noopener noreferrer"
+                  size="small"
+                  target="_blank"
+                >
+                  <StyledIcon icon="globe" />
+                  Visit site
+                </ProjectDetailsButton>
+                <ProjectDetailsButton
+                  forwardedAs="a"
+                  href="https://github.com/LibertyNJ/community-church-of-syosset"
+                  rel="noopener noreferrer"
+                  size="small"
+                  target="_blank"
+                >
+                  <StyledIcon icon={['fab', 'github']} />
+                  View code
+                </ProjectDetailsButton>
+              </div>
+              <div>
+                <ListHeading>Technologies</ListHeading>
+                <TechnologyList>
+                  <li>Contentful</li>
+                  <li>Gatsby</li>
+                  <li>Google Maps API</li>
+                  <li>GraphQL</li>
+                  <li>Netlify</li>
+                  <li>React</li>
+                  <li>Styled components</li>
+                  <li>TypeScript</li>
+                </TechnologyList>
+              </div>
+            </ProjectDetails>
+            <ProjectStory>
+              <section>
+                <h3>My role</h3>
+                <p>
+                  I served as the sole developer and managed all aspects of the
+                  project.
+                </p>
+              </section>
+              <section>
+                <h3>Problem</h3>
+                <p>
+                  A church needed a modern, easy-to-use replacement for their
+                  aging website, with an emphasis on encouraging first-time
+                  contact and in-person visitation.
+                </p>
+              </section>
+              <section>
+                <h3>Solution</h3>
+                <p>
+                  A new, mobile-first, responsive design using Contentful as a
+                  content management system. Call to action buttons push users
+                  towards visitation and contact. Template-driven pages for
+                  events, sermons, and image galleries with dynamic pagination
+                  keep the site easy to maintain for the organization.
+                </p>
+              </section>
+            </ProjectStory>
+          </Project>
+          <Project>
             <ProjectHeader>
               <h2>
                 Study Drug Label&nbsp;Maker <br />
@@ -407,10 +479,150 @@ export default function ProjectsPage({ ...restProps }) {
               </section>
             </ProjectStory>
           </Project>
-          <Project
-            githubSlug="/LibertyNJ/cytoxan-label-maker"
-            name="Cytoxan Label Maker"
-          >
+          <Project>
+            <ProjectHeader>
+              <h2>
+                Abigail &amp; Nathaniel <br />
+                <ProjectSubtitle>Wedding website</ProjectSubtitle>
+              </h2>
+            </ProjectHeader>
+            <ProjectDetails>
+              <DesktopImage
+                fluid={getImageFluidFromData('abigail-and-nathaniel', data)}
+              />
+              <div>
+                <ProjectDetailsButton
+                  forwardedAs="a"
+                  href="https://www.abigailandnathaniel.com/"
+                  rel="noopener noreferrer"
+                  size="small"
+                  target="_blank"
+                >
+                  <StyledIcon icon="globe" />
+                  Visit site
+                </ProjectDetailsButton>
+                <ProjectDetailsButton
+                  forwardedAs="a"
+                  href="https://github.com/LibertyNJ/abigail-and-nathaniel"
+                  rel="noopener noreferrer"
+                  size="small"
+                  target="_blank"
+                >
+                  <StyledIcon icon={['fab', 'github']} />
+                  View code
+                </ProjectDetailsButton>
+              </div>
+              <div>
+                <ListHeading>Technologies</ListHeading>
+                <TechnologyList>
+                  <li>Bootstrap</li>
+                  <li>Gatsby</li>
+                  <li>GraphQL</li>
+                  <li>Jest</li>
+                  <li>Netlify</li>
+                  <li>React</li>
+                  <li>Sass</li>
+                </TechnologyList>
+              </div>
+            </ProjectDetails>
+            <ProjectStory>
+              <section>
+                <h3>My role</h3>
+                <p>
+                  I collaborated with a designer who provided wireframes and art
+                  assets.
+                </p>
+              </section>
+              <section>
+                <h3>Problem</h3>
+                <p>
+                  The creation of a wedding website. The client desired a
+                  countdown, photo galleries, and convenient access to
+                  information regarding accommodations, travel arrangements, and
+                  other services surrounding the wedding.
+                </p>
+              </section>
+              <section>
+                <h3>Solution</h3>
+                <p>
+                  A single-page scrolling site featuring full-screen background
+                  images. A responsive mobile experience was created via
+                  graceful degredation of the designer’s wireframes, which were
+                  envisioned for a desktop device.
+                </p>
+              </section>
+            </ProjectStory>
+          </Project>
+          <Project>
+            <ProjectHeader>
+              <h2>
+                VaccTrac <br />
+                <ProjectSubtitle>Mobile application</ProjectSubtitle>
+              </h2>
+            </ProjectHeader>
+            <ProjectDetails>
+              <MobileImage fluid={getImageFluidFromData('vacctrac', data)} />
+              <div>
+                <ProjectDetailsButton
+                  forwardedAs="a"
+                  href="https://exp-shell-app-assets.s3.us-west-1.amazonaws.com/android/%40libertynj/vacctrac-poc-4be840ba42244fc592a9f88f90745734-signed.apk"
+                  rel="noopener noreferrer"
+                  size="small"
+                  target="_blank"
+                >
+                  <StyledIcon icon="download" />
+                  Download for Android
+                </ProjectDetailsButton>
+                <ProjectDetailsButton
+                  forwardedAs="a"
+                  href="https://github.com/LibertyNJ/vacctrac-poc"
+                  rel="noopener noreferrer"
+                  size="small"
+                  target="_blank"
+                >
+                  <StyledIcon icon={['fab', 'github']} />
+                  View code
+                </ProjectDetailsButton>
+              </div>
+              <div>
+                <ListHeading>Technologies</ListHeading>
+                <TechnologyList>
+                  <li>Expo</li>
+                  <li>React Native</li>
+                  <li>Redux</li>
+                </TechnologyList>
+              </div>
+            </ProjectDetails>
+            <ProjectStory>
+              <section>
+                <h3>My role</h3>
+                <p>
+                  I served as the sole developer and managed all aspects of the
+                  project.
+                </p>
+              </section>
+              <section>
+                <h3>Problem</h3>
+                <p>
+                  A discussion with a clinical pharmacist revealed the need for
+                  a tool patients can use to track their vaccination history.
+                </p>
+              </section>
+              <section>
+                <h3>Solution</h3>
+                <p>
+                  A proof-of-concept mobile application to show the feasibility
+                  of patients tracking vaccination history on their smartphones.
+                  The application allows patients to enter dates and manage
+                  follow-up doses for vaccinations they have received or are
+                  scheduled to receive. A vaccine info screen provides images of
+                  common vaccines and links to up-to-date information maintained
+                  by the Centers for Disease Control.
+                </p>
+              </section>
+            </ProjectStory>
+          </Project>
+          <Project>
             <ProjectHeader>
               <h2>
                 Cytoxan Label&nbsp;Maker <br />
@@ -499,234 +711,6 @@ export default function ProjectsPage({ ...restProps }) {
                     demonstration purposes.
                   </p>
                 </section>
-              </section>
-            </ProjectStory>
-          </Project>
-          <Project githubSlug="/LibertyNJ/vacctrac" name="VaccTrac">
-            <ProjectHeader>
-              <h2>
-                VaccTrac <br />
-                <ProjectSubtitle>Mobile application</ProjectSubtitle>
-              </h2>
-            </ProjectHeader>
-            <ProjectDetails>
-              <MobileImage fluid={getImageFluidFromData('vacctrac', data)} />
-              <div>
-                <ProjectDetailsButton
-                  forwardedAs="a"
-                  href="https://exp-shell-app-assets.s3.us-west-1.amazonaws.com/android/%40libertynj/vacctrac-poc-4be840ba42244fc592a9f88f90745734-signed.apk"
-                  rel="noopener noreferrer"
-                  size="small"
-                  target="_blank"
-                >
-                  <StyledIcon icon="download" />
-                  Download for Android
-                </ProjectDetailsButton>
-                <ProjectDetailsButton
-                  forwardedAs="a"
-                  href="https://github.com/LibertyNJ/vacctrac-poc"
-                  rel="noopener noreferrer"
-                  size="small"
-                  target="_blank"
-                >
-                  <StyledIcon icon={['fab', 'github']} />
-                  View code
-                </ProjectDetailsButton>
-              </div>
-              <div>
-                <ListHeading>Technologies</ListHeading>
-                <TechnologyList>
-                  <li>Expo</li>
-                  <li>React Native</li>
-                  <li>Redux</li>
-                </TechnologyList>
-              </div>
-            </ProjectDetails>
-            <ProjectStory>
-              <section>
-                <h3>My role</h3>
-                <p>
-                  I served as the sole developer and managed all aspects of the
-                  project.
-                </p>
-              </section>
-              <section>
-                <h3>Problem</h3>
-                <p>
-                  A discussion with a clinical pharmacist revealed the need for
-                  a tool patients can use to track their vaccination history.
-                </p>
-              </section>
-              <section>
-                <h3>Solution</h3>
-                <p>
-                  A proof-of-concept mobile application to show the feasibility
-                  of patients tracking vaccination history on their smartphones.
-                  The application allows patients to enter dates and manage
-                  follow-up doses for vaccinations they have received or are
-                  scheduled to receive. A vaccine info screen provides images of
-                  common vaccines and links to up-to-date information maintained
-                  by the Centers for Disease Control.
-                </p>
-              </section>
-            </ProjectStory>
-          </Project>
-          <Project
-            githubSlug="/LibertyNJ/abigail-and-nathaniel"
-            liveUrl="https://www.abigailandnathaniel.com/"
-            name="abigailandnathaniel.com"
-          >
-            <ProjectHeader>
-              <h2>
-                Abigail &amp; Nathaniel <br />
-                <ProjectSubtitle>Wedding website</ProjectSubtitle>
-              </h2>
-            </ProjectHeader>
-            <ProjectDetails>
-              <DesktopImage
-                fluid={getImageFluidFromData('abigail-and-nathaniel', data)}
-              />
-              <div>
-                <ProjectDetailsButton
-                  forwardedAs="a"
-                  href="https://www.abigailandnathaniel.com/"
-                  rel="noopener noreferrer"
-                  size="small"
-                  target="_blank"
-                >
-                  <StyledIcon icon="globe" />
-                  Visit site
-                </ProjectDetailsButton>
-                <ProjectDetailsButton
-                  forwardedAs="a"
-                  href="https://github.com/LibertyNJ/abigail-and-nathaniel"
-                  rel="noopener noreferrer"
-                  size="small"
-                  target="_blank"
-                >
-                  <StyledIcon icon={['fab', 'github']} />
-                  View code
-                </ProjectDetailsButton>
-              </div>
-              <div>
-                <ListHeading>Technologies</ListHeading>
-                <TechnologyList>
-                  <li>Bootstrap</li>
-                  <li>Gatsby</li>
-                  <li>GraphQL</li>
-                  <li>Jest</li>
-                  <li>Netlify</li>
-                  <li>React</li>
-                  <li>Sass</li>
-                </TechnologyList>
-              </div>
-            </ProjectDetails>
-            <ProjectStory>
-              <section>
-                <h3>My role</h3>
-                <p>
-                  I collaborated with a designer who provided wireframes and art
-                  assets.
-                </p>
-              </section>
-              <section>
-                <h3>Problem</h3>
-                <p>
-                  The creation of a wedding website. The client desired a
-                  countdown, photo galleries, and convenient access to
-                  information regarding accommodations, travel arrangements, and
-                  other services surrounding the wedding.
-                </p>
-              </section>
-              <section>
-                <h3>Solution</h3>
-                <p>
-                  A single-page scrolling site featuring full-screen background
-                  images. A responsive mobile experience was created via
-                  graceful degredation of the designer’s wireframes, which were
-                  envisioned for a desktop device.
-                </p>
-              </section>
-            </ProjectStory>
-          </Project>
-          <Project
-            githubSlug="/LibertyNJ/community-church-of-syosset"
-            name="Community Church of Syosset"
-          >
-            <ProjectHeader>
-              <h2>
-                Community Church of&nbsp;Syosset <br />
-                <ProjectSubtitle>Church website</ProjectSubtitle>
-              </h2>
-            </ProjectHeader>
-            <ProjectDetails>
-              <DesktopImage
-                fluid={getImageFluidFromData(
-                  'community-church-of-syosset',
-                  data
-                )}
-              />
-              <div>
-                <ProjectDetailsButton
-                  forwardedAs="a"
-                  href="https://uccsyosset.netlify.com/"
-                  rel="noopener noreferrer"
-                  size="small"
-                  target="_blank"
-                >
-                  <StyledIcon icon="globe" />
-                  Visit site
-                </ProjectDetailsButton>
-                <ProjectDetailsButton
-                  forwardedAs="a"
-                  href="https://github.com/LibertyNJ/community-church-of-syosset"
-                  rel="noopener noreferrer"
-                  size="small"
-                  target="_blank"
-                >
-                  <StyledIcon icon={['fab', 'github']} />
-                  View code
-                </ProjectDetailsButton>
-              </div>
-              <div>
-                <ListHeading>Technologies</ListHeading>
-                <TechnologyList>
-                  <li>Contentful</li>
-                  <li>Gatsby</li>
-                  <li>Google Maps API</li>
-                  <li>GraphQL</li>
-                  <li>Netlify</li>
-                  <li>React</li>
-                  <li>Styled components</li>
-                  <li>TypeScript</li>
-                </TechnologyList>
-              </div>
-            </ProjectDetails>
-            <ProjectStory>
-              <section>
-                <h3>My role</h3>
-                <p>
-                  I served as the sole developer and managed all aspects of the
-                  project.
-                </p>
-              </section>
-              <section>
-                <h3>Problem</h3>
-                <p>
-                  A church needed a modern, easy-to-use replacement for their
-                  aging website, with an emphasis on encouraging first-time
-                  contact and in-person visitation.
-                </p>
-              </section>
-              <section>
-                <h3>Solution</h3>
-                <p>
-                  A new, mobile-first, responsive design using Contentful as a
-                  content management system. Call to action buttons push users
-                  towards visitation and contact. Template-driven pages for
-                  events, sermons, and image galleries with dynamic pagination
-                  keep the site easy to maintain for the organization.
-                </p>
               </section>
             </ProjectStory>
           </Project>

@@ -230,12 +230,12 @@ export default function AboutPage({ ...restProps }) {
                 <h2>Profile</h2>
                 <p>
                   As a data analyst with a passion for technology, I discovered
-                  programming out of a drive to improve efficiency in the
-                  workplace. I fell in love with the versatility of JavaScript,
-                  using it to create websites, mobile apps, and desktop
-                  applications. I now look forward to the daily adventure of
-                  exploring the latest web technologies and using them to build
-                  new and exciting projects.
+                  programming out of a drive to push myself further. I fell in
+                  love with the versatility of JavaScript, using it to create
+                  websites, mobile apps, and desktop applications. I now look
+                  forward to the daily adventure of exploring the latest web
+                  technologies and using them to build new and exciting
+                  projects.
                 </p>
                 <p>I’m also very much inspired by space.</p>
               </section>

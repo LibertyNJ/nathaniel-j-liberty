@@ -8,7 +8,7 @@ import Layout from '../../components/Layout';
 import Lead from '../../components/Lead';
 import SEO from '../../components/SEO';
 import StarCanvas from '../../components/StarCanvas';
-import { baseline, breakpoint, typography } from '../../style';
+import { baseline, typography } from '../../style';
 
 const BlockButton = styled(Button)`
   display: block;
