@@ -74,6 +74,15 @@ const CtaContainer = styled.div`
   }
 `;
 
+const ExternalLink = styled.a`
+  color: ${color.white};
+  transition: color 250ms;
+
+  & :hover {
+    color: ${color.lightGray};
+  }
+`;
+
 const GridContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -144,7 +153,6 @@ const TechnologyColumns = styled.div`
 
   @media (min-width: ${breakpoint.md}) {
     columns: 3;
-    margin-bottom: 0;
   }
 `;
 
@@ -267,6 +275,7 @@ export default function AboutPage({ ...restProps }) {
                     <ul>
                       <li>Express</li>
                       <li>GraphQL</li>
+                      <li>MongoDB</li>
                       <li>Node.js</li>
                       <li>PostgreSQL</li>
                       <li>Sequelize</li>
@@ -300,7 +309,35 @@ export default function AboutPage({ ...restProps }) {
                       <li>React Native</li>
                     </ul>
                   </TechnologyList>
+                  <TechnologyList>
+                    <ListHeading>Other</ListHeading>
+                    <ul>
+                      <li>Arduino</li>
+                    </ul>
+                  </TechnologyList>
                 </TechnologyColumns>
+              </section>
+              <section>
+                <h2>Certifications</h2>
+                <ul>
+                  <li>
+                    <b>
+                      Arduino Fundamentals: Electronics and Physical Computing
+                    </b>
+                    <br />
+                    <span>
+                      Certificate ID: 850A10E0-8119-4A76-99DF-7EEACAA30ECE
+                    </span>
+                    <br />
+                    <ExternalLink
+                      href="https://create.arduino.cc/edu/courses/local/certification/certinfo.php?id=850a10e0-8119-4a76-99df-7eeacaa30ece"
+                      rel="noopener noreferrer"
+                      target="_blank"
+                    >
+                      See verification
+                    </ExternalLink>
+                  </li>
+                </ul>
               </section>
             </TextContainer>
           </ContentContainer>

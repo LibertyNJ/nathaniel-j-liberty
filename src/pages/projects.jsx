@@ -511,17 +511,32 @@ export default function ProjectsPage({ ...restProps }) {
                   <StyledIcon icon={['fab', 'github']} />
                   View code
                 </ProjectDetailsButton>
+                <ProjectDetailsButton
+                  forwardedAs="a"
+                  href="https://github.com/LibertyNJ/abigail-and-nathaniel-rsvp-server"
+                  rel="noopener noreferrer"
+                  size="small"
+                  target="_blank"
+                >
+                  <StyledIcon icon={['fab', 'github']} />
+                  View server code
+                </ProjectDetailsButton>
               </div>
               <div>
                 <ListHeading>Technologies</ListHeading>
                 <TechnologyList>
                   <li>Bootstrap</li>
+                  <li>Express</li>
                   <li>Gatsby</li>
                   <li>GraphQL</li>
+                  <li>Heroku</li>
                   <li>Jest</li>
+                  <li>MongoDB</li>
                   <li>Netlify</li>
+                  <li>Node.js</li>
                   <li>React</li>
                   <li>Sass</li>
+                  <li>TypeScript</li>
                 </TechnologyList>
               </div>
             </ProjectDetails>
@@ -550,6 +565,13 @@ export default function ProjectsPage({ ...restProps }) {
                   graceful degredation of the designer’s wireframes, which were
                   envisioned for a desktop device.
                 </p>
+                <section>
+                  <h4>RSVP server</h4>
+                  <p>
+                    An RSVP server was later added to handle electronic RSVPs
+                    after the wedding had a change of date.
+                  </p>
+                </section>
               </section>
             </ProjectStory>
           </Project>
