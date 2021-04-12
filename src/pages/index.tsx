@@ -21,7 +21,7 @@ export default function IndexPage() {
         <Button icon="satellite" size="large" to="/contact">
           Make contact
         </Button>
-        <Button icon="rocket" size="large" to="/past-work">
+        <Button icon="rocket" size="large" to="/projects">
           Explore work
         </Button>
       </Grid>
