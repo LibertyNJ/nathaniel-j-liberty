@@ -19,7 +19,9 @@ export default function Button(props: Props) {
         {props.children}
       </Container>
     );
-  } else if (props.href) {
+  }
+
+  if (props.href) {
     return (
       <Container
         as={ExternalLink}
@@ -31,7 +33,9 @@ export default function Button(props: Props) {
         {props.children}
       </Container>
     );
-  } else if (props.to) {
+  }
+
+  if (props.to) {
     return (
       <Container
         as={Link}
@@ -43,12 +47,12 @@ export default function Button(props: Props) {
         {props.children}
       </Container>
     );
-  } else {
-    return (
-      <Container size={props.size} unlimitedWidth={props.unlimitedWidth}>
-        {props.icon && <Icon icon={props.icon} />}
-        {props.children}
-      </Container>
-    );
   }
+
+  return (
+    <Container size={props.size} unlimitedWidth={props.unlimitedWidth}>
+      {props.icon && <Icon icon={props.icon} />}
+      {props.children}
+    </Container>
+  );
 }

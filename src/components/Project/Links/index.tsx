@@ -21,13 +21,18 @@ export default function ProjectLinks(props: Props) {
 
 function assignIcon(text: string) {
   const lowerCaseText = text.toLowerCase();
+
   if (lowerCaseText.includes('code')) {
     return ['fab', 'github'] as ['fab', 'github'];
-  } else if (lowerCaseText.includes('visit')) {
-    return 'globe';
-  } else if (lowerCaseText.includes('try')) {
-    return 'desktop';
-  } else {
-    return undefined;
   }
+
+  if (lowerCaseText.includes('visit')) {
+    return 'globe';
+  }
+
+  if (lowerCaseText.includes('try')) {
+    return 'desktop';
+  }
+
+  return undefined;
 }

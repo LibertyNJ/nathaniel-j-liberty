@@ -68,11 +68,11 @@ function getCoveredElementDimensions() {
     const height = element.offsetHeight;
     const width = element.offsetWidth;
     return { height, width };
-  } else {
-    throw new Error(
-      `StarCanvas must cover an HTMLElement, but "${_coveredElementSelector}" refers to a different kind of element.`
-    );
   }
+
+  throw new Error(
+    `StarCanvas must cover an HTMLElement, but "${_coveredElementSelector}" refers to a different kind of element.`
+  );
 }
 
 function getNumberOfStars() {
