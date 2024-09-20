@@ -1,12 +1,6 @@
 import styled from 'styled-components';
 
-import {
-  baseline,
-  breakpoint,
-  color,
-  transition,
-  typography,
-} from '../../../../../style';
+import { baseline, color, transition, typography } from '../../../../../style';
 import Props from './Props';
 
 export default styled.header<Props>`
