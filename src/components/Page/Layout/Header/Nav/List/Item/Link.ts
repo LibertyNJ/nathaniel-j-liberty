@@ -27,7 +27,7 @@ export default styled(Link)`
     color: ${color.black};
   }
 
-  :active,
+  &:active,
   &.active {
     border: ${borderThickness} ${color.white} solid;
     padding: calc(6 * ${baseline} - ${borderThickness});
@@ -36,7 +36,7 @@ export default styled(Link)`
   @media (min-width: ${breakpoint.md}) {
     padding: calc(3 * ${baseline});
 
-    :active,
+    &:active,
     &.active {
       padding: calc(3 * ${baseline} - ${borderThickness});
     }

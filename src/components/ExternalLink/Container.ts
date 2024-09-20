@@ -6,7 +6,7 @@ export default styled.a`
   color: ${color.white};
   transition: color ${transition.duration};
 
-  & :hover {
+  &:hover {
     color: ${color.lightGray};
   }
 `;
