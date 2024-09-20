@@ -29,7 +29,7 @@ export default styled.button<Props>`
     filter: drop-shadow(0 0 5px ${color.white});
   }
 
-  :hover {
+  &:hover {
     background: ${color.white};
     color: ${color.black};
     cursor: pointer;
