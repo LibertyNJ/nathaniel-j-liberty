@@ -19,7 +19,7 @@ export default styled.button`
   transition: filter ${transition.duration};
   width: ${typography.fontSize.h1.xs};
 
-  :focus {
+  &:focus {
     filter: drop-shadow(0 0 10px ${color.white});
   }
 

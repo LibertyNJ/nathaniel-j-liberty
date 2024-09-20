@@ -19,7 +19,7 @@ export default styled.input`
   padding: calc(3 * ${baseline} - ${borderThickness});
   transition: filter ${transition.duration};
 
-  :focus {
+  &:focus {
     filter: drop-shadow(0 0 5px ${color.white});
   }
 

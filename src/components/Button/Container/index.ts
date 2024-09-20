@@ -24,7 +24,7 @@ export default styled.button<Props>`
   white-space: nowrap;
   ${(props) => props.unlimitedWidth && 'width: 100%;'}
 
-  :focus {
+  &:focus {
     background: ${color.black};
     filter: drop-shadow(0 0 5px ${color.white});
   }

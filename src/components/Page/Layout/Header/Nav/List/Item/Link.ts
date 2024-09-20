@@ -17,7 +17,7 @@ export default styled(Link)`
   transition: background ${transition.duration}, color ${transition.duration},
     filter ${transition.duration};
 
-  :focus {
+  &:focus {
     background: ${color.black};
     filter: drop-shadow(0 0 5px ${color.white});
   }

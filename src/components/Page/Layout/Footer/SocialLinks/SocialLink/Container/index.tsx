@@ -18,7 +18,7 @@ export default styled(ExternalLink)<Props>`
   margin: 0 calc(6 * ${baseline});
   transition: color ${transition.duration}, filter ${transition.duration};
 
-  :focus {
+  &:focus {
     filter: drop-shadow(0 0 10px ${color.white});
   }
 

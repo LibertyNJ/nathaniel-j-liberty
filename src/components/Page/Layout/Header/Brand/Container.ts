@@ -11,7 +11,7 @@ export default styled(Link)`
   flex: initial;
   transition: filter ${transition.duration};
 
-  :focus {
+  &:focus {
     filter: drop-shadow(0 0 10px ${color.white});
   }
 
