@@ -22,7 +22,7 @@ export default styled(ExternalLink)<Props>`
     filter: drop-shadow(0 0 10px ${color.white});
   }
 
-  :hover {
+  &:hover {
     color: ${(props) => props.hoverColor ?? color.white};
   }
 
