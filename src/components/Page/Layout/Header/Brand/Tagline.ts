@@ -7,7 +7,7 @@ export default styled.span`
   font-size: ${typography.fontSize.small.xs};
   line-height: ${typography.lineHeight.small.xs};
 
-  ::before {
+  &:before {
     content: '// ';
   }
 `;
