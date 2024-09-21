@@ -14,8 +14,8 @@ export default function LayoutHeaderNavList(props: Props) {
       $isVisiblyTransparent={props.isHiding}
       $topOffset={headerHeight}
     >
-      <NavItem to="/projects">Projects</NavItem>
       <NavItem to="/about">About</NavItem>
+      <NavItem to="/projects">Projects</NavItem>
       <NavItem to="/contact">Contact</NavItem>
     </Container>
   );
