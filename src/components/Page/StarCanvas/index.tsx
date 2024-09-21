@@ -5,21 +5,20 @@ import Props from './Props';
 
 let _animationRequestId: number;
 let _canvas: HTMLCanvasElement | null;
-let _twinkle: boolean;
 
 export default function StarCanvas(props: Props) {
-  _twinkle = props.twinkle ?? false;
   const { coveredElementSelector } = props;
   const shroud = props.shroud ?? false;
+  const twinkle = props.twinkle ?? false;
   const canvasRef = useRef<HTMLCanvasElement>(null);
   useEffect(() => setCanvas(canvasRef), []);
   useEffect(
-    () => listenForWindowResize(coveredElementSelector, shroud),
-    [coveredElementSelector, shroud]
+    () => listenForWindowResize(coveredElementSelector, shroud, twinkle),
+    [coveredElementSelector, shroud, twinkle]
   );
   useEffect(
-    () => initStarField(coveredElementSelector, shroud),
-    [coveredElementSelector, shroud]
+    () => initStarField(coveredElementSelector, shroud, twinkle),
+    [coveredElementSelector, shroud, twinkle]
   );
   return <Canvas ref={canvasRef} />;
 }
@@ -40,28 +39,37 @@ function getCanvas() {
 
 function listenForWindowResize(
   coveredElementSelector: string,
-  shroud: boolean
+  shroud: boolean,
+  twinkle: boolean
 ) {
   const windowResizeHandler = () =>
-    handleWindowResize(coveredElementSelector, shroud);
+    handleWindowResize(coveredElementSelector, shroud, twinkle);
   window.addEventListener('resize', windowResizeHandler);
   return () => stopListeningForWindowResize(windowResizeHandler);
 }
 
-function handleWindowResize(coveredElementSelector: string, shroud: boolean) {
+function handleWindowResize(
+  coveredElementSelector: string,
+  shroud: boolean,
+  twinkle: boolean
+) {
   cancelAnimationFrame(_animationRequestId);
-  initStarField(coveredElementSelector, shroud);
+  initStarField(coveredElementSelector, shroud, twinkle);
 }
 
 function stopListeningForWindowResize(windowResizeHandler: () => void) {
   window.removeEventListener('resize', windowResizeHandler);
 }
 
-function initStarField(coveredElementSelector: string, shroud: boolean) {
+function initStarField(
+  coveredElementSelector: string,
+  shroud: boolean,
+  twinkle: boolean
+) {
   spreadCanvas(coveredElementSelector);
   const numberOfStars = getNumberOfStars();
   const stars = createStars(numberOfStars);
-  drawFrame(stars, shroud);
+  drawFrame(stars, shroud, twinkle);
 
   return () => {
     cancelAnimationFrame(_animationRequestId);
@@ -154,7 +162,7 @@ function randomizeStarSize() {
   return Math.ceil(Math.random() * MAX_STAR_SIZE);
 }
 
-function drawFrame(stars: readonly Star[], shroud: boolean) {
+function drawFrame(stars: readonly Star[], shroud: boolean, twinkle: boolean) {
   clearCanvas();
   drawStars(stars);
 
@@ -162,7 +170,7 @@ function drawFrame(stars: readonly Star[], shroud: boolean) {
     drawShroud();
   }
 
-  if (_twinkle) {
+  if (twinkle) {
     animateStars(stars, shroud);
   }
 }
@@ -249,7 +257,9 @@ function drawShroud() {
 }
 
 function animateStars(stars: readonly Star[], shroud: boolean) {
-  _animationRequestId = requestAnimationFrame(() => drawFrame(stars, shroud));
+  _animationRequestId = requestAnimationFrame(() =>
+    drawFrame(stars, shroud, true)
+  );
 }
 
 interface Color {
