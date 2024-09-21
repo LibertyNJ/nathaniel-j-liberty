@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import { transition } from '../../../../style';
 import Brand from './Brand';
