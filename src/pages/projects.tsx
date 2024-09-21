@@ -28,7 +28,7 @@ interface StaticQueryData {
 export default function PastWorkPage() {
   const data = useStaticQuery<StaticQueryData>(graphql`
     query {
-      allContentfulProject(sort: { fields: date, order: DESC }) {
+      allContentfulProject(sort: { date: DESC }) {
         edges {
           node {
             id
