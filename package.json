@@ -15,7 +15,8 @@
     "develop": "gatsby develop -H 0.0.0.0 -o",
     "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
     "start": "npm run develop",
-    "serve": "gatsby serve -H 0.0.0.0 -o"
+    "serve": "gatsby serve -H 0.0.0.0 -o",
+    "type-check": "tsc --noEmit"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.6.0",
@@ -38,11 +39,15 @@
     "styled-normalize": "^8.1.1"
   },
   "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/react": "^18.3.8",
+    "@types/react-dom": "^18.3.0",
     "@types/react-helmet": "^6.1.0",
     "babel-plugin-styled-components": "^1.12.0",
     "babel-preset-gatsby": "^3.13.2",
     "dotenv": "^16.4.5",
-    "prettier": "^3.3.3"
+    "prettier": "^3.3.3",
+    "typescript": "^5.6.2"
   },
   "engines": {
     "node": ">=20.17.0"

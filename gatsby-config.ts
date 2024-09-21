@@ -1,6 +1,7 @@
-require('dotenv').config();
+import 'dotenv/config';
+import type { GatsbyConfig } from 'gatsby';
 
-module.exports = {
+const config: GatsbyConfig = {
   siteMetadata: {
     author: 'Nathaniel J. Liberty',
     description:
@@ -36,3 +37,5 @@ module.exports = {
     },
   ],
 };
+
+export default config;
