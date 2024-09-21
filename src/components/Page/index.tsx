@@ -5,7 +5,6 @@ import GlobalStyle from './GlobalStyle';
 import './icon-library';
 import Layout from './Layout';
 import Props from './Props';
-import SEO from './SEO';
 import StarCanvas from './StarCanvas';
 
 fontAwesomeConfig.autoAddCss = false;
@@ -13,7 +12,6 @@ fontAwesomeConfig.autoAddCss = false;
 export default function Page(props: Props) {
   return (
     <>
-      <SEO title={props.title} />
       <GlobalStyle />
       <StarCanvas
         coveredElementSelector="body"

@@ -9,7 +9,6 @@ const config: GatsbyConfig = {
     title: 'Nathaniel J. Liberty, Software Engineer',
   },
   plugins: [
-    'gatsby-plugin-react-helmet',
     'gatsby-transformer-sharp',
     'gatsby-plugin-image',
     'gatsby-plugin-sharp',

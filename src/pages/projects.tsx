@@ -3,6 +3,7 @@ import { IGatsbyImageData } from 'gatsby-plugin-image';
 
 import Page from '../components/Page';
 import Project from '../components/Project';
+import Seo from '../components/Seo';
 import Title from '../components/Title';
 
 interface StaticQueryData {
@@ -70,9 +71,13 @@ export default function PastWorkPage() {
   ));
 
   return (
-    <Page breakpoints shroud title="Projects">
+    <Page breakpoints shroud>
       <Title $centered>Projects</Title>
       <section>{projects}</section>
     </Page>
   );
+}
+
+export function Head() {
+  return <Seo title="Projects" />;
 }

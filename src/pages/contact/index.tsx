@@ -2,12 +2,13 @@ import Button from '../../components/Button';
 import Form from '../../components/Form';
 import Lead from '../../components/Lead';
 import Page from '../../components/Page';
+import Seo from '../../components/Seo';
 import TextInput from '../../components/TextInput';
 import Title from '../../components/Title';
 
 export default function ContactPage() {
   return (
-    <Page title="Contact">
+    <Page>
       <Title $centered>Contact</Title>
       <Lead>Let’s discover new frontiers together.</Lead>
       <Form
@@ -33,4 +34,8 @@ export default function ContactPage() {
       </Form>
     </Page>
   );
+}
+
+export function Head() {
+  return <Seo title="Contact" />;
 }

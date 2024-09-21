@@ -8,6 +8,7 @@ import Grid from '../components/Grid';
 import GridItem from '../components/GridItem';
 import HeadedList from '../components/HeadedList';
 import Page from '../components/Page';
+import Seo from '../components/Seo';
 import Title from '../components/Title';
 import { baseline, borderThickness, breakpoint, color } from '../style';
 
@@ -74,7 +75,7 @@ export default function AboutPage() {
   `);
 
   return (
-    <Page breakpoints shroud title="About">
+    <Page breakpoints shroud>
       <Title $centered>About</Title>
       <GridContainer>
         <GridItem $column="1 / 2" $row="1 / 2">
@@ -84,7 +85,7 @@ export default function AboutPage() {
           />
           <Grid $columns={1}>
             <Button
-                            href={'https://' + data.resume.file.url}
+              href={'https://' + data.resume.file.url}
               icon="file-download"
               size="small"
             >
@@ -184,4 +185,8 @@ export default function AboutPage() {
       </GridContainer>
     </Page>
   );
+}
+
+export function Head() {
+  return <Seo title="About" />;
 }

@@ -2,12 +2,13 @@ import Button from '../components/Button';
 import Grid from '../components/Grid';
 import Lead from '../components/Lead';
 import Page from '../components/Page';
+import Seo from '../components/Seo';
 import Subtitle from '../components/Subtitle';
 import Title from '../components/Title';
 
 export default function IndexPage() {
   return (
-    <Page display="flex" title="Home" twinkle unlimitedWidth>
+    <Page display="flex" twinkle unlimitedWidth>
       <Title>
         Nathaniel&nbsp;J. Liberty <br />
         <Subtitle>Software Engineer</Subtitle>
@@ -25,4 +26,8 @@ export default function IndexPage() {
       </Grid>
     </Page>
   );
+}
+
+export function Head() {
+  return <Seo title="Home" />;
 }
