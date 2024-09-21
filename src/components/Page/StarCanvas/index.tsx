@@ -1,23 +1,35 @@
-import { useEffect, useRef } from 'react';
+import { MutableRefObject, useEffect, useRef } from 'react';
 
 import Canvas from './Canvas';
 import Props from './Props';
 
-let _animationRequestId: number;
 let _canvas: HTMLCanvasElement | null;
 
 export default function StarCanvas(props: Props) {
   const { coveredElementSelector } = props;
   const shroud = props.shroud ?? false;
   const twinkle = props.twinkle ?? false;
+  const animationRequestId = useRef<number | null>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   useEffect(() => setCanvas(canvasRef), []);
   useEffect(
-    () => listenForWindowResize(coveredElementSelector, shroud, twinkle),
+    () =>
+      listenForWindowResize(
+        coveredElementSelector,
+        shroud,
+        twinkle,
+        animationRequestId
+      ),
     [coveredElementSelector, shroud, twinkle]
   );
   useEffect(
-    () => initStarField(coveredElementSelector, shroud, twinkle),
+    () =>
+      initStarField(
+        coveredElementSelector,
+        shroud,
+        twinkle,
+        animationRequestId
+      ),
     [coveredElementSelector, shroud, twinkle]
   );
   return <Canvas ref={canvasRef} />;
@@ -40,10 +52,16 @@ function getCanvas() {
 function listenForWindowResize(
   coveredElementSelector: string,
   shroud: boolean,
-  twinkle: boolean
+  twinkle: boolean,
+  animationRequestId: MutableRefObject<number | null>
 ) {
   const windowResizeHandler = () =>
-    handleWindowResize(coveredElementSelector, shroud, twinkle);
+    handleWindowResize(
+      coveredElementSelector,
+      shroud,
+      twinkle,
+      animationRequestId
+    );
   window.addEventListener('resize', windowResizeHandler);
   return () => stopListeningForWindowResize(windowResizeHandler);
 }
@@ -51,10 +69,15 @@ function listenForWindowResize(
 function handleWindowResize(
   coveredElementSelector: string,
   shroud: boolean,
-  twinkle: boolean
+  twinkle: boolean,
+  animationRequestId: MutableRefObject<number | null>
 ) {
-  cancelAnimationFrame(_animationRequestId);
-  initStarField(coveredElementSelector, shroud, twinkle);
+  if (animationRequestId.current !== null) {
+    cancelAnimationFrame(animationRequestId.current);
+    animationRequestId.current = null;
+  }
+
+  initStarField(coveredElementSelector, shroud, twinkle, animationRequestId);
 }
 
 function stopListeningForWindowResize(windowResizeHandler: () => void) {
@@ -64,15 +87,19 @@ function stopListeningForWindowResize(windowResizeHandler: () => void) {
 function initStarField(
   coveredElementSelector: string,
   shroud: boolean,
-  twinkle: boolean
+  twinkle: boolean,
+  animationRequestId: MutableRefObject<number | null>
 ) {
   spreadCanvas(coveredElementSelector);
   const numberOfStars = getNumberOfStars();
   const stars = createStars(numberOfStars);
-  drawFrame(stars, shroud, twinkle);
+  drawFrame(stars, shroud, twinkle, animationRequestId);
 
   return () => {
-    cancelAnimationFrame(_animationRequestId);
+    if (animationRequestId.current !== null) {
+      cancelAnimationFrame(animationRequestId.current);
+      animationRequestId.current = null;
+    }
   };
 }
 
@@ -162,7 +189,12 @@ function randomizeStarSize() {
   return Math.ceil(Math.random() * MAX_STAR_SIZE);
 }
 
-function drawFrame(stars: readonly Star[], shroud: boolean, twinkle: boolean) {
+function drawFrame(
+  stars: readonly Star[],
+  shroud: boolean,
+  twinkle: boolean,
+  animationRequestId: MutableRefObject<number | null>
+) {
   clearCanvas();
   drawStars(stars);
 
@@ -171,7 +203,7 @@ function drawFrame(stars: readonly Star[], shroud: boolean, twinkle: boolean) {
   }
 
   if (twinkle) {
-    animateStars(stars, shroud);
+    animateStars(stars, shroud, animationRequestId);
   }
 }
 
@@ -256,9 +288,13 @@ function drawShroud() {
   );
 }
 
-function animateStars(stars: readonly Star[], shroud: boolean) {
-  _animationRequestId = requestAnimationFrame(() =>
-    drawFrame(stars, shroud, true)
+function animateStars(
+  stars: readonly Star[],
+  shroud: boolean,
+  animationRequestId: MutableRefObject<number | null>
+) {
+  animationRequestId.current = requestAnimationFrame(() =>
+    drawFrame(stars, shroud, true, animationRequestId)
   );
 }
 
