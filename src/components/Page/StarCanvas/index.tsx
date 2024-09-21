@@ -5,18 +5,23 @@ import Props from './Props';
 
 let _animationRequestId: number;
 let _canvas: HTMLCanvasElement | null;
-let _coveredElementSelector: string;
 let _shroud: boolean;
 let _twinkle: boolean;
 
-export default function PageStarCanvas(props: Props) {
-  _coveredElementSelector = props.coveredElementSelector;
+export default function StarCanvas(props: Props) {
   _shroud = props.shroud ?? false;
   _twinkle = props.twinkle ?? false;
+  const { coveredElementSelector } = props;
   const canvasRef = useRef<HTMLCanvasElement>(null);
   useEffect(() => setCanvas(canvasRef), []);
-  useEffect(listenForWindowResize, []);
-  useEffect(initStarField, []);
+  useEffect(
+    () => listenForWindowResize(coveredElementSelector),
+    [coveredElementSelector]
+  );
+  useEffect(
+    () => initStarField(coveredElementSelector),
+    [coveredElementSelector]
+  );
   return <Canvas ref={canvasRef} />;
 }
 
@@ -34,22 +39,23 @@ function getCanvas() {
   return _canvas;
 }
 
-function listenForWindowResize() {
-  window.addEventListener('resize', handleWindowResize);
-  return stopListeningForWindowResize;
+function listenForWindowResize(coveredElementSelector: string) {
+  const windowResizeHandler = () => handleWindowResize(coveredElementSelector);
+  window.addEventListener('resize', windowResizeHandler);
+  return () => stopListeningForWindowResize(windowResizeHandler);
 }
 
-function handleWindowResize() {
+function handleWindowResize(coveredElementSelector: string) {
   cancelAnimationFrame(_animationRequestId);
-  initStarField();
+  initStarField(coveredElementSelector);
 }
 
-function stopListeningForWindowResize() {
-  window.removeEventListener('resize', handleWindowResize);
+function stopListeningForWindowResize(windowResizeHandler: () => void) {
+  window.removeEventListener('resize', windowResizeHandler);
 }
 
-function initStarField() {
-  spreadCanvas();
+function initStarField(coveredElementSelector: string) {
+  spreadCanvas(coveredElementSelector);
   const numberOfStars = getNumberOfStars();
   const stars = createStars(numberOfStars);
   drawFrame(stars);
@@ -59,19 +65,19 @@ function initStarField() {
   };
 }
 
-function spreadCanvas() {
-  const { height, width } = getCoveredElementDimensions();
+function spreadCanvas(coveredElementSelector: string) {
+  const { height, width } = getCoveredElementDimensions(coveredElementSelector);
   const canvas = getCanvas();
   canvas.height = height;
   canvas.width = width;
 }
 
-function getCoveredElementDimensions() {
-  const element = document.querySelector(_coveredElementSelector);
+function getCoveredElementDimensions(coveredElementSelector: string) {
+  const element = document.querySelector(coveredElementSelector);
 
   if (element === null) {
     throw new Error(
-      `StarCanvas is unable to find covered element with selector "${_coveredElementSelector}".`
+      `StarCanvas is unable to find covered element with selector "${coveredElementSelector}".`
     );
   }
 
@@ -82,7 +88,7 @@ function getCoveredElementDimensions() {
   }
 
   throw new Error(
-    `StarCanvas must cover an HTMLElement, but "${_coveredElementSelector}" refers to a different kind of element.`
+    `StarCanvas must cover an HTMLElement, but "${coveredElementSelector}" refers to a different kind of element.`
   );
 }
 
