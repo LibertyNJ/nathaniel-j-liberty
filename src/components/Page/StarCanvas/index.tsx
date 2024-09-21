@@ -3,64 +3,62 @@ import { MutableRefObject, useEffect, useRef } from 'react';
 import Canvas from './Canvas';
 import Props from './Props';
 
-let _canvas: HTMLCanvasElement | null;
-
 export default function StarCanvas(props: Props) {
   const { coveredElementSelector } = props;
   const shroud = props.shroud ?? false;
   const twinkle = props.twinkle ?? false;
   const animationRequestId = useRef<number | null>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  useEffect(() => setCanvas(canvasRef), []);
+
+  const getCanvas = () => {
+    if (canvasRef.current === null) {
+      throw new Error('canvas is null.');
+    }
+
+    return canvasRef.current;
+  };
+
   useEffect(
     () =>
       listenForWindowResize(
         coveredElementSelector,
         shroud,
         twinkle,
-        animationRequestId
+        animationRequestId,
+        getCanvas()
       ),
     [coveredElementSelector, shroud, twinkle]
   );
+
   useEffect(
     () =>
       initStarField(
         coveredElementSelector,
         shroud,
         twinkle,
-        animationRequestId
+        animationRequestId,
+        getCanvas()
       ),
     [coveredElementSelector, shroud, twinkle]
   );
+
   return <Canvas ref={canvasRef} />;
-}
-
-function setCanvas(
-  canvasRef: React.MutableRefObject<HTMLCanvasElement | null>
-) {
-  _canvas = canvasRef.current;
-}
-
-function getCanvas() {
-  if (_canvas === null) {
-    throw new Error('_canvas is null.');
-  }
-
-  return _canvas;
 }
 
 function listenForWindowResize(
   coveredElementSelector: string,
   shroud: boolean,
   twinkle: boolean,
-  animationRequestId: MutableRefObject<number | null>
+  animationRequestId: MutableRefObject<number | null>,
+  canvas: HTMLCanvasElement
 ) {
   const windowResizeHandler = () =>
     handleWindowResize(
       coveredElementSelector,
       shroud,
       twinkle,
-      animationRequestId
+      animationRequestId,
+      canvas
     );
   window.addEventListener('resize', windowResizeHandler);
   return () => stopListeningForWindowResize(windowResizeHandler);
@@ -70,14 +68,21 @@ function handleWindowResize(
   coveredElementSelector: string,
   shroud: boolean,
   twinkle: boolean,
-  animationRequestId: MutableRefObject<number | null>
+  animationRequestId: MutableRefObject<number | null>,
+  canvas: HTMLCanvasElement
 ) {
   if (animationRequestId.current !== null) {
     cancelAnimationFrame(animationRequestId.current);
     animationRequestId.current = null;
   }
 
-  initStarField(coveredElementSelector, shroud, twinkle, animationRequestId);
+  initStarField(
+    coveredElementSelector,
+    shroud,
+    twinkle,
+    animationRequestId,
+    canvas
+  );
 }
 
 function stopListeningForWindowResize(windowResizeHandler: () => void) {
@@ -88,12 +93,13 @@ function initStarField(
   coveredElementSelector: string,
   shroud: boolean,
   twinkle: boolean,
-  animationRequestId: MutableRefObject<number | null>
+  animationRequestId: MutableRefObject<number | null>,
+  canvas: HTMLCanvasElement
 ) {
-  spreadCanvas(coveredElementSelector);
-  const numberOfStars = getNumberOfStars();
-  const stars = createStars(numberOfStars);
-  drawFrame(stars, shroud, twinkle, animationRequestId);
+  spreadCanvas(coveredElementSelector, canvas);
+  const numberOfStars = getNumberOfStars(canvas);
+  const stars = createStars(numberOfStars, canvas);
+  drawFrame(stars, shroud, twinkle, animationRequestId, canvas);
 
   return () => {
     if (animationRequestId.current !== null) {
@@ -103,9 +109,11 @@ function initStarField(
   };
 }
 
-function spreadCanvas(coveredElementSelector: string) {
+function spreadCanvas(
+  coveredElementSelector: string,
+  canvas: HTMLCanvasElement
+) {
   const { height, width } = getCoveredElementDimensions(coveredElementSelector);
-  const canvas = getCanvas();
   canvas.height = height;
   canvas.width = width;
 }
@@ -130,27 +138,24 @@ function getCoveredElementDimensions(coveredElementSelector: string) {
   );
 }
 
-function getNumberOfStars() {
+function getNumberOfStars(canvas: HTMLCanvasElement) {
   const SQUARE_PIXELS_PER_STAR = 2000;
-  const canvas = getCanvas();
   const canvasArea = canvas.width * canvas.height;
   return canvasArea / SQUARE_PIXELS_PER_STAR;
 }
 
-function createStars(numberOfStars: number) {
+function createStars(numberOfStars: number, canvas: HTMLCanvasElement) {
   const stars: Star[] = [];
 
   for (let i = 0; i < numberOfStars; i++) {
-    const star = createStar();
+    const star = createStar(canvas);
     stars.push(star);
   }
 
   return stars;
 }
 
-function createStar(): Star {
-  const canvas = getCanvas();
-
+function createStar(canvas: HTMLCanvasElement): Star {
   return {
     color: randomizeStarColor(),
     coordinates: {
@@ -193,33 +198,32 @@ function drawFrame(
   stars: readonly Star[],
   shroud: boolean,
   twinkle: boolean,
-  animationRequestId: MutableRefObject<number | null>
+  animationRequestId: MutableRefObject<number | null>,
+  canvas: HTMLCanvasElement
 ) {
-  clearCanvas();
-  drawStars(stars);
+  clearCanvas(canvas);
+  drawStars(stars, canvas);
 
   if (shroud) {
-    drawShroud();
+    drawShroud(canvas);
   }
 
   if (twinkle) {
-    animateStars(stars, shroud, animationRequestId);
+    animateStars(stars, shroud, animationRequestId, canvas);
   }
 }
 
-function clearCanvas() {
-  const context = getContext();
-  const canvas = getCanvas();
+function clearCanvas(canvas: HTMLCanvasElement) {
+  const context = getContext(canvas);
   context.clearRect(0, 0, canvas.width, canvas.height);
 }
 
-function drawStars(stars: readonly Star[]) {
-  const context = getContext();
+function drawStars(stars: readonly Star[], canvas: HTMLCanvasElement) {
+  const context = getContext(canvas);
   stars.forEach((star) => drawStar(star, context));
 }
 
-function getContext() {
-  const canvas = getCanvas();
+function getContext(canvas: HTMLCanvasElement) {
   const context = canvas.getContext('2d');
 
   if (context === null) {
@@ -244,9 +248,8 @@ function randomizeLuminosity(luminosity: number) {
   return Math.floor(Math.random() * (luminosity + 1));
 }
 
-function drawShroud() {
-  const context = getContext();
-  const canvas = getCanvas();
+function drawShroud(canvas: HTMLCanvasElement) {
+  const context = getContext(canvas);
 
   const topGradient = context.createLinearGradient(
     0.5 * canvas.width,
@@ -291,10 +294,11 @@ function drawShroud() {
 function animateStars(
   stars: readonly Star[],
   shroud: boolean,
-  animationRequestId: MutableRefObject<number | null>
+  animationRequestId: MutableRefObject<number | null>,
+  canvas: HTMLCanvasElement
 ) {
   animationRequestId.current = requestAnimationFrame(() =>
-    drawFrame(stars, shroud, true, animationRequestId)
+    drawFrame(stars, shroud, true, animationRequestId, canvas)
   );
 }
 
