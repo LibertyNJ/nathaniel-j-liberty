@@ -5,7 +5,7 @@ import NavItem from './Item';
 import Props from './Props';
 
 export default function LayoutHeaderNavList(props: Props) {
-  const [headerHeight, setHeaderHeight] = useState<number>();
+  const [headerHeight, setHeaderHeight] = useState<number>(0);
   useEffect(() => getAndSetHeaderHeight(setHeaderHeight), []);
 
   return (

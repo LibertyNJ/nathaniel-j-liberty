@@ -84,8 +84,7 @@ export default function AboutPage() {
           />
           <Grid columns={1}>
             <Button
-              download
-              href={'https://' + data.resume.file.url}
+                            href={'https://' + data.resume.file.url}
               icon="file-download"
               size="small"
             >

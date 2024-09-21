@@ -9,7 +9,7 @@ import Props from './Props';
 export default function LayoutHeader(props: Props) {
   const [navListIsHiding, setNavListIsHiding] = useState(false);
   const [navListIsShown, setNavListIsShown] = useState(false);
-  const navListHidingDuration = +transition.duration.match(/\d*/)[0];
+  const navListHidingDuration = +transition.duration.replace('ms', '');
 
   const hideNavList = () => {
     setNavListIsShown(false);

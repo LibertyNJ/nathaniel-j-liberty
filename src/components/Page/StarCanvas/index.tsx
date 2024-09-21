@@ -4,7 +4,7 @@ import Canvas from './Canvas';
 import Props from './Props';
 
 let _animationRequestId: number;
-let _canvas: HTMLCanvasElement;
+let _canvas: HTMLCanvasElement | null;
 let _coveredElementSelector: string;
 let _shroud: boolean;
 let _twinkle: boolean;
@@ -13,15 +13,25 @@ export default function PageStarCanvas(props: Props) {
   _coveredElementSelector = props.coveredElementSelector;
   _shroud = props.shroud ?? false;
   _twinkle = props.twinkle ?? false;
-  const canvasRef = useRef<HTMLCanvasElement>();
+  const canvasRef = useRef<HTMLCanvasElement>(null);
   useEffect(() => setCanvas(canvasRef), []);
   useEffect(listenForWindowResize, []);
   useEffect(initStarField, []);
   return <Canvas ref={canvasRef} />;
 }
 
-function setCanvas(canvasRef: React.MutableRefObject<HTMLCanvasElement>) {
+function setCanvas(
+  canvasRef: React.MutableRefObject<HTMLCanvasElement | null>
+) {
   _canvas = canvasRef.current;
+}
+
+function getCanvas() {
+  if (_canvas === null) {
+    throw new Error('_canvas is null.');
+  }
+
+  return _canvas;
 }
 
 function listenForWindowResize() {
@@ -51,8 +61,9 @@ function initStarField() {
 
 function spreadCanvas() {
   const { height, width } = getCoveredElementDimensions();
-  _canvas.height = height;
-  _canvas.width = width;
+  const canvas = getCanvas();
+  canvas.height = height;
+  canvas.width = width;
 }
 
 function getCoveredElementDimensions() {
@@ -77,12 +88,13 @@ function getCoveredElementDimensions() {
 
 function getNumberOfStars() {
   const SQUARE_PIXELS_PER_STAR = 2000;
-  const canvasArea = _canvas.width * _canvas.height;
+  const canvas = getCanvas();
+  const canvasArea = canvas.width * canvas.height;
   return canvasArea / SQUARE_PIXELS_PER_STAR;
 }
 
-function createStars(numberOfStars) {
-  const stars = [];
+function createStars(numberOfStars: number) {
+  const stars: Star[] = [];
 
   for (let i = 0; i < numberOfStars; i++) {
     const star = createStar();
@@ -92,12 +104,14 @@ function createStars(numberOfStars) {
   return stars;
 }
 
-function createStar() {
+function createStar(): Star {
+  const canvas = getCanvas();
+
   return {
     color: randomizeStarColor(),
     coordinates: {
-      x: randomizeStarCoordinate(_canvas.width),
-      y: randomizeStarCoordinate(_canvas.height),
+      x: randomizeStarCoordinate(canvas.width),
+      y: randomizeStarCoordinate(canvas.height),
     },
     size: randomizeStarSize(),
   };
@@ -122,7 +136,7 @@ function randomizeStarColorIndex() {
   return Math.floor(Math.random() * starColors.length);
 }
 
-function randomizeStarCoordinate(axisLength) {
+function randomizeStarCoordinate(axisLength: number) {
   return Math.floor(Math.random() * axisLength);
 }
 
@@ -131,7 +145,7 @@ function randomizeStarSize() {
   return Math.ceil(Math.random() * MAX_STAR_SIZE);
 }
 
-function drawFrame(stars) {
+function drawFrame(stars: readonly Star[]) {
   clearCanvas();
   drawStars(stars);
 
@@ -145,58 +159,73 @@ function drawFrame(stars) {
 }
 
 function clearCanvas() {
-  const context = _canvas.getContext('2d');
-  context.clearRect(0, 0, _canvas.width, _canvas.height);
+  const context = getContext();
+  const canvas = getCanvas();
+  context.clearRect(0, 0, canvas.width, canvas.height);
 }
 
-function drawStars(stars) {
-  const context = _canvas.getContext('2d');
+function drawStars(stars: readonly Star[]) {
+  const context = getContext();
   stars.forEach((star) => drawStar(star, context));
 }
 
-function drawStar({ color, coordinates, size }, context) {
+function getContext() {
+  const canvas = getCanvas();
+  const context = canvas.getContext('2d');
+
+  if (context === null) {
+    throw new Error('Could not get 2d context.');
+  }
+
+  return context;
+}
+
+function drawStar(star: Star, context: CanvasRenderingContext2D) {
+  const { color, coordinates, size } = star;
   context.fillStyle = getStarFillStyle(color);
   context.fillRect(coordinates.x, coordinates.y, size, size);
 }
 
-function getStarFillStyle({ hue, saturation, luminosity }) {
+function getStarFillStyle(color: Color) {
+  const { hue, luminosity, saturation } = color;
   return `hsl(${hue}, ${saturation}%, ${randomizeLuminosity(luminosity)}%)`;
 }
 
-function randomizeLuminosity(luminosity) {
+function randomizeLuminosity(luminosity: number) {
   return Math.floor(Math.random() * (luminosity + 1));
 }
 
 function drawShroud() {
-  const context = _canvas.getContext('2d');
+  const context = getContext();
+  const canvas = getCanvas();
 
   const topGradient = context.createLinearGradient(
-    0.5 * _canvas.width,
+    0.5 * canvas.width,
     0,
-    0.5 * _canvas.width,
+    0.5 * canvas.width,
     window.innerHeight
   );
   topGradient.addColorStop(0, 'rgba(0, 0, 0, 0)');
   topGradient.addColorStop(1, 'rgba(0, 0, 0, 1)');
 
   context.fillStyle = topGradient;
-  context.fillRect(0, 0, _canvas.width, window.innerHeight);
+  context.fillRect(0, 0, canvas.width, window.innerHeight);
 
-  if (_canvas.height > 2 * window.innerHeight) {
+  if (canvas.height > 2 * window.innerHeight) {
     context.fillStyle = 'black';
     context.fillRect(
       0,
       window.innerHeight,
-      _canvas.width,
-      _canvas.height - 2 * window.innerHeight
+      canvas.width,
+      canvas.height - 2 * window.innerHeight
     );
   }
 
   const bottomGradient = context.createLinearGradient(
-    0.5 * _canvas.width,
-    _canvas.height - window.innerHeight,
-    0.5 * _canvas.width,
-    _canvas.height
+    0.5 * canvas.width,
+    canvas.height - window.innerHeight,
+    0.5 * canvas.width,
+    canvas.height
   );
   bottomGradient.addColorStop(0, 'rgba(0, 0, 0, 1)');
   bottomGradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
@@ -204,12 +233,30 @@ function drawShroud() {
   context.fillStyle = bottomGradient;
   context.fillRect(
     0,
-    _canvas.height - window.innerHeight,
-    _canvas.width,
+    canvas.height - window.innerHeight,
+    canvas.width,
     window.innerHeight
   );
 }
 
-function animateStars(stars) {
+function animateStars(stars: readonly Star[]) {
   _animationRequestId = requestAnimationFrame(() => drawFrame(stars));
+}
+
+interface Color {
+  hue: number;
+  luminosity: number;
+  name: string;
+  saturation: number;
+}
+
+interface Star {
+  color: Color;
+  size: number;
+  coordinates: Coordinates;
+}
+
+interface Coordinates {
+  x: number;
+  y: number;
 }

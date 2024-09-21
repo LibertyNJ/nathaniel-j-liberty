@@ -6,7 +6,7 @@ import Icon from './Icon';
 import Props from './Props';
 
 export default function Button(props: Props) {
-  if (props.download) {
+  if ('href' in props) {
     return (
       <Container
         as={ExternalLink}
@@ -20,21 +20,7 @@ export default function Button(props: Props) {
     );
   }
 
-  if (props.href) {
-    return (
-      <Container
-        as={ExternalLink}
-        size={props.size}
-        href={props.href}
-        unlimitedWidth={props.unlimitedWidth}
-      >
-        {props.icon && <Icon icon={props.icon} />}
-        {props.children}
-      </Container>
-    );
-  }
-
-  if (props.to) {
+  if ('to' in props) {
     return (
       <Container
         as={Link}

@@ -1,11 +1,20 @@
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
-export default interface ButtonProps {
+export default ButtonProps;
+
+type ButtonProps = BaseButtonProps | ExternalLinkButtonProps | LinkButtonProps;
+
+interface BaseButtonProps {
   readonly children: React.ReactNode;
-  readonly download?: boolean;
-  readonly href?: string;
   readonly icon?: IconProp;
   readonly size: 'large' | 'medium' | 'small';
-  readonly to?: string;
   readonly unlimitedWidth?: boolean;
+}
+
+interface ExternalLinkButtonProps extends BaseButtonProps {
+  readonly href: string;
+}
+
+interface LinkButtonProps extends BaseButtonProps {
+  readonly to: string;
 }
