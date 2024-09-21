@@ -5,7 +5,7 @@ import SocialLinks from './SocialLinks';
 
 export default function LayoutFooter(props: Props) {
   return (
-    <Container backgroundIsOpaque={props.windowIsScrolled}>
+    <Container $backgroundIsOpaque={props.windowIsScrolled}>
       <SocialLinks />
       <Copyright
         currentYear={new Date().getFullYear()}

@@ -14,7 +14,7 @@ const VIEWPORT_COVER_TOP_ADJUSTMENT = '1px'; // Prevents gap between dropdown li
 export default styled.ul<Props>`
   background: ${color.black};
   height: calc(
-    100vh - ${(props) => props.topOffset}px +
+    100vh - ${(props) => props.$topOffset}px +
       ${VIEWPORT_COVER_HEIGHT_ADJUSTMENT}
   );
   left: 0;
@@ -23,20 +23,22 @@ export default styled.ul<Props>`
   opacity: 0;
   padding: calc(6 * ${baseline});
   position: absolute;
-  top: calc(${(props) => props.topOffset}px - ${VIEWPORT_COVER_TOP_ADJUSTMENT});
+  top: calc(
+    ${(props) => props.$topOffset}px - ${VIEWPORT_COVER_TOP_ADJUSTMENT}
+  );
   transition: opacity ${transition.duration};
   visibility: hidden;
   width: 100%;
 
   ${(props) =>
-    props.isVisiblyTransparent &&
+    props.$isVisiblyTransparent &&
     `
       opacity: 0;
       visibility: visible;
     `}
 
   ${(props) =>
-    props.isVisiblyOpaque &&
+    props.$isVisiblyOpaque &&
     `
       opacity: 1;
       visibility: visible;

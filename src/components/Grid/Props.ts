@@ -1,3 +1,3 @@
 export default interface GridProps {
-  readonly columns: number;
+  readonly $columns: number;
 }

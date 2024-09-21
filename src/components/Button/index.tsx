@@ -12,7 +12,7 @@ export default function Button(props: Props) {
         as={ExternalLink}
         href={props.href}
         size={props.size}
-        unlimitedWidth={props.unlimitedWidth}
+        $unlimitedWidth={props.unlimitedWidth}
       >
         {props.icon && <Icon icon={props.icon} />}
         {props.children}
@@ -26,7 +26,7 @@ export default function Button(props: Props) {
         as={Link}
         size={props.size}
         to={props.to}
-        unlimitedWidth={props.unlimitedWidth}
+        $unlimitedWidth={props.unlimitedWidth}
       >
         {props.icon && <Icon icon={props.icon} />}
         {props.children}
@@ -35,7 +35,7 @@ export default function Button(props: Props) {
   }
 
   return (
-    <Container size={props.size} unlimitedWidth={props.unlimitedWidth}>
+    <Container size={props.size} $unlimitedWidth={props.unlimitedWidth}>
       {props.icon && <Icon icon={props.icon} />}
       {props.children}
     </Container>

@@ -29,7 +29,7 @@ export default function LayoutHeader(props: Props) {
 
   return (
     <Container
-      backgroundIsOpaque={navListIsShown || props.windowIsScrolled}
+      $backgroundIsOpaque={navListIsShown || props.windowIsScrolled}
       id="page-header"
     >
       <Brand />

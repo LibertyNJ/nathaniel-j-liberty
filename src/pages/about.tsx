@@ -75,14 +75,14 @@ export default function AboutPage() {
 
   return (
     <Page breakpoints shroud title="About">
-      <Title centered>About</Title>
+      <Title $centered>About</Title>
       <GridContainer>
-        <GridItem column="1 / 2" row="1 / 2">
+        <GridItem $column="1 / 2" $row="1 / 2">
           <StyledImage
             alt={data.image.description}
             image={data.image.gatsbyImageData}
           />
-          <Grid columns={1}>
+          <Grid $columns={1}>
             <Button
                             href={'https://' + data.resume.file.url}
               icon="file-download"
@@ -106,7 +106,7 @@ export default function AboutPage() {
             </Button>
           </Grid>
         </GridItem>
-        <GridItem column="2 / 3" row="1 / 3">
+        <GridItem $column="2 / 3" $row="1 / 3">
           <TextContainer>
             <section>
               <h2>Profile</h2>

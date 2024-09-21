@@ -1,5 +1,5 @@
 export default interface NavListContainerProps {
-  readonly isVisiblyOpaque: boolean;
-  readonly isVisiblyTransparent: boolean;
-  readonly topOffset: number;
+  readonly $isVisiblyOpaque: boolean;
+  readonly $isVisiblyTransparent: boolean;
+  readonly $topOffset: number;
 }

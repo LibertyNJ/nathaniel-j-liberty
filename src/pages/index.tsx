@@ -15,7 +15,7 @@ export default function IndexPage() {
       <Lead>
         A stellar software engineer building things that are out of this world.
       </Lead>
-      <Grid columns={2}>
+      <Grid $columns={2}>
         <Button icon="satellite" size="large" to="/contact">
           Make contact
         </Button>

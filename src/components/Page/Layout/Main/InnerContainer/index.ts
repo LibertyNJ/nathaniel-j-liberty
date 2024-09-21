@@ -11,7 +11,7 @@ export default styled.div<Props>`
   max-width: 33rem;
 
   ${(props) =>
-    props.breakpoints &&
+    props.$breakpoints &&
     `
       width: 100%;
     
@@ -32,5 +32,5 @@ export default styled.div<Props>`
       }
     `}
 
-  ${(props) => props.unlimitedWidth && 'max-width: none;'}
+  ${(props) => props.$unlimitedWidth && 'max-width: none;'}
 `;

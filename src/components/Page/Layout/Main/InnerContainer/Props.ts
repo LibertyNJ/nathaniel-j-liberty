@@ -1,4 +1,4 @@
 export default interface PageLayoutMainInnerContainerProps {
-  readonly unlimitedWidth?: boolean;
-  readonly breakpoints?: boolean;
+  readonly $breakpoints?: boolean;
+  readonly $unlimitedWidth?: boolean;
 }

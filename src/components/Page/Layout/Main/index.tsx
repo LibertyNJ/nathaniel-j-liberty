@@ -6,8 +6,8 @@ export default function PageLayoutMain(props: Props) {
   return (
     <OuterContainer display={props.display}>
       <InnerContainer
-        breakpoints={props.breakpoints}
-        unlimitedWidth={props.unlimitedWidth}
+        $breakpoints={props.breakpoints}
+        $unlimitedWidth={props.unlimitedWidth}
       >
         {props.children}
       </InnerContainer>

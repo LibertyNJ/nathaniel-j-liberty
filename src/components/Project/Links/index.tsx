@@ -14,7 +14,7 @@ export default function ProjectLinks(props: Props) {
     </Button>
   ));
 
-  return <Grid columns={1}>{links}</Grid>;
+  return <Grid $columns={1}>{links}</Grid>;
 }
 
 function assignIcon(text: string) {

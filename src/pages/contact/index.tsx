@@ -8,7 +8,7 @@ import Title from '../../components/Title';
 export default function ContactPage() {
   return (
     <Page title="Contact">
-      <Title centered>Contact</Title>
+      <Title $centered>Contact</Title>
       <Lead>Let’s discover new frontiers together.</Lead>
       <Form
         action="/contact/success"

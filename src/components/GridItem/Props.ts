@@ -1,4 +1,4 @@
 export default interface GridItemProps {
-  readonly column: string;
-  readonly row: string;
+  readonly $column: string;
+  readonly $row: string;
 }

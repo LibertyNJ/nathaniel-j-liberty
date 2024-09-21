@@ -22,7 +22,7 @@ export default styled.button<Props>`
   transition: background ${transition.duration}, color ${transition.duration},
     filter ${transition.duration};
   white-space: nowrap;
-  ${(props) => props.unlimitedWidth && 'width: 100%;'}
+  ${(props) => props.$unlimitedWidth && 'width: 100%;'}
 
   &:focus {
     background: ${color.black};

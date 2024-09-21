@@ -10,7 +10,7 @@ import {
 import Props from './Props';
 
 export default styled.footer<Props>`
-  background: ${(props) => (props.backgroundIsOpaque ? color.black : 'none')};
+  background: ${(props) => (props.$backgroundIsOpaque ? color.black : 'none')};
   flex: initial;
   font-size: ${typography.fontSize.small.xs};
   justify-content: space-around;

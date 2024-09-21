@@ -1,3 +1,3 @@
 export default interface LayoutHeaderContainerProps {
-  readonly backgroundIsOpaque: boolean;
+  readonly $backgroundIsOpaque: boolean;
 }

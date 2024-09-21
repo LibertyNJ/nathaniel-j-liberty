@@ -71,7 +71,7 @@ export default function PastWorkPage() {
 
   return (
     <Page breakpoints shroud title="Projects">
-      <Title centered>Projects</Title>
+      <Title $centered>Projects</Title>
       <section>{projects}</section>
     </Page>
   );

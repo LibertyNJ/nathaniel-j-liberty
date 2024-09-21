@@ -1,3 +1,3 @@
 export default interface TitleProps {
-  readonly centered?: boolean;
+  readonly $centered?: boolean;
 }

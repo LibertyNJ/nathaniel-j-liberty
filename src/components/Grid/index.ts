@@ -9,6 +9,6 @@ export default styled.div<Props>`
   margin-bottom: calc(6 * ${baseline});
 
   @media (min-width: ${breakpoint.sm}) {
-    grid-template-columns: repeat(${(props) => props.columns}, 1fr);
+    grid-template-columns: repeat(${(props) => props.$columns}, 1fr);
   }
 `;

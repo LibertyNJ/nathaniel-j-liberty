@@ -4,7 +4,7 @@ import Props from './Props';
 
 export default function ProjectTechnologies(props: Props) {
   const listItems = props.technologies.map((technology) => (
-    <li>{technology}</li>
+    <li key={technology}>{technology}</li>
   ));
 
   return (

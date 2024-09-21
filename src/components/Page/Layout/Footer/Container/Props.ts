@@ -1,3 +1,3 @@
 export default interface LayoutFooterContainerProps {
-  readonly backgroundIsOpaque: boolean;
+  readonly $backgroundIsOpaque: boolean;
 }

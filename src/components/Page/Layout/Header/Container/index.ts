@@ -4,7 +4,7 @@ import { baseline, color, transition, typography } from '../../../../../style';
 import Props from './Props';
 
 export default styled.header<Props>`
-  background: ${(props) => (props.backgroundIsOpaque ? color.black : 'none')};
+  background: ${(props) => (props.$backgroundIsOpaque ? color.black : 'none')};
   display: flex;
   flex: initial;
   font-family: ${typography.font.monospace};

@@ -10,9 +10,9 @@ export default function LayoutHeaderNavList(props: Props) {
 
   return (
     <Container
-      isVisiblyOpaque={props.isShown}
-      isVisiblyTransparent={props.isHiding}
-      topOffset={headerHeight}
+      $isVisiblyOpaque={props.isShown}
+      $isVisiblyTransparent={props.isHiding}
+      $topOffset={headerHeight}
     >
       <NavItem to="/projects">Projects</NavItem>
       <NavItem to="/about">About</NavItem>
