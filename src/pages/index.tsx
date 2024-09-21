@@ -1,5 +1,3 @@
-import React from 'react';
-
 import Button from '../components/Button';
 import Grid from '../components/Grid';
 import Lead from '../components/Lead';

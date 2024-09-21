@@ -1,5 +1,4 @@
 import { graphql, useStaticQuery } from 'gatsby';
-import React from 'react';
 import Helmet from 'react-helmet';
 
 import Props from './Props';

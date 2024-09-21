@@ -1,5 +1,3 @@
-import React from 'react';
-
 import InnerContainer from './InnerContainer';
 import OuterContainer from './OuterContainer';
 import Props from './Props';

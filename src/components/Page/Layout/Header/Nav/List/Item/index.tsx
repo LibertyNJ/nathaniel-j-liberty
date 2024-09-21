@@ -1,5 +1,3 @@
-import React from 'react';
-
 import Container from './Container';
 import Link from './Link';
 import Props from './Props';

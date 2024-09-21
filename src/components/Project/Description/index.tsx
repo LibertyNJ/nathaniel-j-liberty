@@ -1,5 +1,4 @@
 import { renderRichText } from 'gatsby-source-contentful/rich-text';
-import React from 'react';
 
 import Container from './Container';
 import Props from './Props';

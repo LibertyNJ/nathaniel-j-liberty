@@ -1,5 +1,3 @@
-import React from 'react';
-
 import Button from '../components/Button';
 import Page from '../components/Page';
 import Lead from '../components/Lead';

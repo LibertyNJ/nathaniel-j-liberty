@@ -1,5 +1,3 @@
-import React from 'react';
-
 import Container from './Container';
 import Description from './Description';
 import Header from './Header';
