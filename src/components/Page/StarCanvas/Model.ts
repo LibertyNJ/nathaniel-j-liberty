@@ -34,8 +34,8 @@ export default class Model {
     }
   }
 
-  setShroud(shroud: Shroud | null) {
-    this.shroud = shroud;
+  update() {
+    this.stars.forEach((star) => star.update());
   }
 
   private expandHeight(canvas: Canvas) {

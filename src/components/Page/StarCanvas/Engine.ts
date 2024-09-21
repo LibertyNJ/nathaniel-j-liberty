@@ -7,14 +7,26 @@ export default class Engine {
     this.canvas = canvas;
     this.isAnimated = isAnimated;
     this.model = model;
+    this.updateIntervalId = null;
   }
 
   resize(coveredElementSelector: string) {
     this.canvas.resize(coveredElementSelector);
     this.model.resize(this.canvas);
+
+    if (!this.isAnimated) {
+      this.drawFrame();
+    }
   }
 
   start() {
+    if (this.isAnimated) {
+      this.updateIntervalId = window.setInterval(
+        () => this.model.update(),
+        UPDATE_INTERVAL
+      );
+    }
+
     this.processFrame();
   }
 
@@ -22,6 +34,11 @@ export default class Engine {
     if (this.animationRequestId !== null) {
       cancelAnimationFrame(this.animationRequestId);
       this.animationRequestId = null;
+    }
+
+    if (this.updateIntervalId) {
+      window.clearInterval(this.updateIntervalId);
+      this.updateIntervalId = null;
     }
   }
 
@@ -46,4 +63,9 @@ export default class Engine {
   private canvas: Canvas;
   private isAnimated: boolean;
   private model: Model;
+  private updateIntervalId: number | null;
 }
+
+const MS_PER_SECOND = 1_000;
+const UPDATES_PER_SECOND = 20;
+const UPDATE_INTERVAL = MS_PER_SECOND / UPDATES_PER_SECOND;

@@ -6,6 +6,7 @@ import Rectangle from './Rectangle';
 export default class Star {
   constructor(color: Color, position: Point, size: number) {
     this.color = color;
+    this.fillStyle = this.generateFillStyle();
     this.position = position;
     this.size = size;
   }
@@ -18,16 +19,21 @@ export default class Star {
   }
 
   draw(context: CanvasRenderingContext2D) {
-    context.fillStyle = this.getFillStyle();
+    context.fillStyle = this.fillStyle;
     context.fillRect(this.position.x, this.position.y, this.size, this.size);
   }
 
-  private getFillStyle() {
+  update() {
+    this.fillStyle = this.generateFillStyle();
+  }
+
+  private generateFillStyle() {
     const { hue, saturation, luminosity } = this.color;
     return `hsl(${hue}, ${saturation}%, ${randomizeLuminosity(luminosity)}%)`;
   }
 
   private readonly color: Readonly<Color>;
+  private fillStyle: string;
   private readonly position: Readonly<Point>;
   private readonly size: number;
 }
