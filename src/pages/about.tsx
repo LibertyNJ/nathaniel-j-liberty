@@ -15,6 +15,16 @@ import { baseline, borderThickness, breakpoint, color } from '../style';
 export default function AboutPage() {
   const data = useStaticQuery<StaticQueryData>(graphql`
     query {
+      allContentfulCertification(sort: { name: ASC }) {
+        edges {
+          node {
+            id
+            identifier
+            name
+            verificationUrl
+          }
+        }
+      }
       allContentfulTechnologyList(sort: { category: ASC }) {
         edges {
           node {
@@ -35,6 +45,18 @@ export default function AboutPage() {
       }
     }
   `);
+
+  const certifications = data.allContentfulCertification.edges.map((edge) => (
+    <li key={edge.node.id}>
+      <b>{edge.node.name}</b>
+      <br />
+      <span>{edge.node.identifier}</span>
+      <br />
+      <ExternalLink href={edge.node.verificationUrl}>
+        See verification
+      </ExternalLink>
+    </li>
+  ));
 
   const technologyLists = data.allContentfulTechnologyList.edges.map((edge) => {
     const technologies = edge.node.technologies.map((technology) => (
@@ -100,21 +122,7 @@ export default function AboutPage() {
             </section>
             <section>
               <h2>Certifications</h2>
-              <ul>
-                <li>
-                  <b>
-                    Arduino Fundamentals: Electronics and Physical Computing
-                  </b>
-                  <br />
-                  <span>
-                    Certificate ID: 850A10E0-8119-4A76-99DF-7EEACAA30ECE
-                  </span>
-                  <br />
-                  <ExternalLink href="https://create.arduino.cc/edu/courses/local/certification/certinfo.php?id=850a10e0-8119-4a76-99df-7eeacaa30ece">
-                    See verification
-                  </ExternalLink>
-                </li>
-              </ul>
+              <ul>{certifications}</ul>
             </section>
           </TextContainer>
         </GridItem>
@@ -128,6 +136,16 @@ export function Head() {
 }
 
 interface StaticQueryData {
+  readonly allContentfulCertification: {
+    readonly edges: readonly {
+      readonly node: {
+        readonly id: string;
+        readonly name: string;
+        readonly identifier: string;
+        readonly verificationUrl: string;
+      };
+    }[];
+  };
   readonly allContentfulTechnologyList: {
     readonly edges: readonly {
       readonly node: {
