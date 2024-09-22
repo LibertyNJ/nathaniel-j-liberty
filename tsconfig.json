@@ -11,8 +11,5 @@
     "strict": true,
     "target": "ESNext"
   },
-  "include": [
-    "./src/**/*",
-    "./gatsby-config.ts",
-  ]
+  "include": ["./src/**/*", "./gatsby-config.ts"]
 }
