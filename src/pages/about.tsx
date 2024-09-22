@@ -112,13 +112,13 @@ export default function AboutPage() {
             <section>
               <h2>Profile</h2>
               <p>
-                As a data analyst with a passion for technology, I pursued
-                programming out of a personal drive to push the boundaries of
-                what’s possible. I enjoy using my self-taught talents to create
-                applications, websites, and games that delight others and make
-                every day easier.
+                As a person with a passion for technology, I pursued programming
+                from a drive to push the boundaries of what’s possible in my own
+                life. I enjoy sharing my talents with others to create
+                applications, websites, and games that delight and make every
+                day better.
               </p>
-              <p>I’m also very much inspired by space.</p>
+              <p>I’m very much inspired by space exploration and robotics.</p>
             </section>
             <section>
               <h2>Technologies</h2>
