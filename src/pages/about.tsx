@@ -12,53 +12,6 @@ import Seo from '../components/Seo';
 import Title from '../components/Title';
 import { baseline, borderThickness, breakpoint, color } from '../style';
 
-const GridContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  width: 100%;
-
-  @media (min-width: ${breakpoint.md}) {
-    column-gap: calc(12 * ${baseline});
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    grid-template-rows: auto auto;
-  }
-`;
-
-const StyledImage = styled(GatsbyImage)`
-  border: ${borderThickness} solid ${color.white};
-  border-radius: 50%;
-  margin-bottom: calc(6 * ${baseline});
-  width: 100%;
-`;
-
-const TechnologyColumns = styled.div`
-  columns: 2;
-  margin-bottom: calc(6 * ${baseline});
-
-  @media (min-width: ${breakpoint.md}) {
-    columns: 3;
-  }
-`;
-
-const TextContainer = styled.div`
-  margin: 0 auto;
-  max-width: 33rem;
-`;
-
-interface StaticQueryData {
-  readonly image: {
-    readonly gatsbyImageData: IGatsbyImageData;
-    readonly description: string;
-  };
-  readonly resume: {
-    readonly file: {
-      readonly url: string;
-    };
-  };
-}
-
 export default function AboutPage() {
   const data = useStaticQuery<StaticQueryData>(graphql`
     query {
@@ -190,3 +143,50 @@ export default function AboutPage() {
 export function Head() {
   return <Seo title="About" />;
 }
+
+interface StaticQueryData {
+  readonly image: {
+    readonly gatsbyImageData: IGatsbyImageData;
+    readonly description: string;
+  };
+  readonly resume: {
+    readonly file: {
+      readonly url: string;
+    };
+  };
+}
+
+const GridContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+
+  @media (min-width: ${breakpoint.md}) {
+    column-gap: calc(12 * ${baseline});
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-template-rows: auto auto;
+  }
+`;
+
+const StyledImage = styled(GatsbyImage)`
+  border: ${borderThickness} solid ${color.white};
+  border-radius: 50%;
+  margin-bottom: calc(6 * ${baseline});
+  width: 100%;
+`;
+
+const TechnologyColumns = styled.div`
+  columns: 2;
+  margin-bottom: calc(6 * ${baseline});
+
+  @media (min-width: ${breakpoint.md}) {
+    columns: 3;
+  }
+`;
+
+const TextContainer = styled.div`
+  margin: 0 auto;
+  max-width: 33rem;
+`;

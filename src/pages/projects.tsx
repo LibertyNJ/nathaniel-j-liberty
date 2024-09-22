@@ -6,25 +6,6 @@ import Project from '../components/Project';
 import Seo from '../components/Seo';
 import Title from '../components/Title';
 
-interface StaticQueryData {
-  readonly allContentfulProject: {
-    readonly edges: {
-      readonly node: {
-        readonly description: { readonly raw: string };
-        readonly id: string;
-        readonly image: {
-          readonly description: string;
-          readonly gatsbyImageData: IGatsbyImageData;
-        };
-        readonly links: { readonly text: string; readonly url: string }[];
-        readonly subtitle?: string;
-        readonly technologies: string[];
-        readonly title: string;
-      };
-    }[];
-  };
-}
-
 export default function PastWorkPage() {
   const data = useStaticQuery<StaticQueryData>(graphql`
     query {
@@ -80,4 +61,26 @@ export default function PastWorkPage() {
 
 export function Head() {
   return <Seo title="Projects" />;
+}
+
+interface StaticQueryData {
+  readonly allContentfulProject: {
+    readonly edges: {
+      readonly node: {
+        readonly description: { readonly raw: string };
+        readonly id: string;
+        readonly image: {
+          readonly description: string;
+          readonly gatsbyImageData: IGatsbyImageData;
+        };
+        readonly links: readonly {
+          readonly text: string;
+          readonly url: string;
+        }[];
+        readonly subtitle?: string;
+        readonly technologies: readonly string[];
+        readonly title: string;
+      };
+    }[];
+  };
 }

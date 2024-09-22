@@ -1,3 +1,3 @@
 export default interface ProjectTechnologiesProps {
-  readonly technologies: string[];
+  readonly technologies: readonly string[];
 }

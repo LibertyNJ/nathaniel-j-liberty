@@ -8,11 +8,11 @@ export default interface ProjectProps {
     readonly alt: string;
     readonly gatsbyImageData: IGatsbyImageData;
   };
-  readonly links: {
+  readonly links: readonly {
     readonly href: string;
     readonly text: string;
   }[];
   readonly subtitle: string;
-  readonly technologies: string[];
+  readonly technologies: readonly string[];
   readonly title: string;
 }
