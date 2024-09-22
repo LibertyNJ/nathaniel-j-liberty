@@ -16,12 +16,15 @@ export default function IndexPage() {
       <Lead>
         A stellar software engineer building things that are out of this world.
       </Lead>
-      <Grid $columns={2}>
-        <Button icon="satellite" size="large" to="/contact">
-          Make contact
+      <Grid $columns={1}>
+        <Button icon="user-astronaut" size="large" to="/about">
+          Learn more
         </Button>
         <Button icon="rocket" size="large" to="/projects">
           Explore work
+        </Button>
+        <Button icon="satellite" size="large" to="/contact">
+          Make contact
         </Button>
       </Grid>
     </Page>
