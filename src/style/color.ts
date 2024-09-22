@@ -1,5 +1,6 @@
 const BLACK = '#000';
 const DARK_GRAY = '#333';
+const MEDIUM_GRAY = '#808080';
 const LIGHT_GRAY = '#ccc';
 const WHITE = '#fff';
 
@@ -18,17 +19,20 @@ export const color = {
   gitHub,
   lightGray: LIGHT_GRAY,
   linkedIn,
+  mediumGray: MEDIUM_GRAY,
   white: WHITE,
 };
 
 export const darkTheme = {
   base: BLACK,
   contrast: WHITE,
+  hover: MEDIUM_GRAY,
 };
 
 export const lightTheme = {
   base: WHITE,
   contrast: BLACK,
+  hover: MEDIUM_GRAY,
 };
 
 export function getColorScheme(): ColorScheme {

@@ -25,7 +25,7 @@ export default styled(ExternalLink)<Props>`
   }
 
   &:hover {
-    color: ${(props) => props.hoverColor ?? props.theme.contrast};
+    color: ${(props) => props.hoverColor ?? props.theme.hover};
   }
 
   @media (min-width: ${breakpoint.md}) {
