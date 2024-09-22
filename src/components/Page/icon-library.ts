@@ -1,6 +1,7 @@
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons';
 import {
+  faArrowUpRightFromSquare,
   faBars,
   faDesktop,
   faDownload,
@@ -15,6 +16,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 export default library.add(
+  faArrowUpRightFromSquare,
   faBars,
   faDesktop,
   faDownload,
@@ -27,5 +29,5 @@ export default library.add(
   faSatellite,
   faSatelliteDish,
   faTimes,
-  faUserAstronaut,
+  faUserAstronaut
 );

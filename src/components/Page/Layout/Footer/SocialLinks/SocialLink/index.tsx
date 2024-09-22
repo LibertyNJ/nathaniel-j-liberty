@@ -5,7 +5,7 @@ import Props from './Props';
 
 export default function LayoutFooterSocialLink(props: Props) {
   return (
-    <Container hoverColor={props.hoverColor} href={props.href}>
+    <Container hideIcon hoverColor={props.hoverColor} href={props.href}>
       <FontAwesomeIcon icon={props.icon} />
     </Container>
   );

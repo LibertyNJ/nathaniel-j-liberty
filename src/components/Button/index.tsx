@@ -2,8 +2,8 @@ import { Link } from 'gatsby';
 
 import ExternalLink from '../ExternalLink';
 import Container from './Container';
-import Icon from './Icon';
 import Props from './Props';
+import Icon from '../Icon';
 
 export default function Button(props: Props) {
   if ('href' in props) {
@@ -14,7 +14,7 @@ export default function Button(props: Props) {
         size={props.size}
         $unlimitedWidth={props.unlimitedWidth}
       >
-        {props.icon && <Icon icon={props.icon} />}
+        {props.icon && <Icon icon={props.icon} $marginRight />}
         {props.children}
       </Container>
     );
@@ -28,7 +28,7 @@ export default function Button(props: Props) {
         to={props.to}
         $unlimitedWidth={props.unlimitedWidth}
       >
-        {props.icon && <Icon icon={props.icon} />}
+        {props.icon && <Icon icon={props.icon} $marginRight />}
         {props.children}
       </Container>
     );
@@ -36,7 +36,7 @@ export default function Button(props: Props) {
 
   return (
     <Container size={props.size} $unlimitedWidth={props.unlimitedWidth}>
-      {props.icon && <Icon icon={props.icon} />}
+      {props.icon && <Icon icon={props.icon} $marginRight />}
       {props.children}
     </Container>
   );
