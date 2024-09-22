@@ -65,7 +65,7 @@ export function Head() {
 
 interface StaticQueryData {
   readonly allContentfulProject: {
-    readonly edges: {
+    readonly edges: readonly {
       readonly node: {
         readonly description: { readonly raw: string };
         readonly id: string;

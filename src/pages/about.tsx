@@ -15,6 +15,15 @@ import { baseline, borderThickness, breakpoint, color } from '../style';
 export default function AboutPage() {
   const data = useStaticQuery<StaticQueryData>(graphql`
     query {
+      allContentfulTechnologyList(sort: { category: ASC }) {
+        edges {
+          node {
+            id
+            category
+            technologies
+          }
+        }
+      }
       image: contentfulAsset(title: { eq: "Nathaniel J. Liberty Image" }) {
         gatsbyImageData(layout: CONSTRAINED)
         description
@@ -26,6 +35,18 @@ export default function AboutPage() {
       }
     }
   `);
+
+  const technologyLists = data.allContentfulTechnologyList.edges.map((edge) => {
+    const technologies = edge.node.technologies.map((technology) => (
+      <li key={technology}>{technology}</li>
+    ));
+
+    return (
+      <HeadedList heading={edge.node.category} key={edge.node.id}>
+        {technologies}
+      </HeadedList>
+    );
+  });
 
   return (
     <Page breakpoints shroud>
@@ -75,45 +96,7 @@ export default function AboutPage() {
             </section>
             <section>
               <h2>Technologies</h2>
-              <TechnologyColumns>
-                <HeadedList heading="C++">
-                  <li>Arduino</li>
-                  <li>CMake</li>
-                  <li>Google Test</li>
-                </HeadedList>
-                <HeadedList heading="JavaScript / TypeScript">
-                  <li>Babel</li>
-                  <li>Bootstrap</li>
-                  <li>Electron</li>
-                  <li>Express</li>
-                  <li>Gatsby</li>
-                  <li>Jest</li>
-                  <li>NodeJS</li>
-                  <li>NPM</li>
-                  <li>Puppeteer</li>
-                  <li>React</li>
-                  <li>React Native</li>
-                  <li>Redux</li>
-                  <li>Sequelize</li>
-                  <li>Styled Components</li>
-                  <li>Webpack</li>
-                </HeadedList>
-                <HeadedList heading="Databases">
-                  <li>MongoDB</li>
-                  <li>PostgreSQL</li>
-                  <li>SQLite</li>
-                  <li>SQL Server</li>
-                </HeadedList>
-                <HeadedList heading="Platforms">
-                  <li>Contentful</li>
-                  <li>Expo</li>
-                  <li>Heroku</li>
-                  <li>Netlify</li>
-                </HeadedList>
-                <HeadedList heading="Tools">
-                  <li>Git</li>
-                </HeadedList>
-              </TechnologyColumns>
+              <TechnologyColumns>{technologyLists}</TechnologyColumns>
             </section>
             <section>
               <h2>Certifications</h2>
@@ -145,6 +128,15 @@ export function Head() {
 }
 
 interface StaticQueryData {
+  readonly allContentfulTechnologyList: {
+    readonly edges: readonly {
+      readonly node: {
+        readonly id: string;
+        readonly category: string;
+        readonly technologies: readonly string[];
+      };
+    }[];
+  };
   readonly image: {
     readonly gatsbyImageData: IGatsbyImageData;
     readonly description: string;
