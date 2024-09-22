@@ -14,8 +14,8 @@
     "clean": "gatsby clean",
     "develop": "gatsby develop -H 0.0.0.0 -o",
     "format": "prettier --write \"**/*.{ts,tsx,json,md}\"",
-    "start": "npm run develop",
     "serve": "gatsby serve -H 0.0.0.0 -o",
+    "start": "npm run develop",
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
