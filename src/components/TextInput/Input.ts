@@ -19,7 +19,8 @@ export default styled.input`
   transition: filter ${transition.duration};
 
   &:focus {
-    filter: drop-shadow(0 0 5px ${(props) => props.theme.contrast});
+    filter: drop-shadow(0 0 5px ${(props) => props.theme.contrast})
+      drop-shadow(0 0 10px ${(props) => props.theme.contrast});
   }
 
   @media (min-width: ${breakpoint.md}) {

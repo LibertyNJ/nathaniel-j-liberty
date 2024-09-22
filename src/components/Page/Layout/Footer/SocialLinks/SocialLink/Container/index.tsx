@@ -15,10 +15,13 @@ export default styled(ExternalLink)<Props>`
   font-size: ${typography.fontSize.h4.xs};
   line-height: ${typography.lineHeight.h4.xs};
   margin: 0 calc(6 * ${baseline});
-  transition: color ${transition.duration}, filter ${transition.duration};
+  transition:
+    color ${transition.duration},
+    filter ${transition.duration};
 
   &:focus {
-    filter: drop-shadow(0 0 10px ${(props) => props.theme.contrast});
+    filter: drop-shadow(0 0 5px ${(props) => props.theme.contrast})
+      drop-shadow(0 0 10px ${(props) => props.theme.contrast});
   }
 
   &:hover {
