@@ -4,23 +4,22 @@ import {
   baseline,
   borderThickness,
   breakpoint,
-  color,
   transition,
   typography,
 } from '../../style';
 
 export default styled.textarea`
-  background: ${color.black};
-  border: ${borderThickness} solid ${color.white};
+  background: ${(props) => props.theme.base};
+  border: ${borderThickness} solid ${(props) => props.theme.contrast};
   border-radius: ${baseline};
-  color: ${color.white};
+  color: ${(props) => props.theme.contrast};
   font-size: ${typography.fontSize.body.xs};
   line-height: ${typography.lineHeight.body.xs};
   padding: calc(3 * ${baseline} - ${borderThickness});
   transition: filter ${transition.duration};
 
   &:focus {
-    filter: drop-shadow(0 0 5px ${color.white});
+    filter: drop-shadow(0 0 5px ${(props) => props.theme.contrast});
   }
 
   @media (min-width: ${breakpoint.md}) {

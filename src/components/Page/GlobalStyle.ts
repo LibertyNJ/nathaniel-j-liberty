@@ -1,7 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
 import styledNormalize from 'styled-normalize';
 
-import { baseline, breakpoint, color, typography } from '../../style';
+import { baseline, breakpoint, typography } from '../../style';
 
 export default createGlobalStyle`
   ${styledNormalize}
@@ -62,8 +62,8 @@ export default createGlobalStyle`
   }
   
   html {
-    background: ${color.black};
-    color: ${color.white};
+    background: ${(props) => props.theme.base};
+    color: ${(props) => props.theme.contrast};
     font-family: ${typography.font.sansSerif};
     font-size: 100%;
     overflow-x: hidden;

@@ -1,8 +1,10 @@
+import { ColorScheme } from '../../../style/color';
 import Canvas from './Canvas';
 
 export default class Shroud {
-  constructor() {
+  constructor(colorScheme: ColorScheme) {
     this.bottomGradient = null;
+    this.colorScheme = colorScheme;
     this.topGradient = null;
   }
 
@@ -17,14 +19,16 @@ export default class Shroud {
   }
 
   resize(canvas: Canvas) {
+    const color = this.colorScheme === 'dark' ? '0, 0, 0' : '255, 255, 255';
+
     this.topGradient = canvas.context.createLinearGradient(
       0.5 * canvas.width,
       0,
       0.5 * canvas.width,
       window.innerHeight
     );
-    this.topGradient.addColorStop(0.0, 'rgba(0, 0, 0, 0)');
-    this.topGradient.addColorStop(1.0, 'rgba(0, 0, 0, 1)');
+    this.topGradient.addColorStop(0.0, `rgba(${color}, 0)`);
+    this.topGradient.addColorStop(1.0, `rgba(${color}, 1)`);
 
     this.bottomGradient = canvas.context.createLinearGradient(
       0.5 * canvas.width,
@@ -32,8 +36,8 @@ export default class Shroud {
       0.5 * canvas.width,
       canvas.height
     );
-    this.bottomGradient.addColorStop(0.0, 'rgba(0, 0, 0, 1)');
-    this.bottomGradient.addColorStop(1.0, 'rgba(0, 0, 0, 0)');
+    this.bottomGradient.addColorStop(0.0, `rgba(${color}, 1)`);
+    this.bottomGradient.addColorStop(1.0, `rgba(${color}, 0)`);
   }
 
   private drawBottomSection(canvas: Canvas) {
@@ -49,7 +53,7 @@ export default class Shroud {
   }
 
   private drawMidSection(canvas: Canvas) {
-    canvas.context.fillStyle = 'black';
+    canvas.context.fillStyle = this.colorScheme === 'dark' ? 'black' : 'white';
     canvas.context.fillRect(
       0,
       window.innerHeight,
@@ -66,5 +70,6 @@ export default class Shroud {
   }
 
   private bottomGradient: CanvasGradient | null;
+  private colorScheme: ColorScheme;
   private topGradient: CanvasGradient | null;
 }

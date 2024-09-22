@@ -20,3 +20,21 @@ export const color = {
   linkedIn,
   white: WHITE,
 };
+
+export const darkTheme = {
+  base: BLACK,
+  contrast: WHITE,
+};
+
+export const lightTheme = {
+  base: WHITE,
+  contrast: BLACK,
+};
+
+export function getColorScheme(): ColorScheme {
+  return window.matchMedia('(prefers-color-scheme: light)').matches
+    ? 'light'
+    : 'dark';
+}
+
+export type ColorScheme = 'dark' | 'light';

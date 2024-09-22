@@ -1,18 +1,13 @@
 import styled from 'styled-components';
 
-import {
-  baseline,
-  breakpoint,
-  color,
-  transition,
-} from '../../../../../../../style';
+import { baseline, breakpoint, transition } from '../../../../../../../style';
 import Props from './Props';
 
 const VIEWPORT_COVER_HEIGHT_ADJUSTMENT = '2px'; // Prevents gap between dropdown list and viewport bottom
 const VIEWPORT_COVER_TOP_ADJUSTMENT = '1px'; // Prevents gap between dropdown list and navbar
 
 export default styled.ul<Props>`
-  background: ${color.black};
+  background: ${(props) => props.theme.base};
   height: calc(
     100vh - ${(props) => props.$topOffset}px +
       ${VIEWPORT_COVER_HEIGHT_ADJUSTMENT}

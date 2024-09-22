@@ -3,14 +3,14 @@ import styled from 'styled-components';
 import {
   baseline,
   breakpoint,
-  color,
   transition,
   typography,
 } from '../../../../../style';
 import Props from './Props';
 
 export default styled.footer<Props>`
-  background: ${(props) => (props.$backgroundIsOpaque ? color.black : 'none')};
+  background: ${(props) =>
+    props.$backgroundIsOpaque ? props.theme.base : 'none'};
   flex: initial;
   font-size: ${typography.fontSize.small.xs};
   justify-content: space-around;

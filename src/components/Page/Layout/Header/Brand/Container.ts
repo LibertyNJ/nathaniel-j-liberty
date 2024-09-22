@@ -1,7 +1,7 @@
 import { Link } from 'gatsby';
 import styled from 'styled-components';
 
-import { baseline, color, transition, typography } from '../../../../../style';
+import { baseline, transition, typography } from '../../../../../style';
 
 export default styled(Link)`
   font-size: ${typography.fontSize.h5.xs};
@@ -12,7 +12,7 @@ export default styled(Link)`
   transition: filter ${transition.duration};
 
   &:focus {
-    filter: drop-shadow(0 0 10px ${color.white});
+    filter: drop-shadow(0 0 10px ${(props) => props.theme.contrast});
   }
 
   &:hover {

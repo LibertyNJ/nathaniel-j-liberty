@@ -4,7 +4,6 @@ import {
   baseline,
   borderThickness,
   breakpoint,
-  color,
   transition,
   typography,
 } from '../../../style';
@@ -12,26 +11,28 @@ import Props from './Props';
 
 export default styled.button<Props>`
   background: none;
-  border: ${borderThickness} solid ${color.white};
+  border: ${borderThickness} solid ${(props) => props.theme.contrast};
   border-radius: ${baseline};
-  color: ${color.white};
+  color: ${(props) => props.theme.contrast};
   display: block;
   font-family: ${typography.font.monospace};
   text-align: center;
   text-decoration: none;
-  transition: background ${transition.duration}, color ${transition.duration},
+  transition:
+    background ${transition.duration},
+    color ${transition.duration},
     filter ${transition.duration};
   white-space: nowrap;
   ${(props) => props.$unlimitedWidth && 'width: 100%;'}
 
   &:focus {
-    background: ${color.black};
-    filter: drop-shadow(0 0 5px ${color.white});
+    background: ${(props) => props.theme.base};
+    filter: drop-shadow(0 0 5px ${(props) => props.theme.contrast});
   }
 
   &:hover {
-    background: ${color.white};
-    color: ${color.black};
+    background: ${(props) => props.theme.contrast};
+    color: ${(props) => props.theme.base};
     cursor: pointer;
   }
 

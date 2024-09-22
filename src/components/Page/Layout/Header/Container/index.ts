@@ -1,10 +1,11 @@
 import styled from 'styled-components';
 
-import { baseline, color, transition, typography } from '../../../../../style';
+import { baseline, transition, typography } from '../../../../../style';
 import Props from './Props';
 
 export default styled.header<Props>`
-  background: ${(props) => (props.$backgroundIsOpaque ? color.black : 'none')};
+  background: ${(props) =>
+    props.$backgroundIsOpaque ? props.theme.base : 'none'};
   display: flex;
   flex: initial;
   font-family: ${typography.font.monospace};

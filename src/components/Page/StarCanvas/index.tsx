@@ -8,17 +8,17 @@ import Props from './Props';
 import Shroud from './Shroud';
 
 export default function StarCanvas(props: Props) {
-  const { coveredElementSelector } = props;
+  const { colorScheme, coveredElementSelector } = props;
   const shroud = props.shroud ?? false;
   const twinkle = props.twinkle ?? false;
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const canvas = new Canvas(canvasRef);
-  const model = new Model(shroud ? new Shroud() : null);
+  const model = new Model(shroud ? new Shroud(colorScheme) : null);
   const engine = new Engine(canvas, twinkle, model);
 
   useEffect(
     () => initialize(coveredElementSelector, engine),
-    [coveredElementSelector, shroud, twinkle]
+    [colorScheme, coveredElementSelector, shroud, twinkle]
   );
 
   return <Container ref={canvasRef} />;

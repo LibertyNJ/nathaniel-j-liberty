@@ -5,7 +5,6 @@ import {
   baseline,
   borderThickness,
   breakpoint,
-  color,
   transition,
 } from '../../../../../../../style';
 
@@ -14,22 +13,24 @@ export default styled(Link)`
   border-radius: ${baseline};
   display: block;
   padding: calc(6 * ${baseline});
-  transition: background ${transition.duration}, color ${transition.duration},
+  transition:
+    background ${transition.duration},
+    color ${transition.duration},
     filter ${transition.duration};
 
   &:focus {
-    background: ${color.black};
-    filter: drop-shadow(0 0 5px ${color.white});
+    background: ${(props) => props.theme.base};
+    filter: drop-shadow(0 0 5px ${(props) => props.theme.contrast});
   }
 
   &:hover {
-    background: ${color.white};
-    color: ${color.black};
+    background: ${(props) => props.theme.contrast};
+    color: ${(props) => props.theme.base};
   }
 
   &:active,
   &.active {
-    border: ${borderThickness} ${color.white} solid;
+    border: ${borderThickness} ${(props) => props.theme.contrast} solid;
     padding: calc(6 * ${baseline} - ${borderThickness});
   }
 

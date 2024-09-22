@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import {
   baseline,
   breakpoint,
-  color,
   transition,
   typography,
 } from '../../../../../../style';
@@ -11,7 +10,7 @@ import {
 export default styled.button`
   background: none;
   border: none;
-  color: ${color.white};
+  color: ${(props) => props.theme.contrast};
   font-size: ${typography.fontSize.h1.xs};
   line-height: ${typography.lineHeight.h1.xs};
   margin-left: auto;
@@ -20,7 +19,7 @@ export default styled.button`
   width: ${typography.fontSize.h1.xs};
 
   &:focus {
-    filter: drop-shadow(0 0 10px ${color.white});
+    filter: drop-shadow(0 0 10px ${(props) => props.theme.contrast});
   }
 
   :&hover {
