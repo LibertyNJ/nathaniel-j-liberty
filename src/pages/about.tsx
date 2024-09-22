@@ -46,29 +46,33 @@ export default function AboutPage() {
     }
   `);
 
-  const certifications = data.allContentfulCertification.edges.map((edge) => (
-    <li key={edge.node.id}>
-      <b>{edge.node.name}</b>
-      <br />
-      <span>{edge.node.identifier}</span>
-      <br />
-      <ExternalLink href={edge.node.verificationUrl}>
-        See verification
-      </ExternalLink>
-    </li>
-  ));
+  const certifications = data.allContentfulCertification.edges.map(
+    ({ node }) => (
+      <li key={node.id}>
+        <b>{node.name}</b>
+        <br />
+        <span>{node.identifier}</span>
+        <br />
+        <ExternalLink href={node.verificationUrl}>
+          See verification
+        </ExternalLink>
+      </li>
+    )
+  );
 
-  const technologyLists = data.allContentfulTechnologyList.edges.map((edge) => {
-    const technologies = edge.node.technologies.map((technology) => (
-      <li key={technology}>{technology}</li>
-    ));
+  const technologyLists = data.allContentfulTechnologyList.edges.map(
+    ({ node }) => {
+      const technologies = node.technologies.map((technology) => (
+        <li key={technology}>{technology}</li>
+      ));
 
-    return (
-      <HeadedList heading={edge.node.category} key={edge.node.id}>
-        {technologies}
-      </HeadedList>
-    );
-  });
+      return (
+        <HeadedList heading={node.category} key={node.id}>
+          {technologies}
+        </HeadedList>
+      );
+    }
+  );
 
   return (
     <Page breakpoints shroud>

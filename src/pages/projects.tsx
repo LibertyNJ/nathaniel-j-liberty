@@ -33,21 +33,21 @@ export default function PastWorkPage() {
     }
   `);
 
-  const projects = data.allContentfulProject.edges.map((edge) => (
+  const projects = data.allContentfulProject.edges.map(({ node }) => (
     <Project
-      description={edge.node.description}
+      description={node.description}
       image={{
-        alt: edge.node.image.description,
-        gatsbyImageData: edge.node.image.gatsbyImageData,
+        alt: node.image.description,
+        gatsbyImageData: node.image.gatsbyImageData,
       }}
-      key={edge.node.id}
-      links={edge.node.links.map((link) => ({
+      key={node.id}
+      links={node.links.map((link) => ({
         href: link.url,
         text: link.text,
       }))}
-      subtitle={edge.node.subtitle ?? ''}
-      technologies={edge.node.technologies}
-      title={edge.node.title}
+      subtitle={node.subtitle ?? ''}
+      technologies={node.technologies}
+      title={node.title}
     />
   ));
 
