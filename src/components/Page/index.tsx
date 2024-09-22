@@ -7,12 +7,7 @@ import './icon-library';
 import Layout from './Layout';
 import Props from './Props';
 import StarCanvas from './StarCanvas';
-import {
-  ColorScheme,
-  darkTheme,
-  getColorScheme,
-  lightTheme,
-} from '../../style/color';
+import { ColorScheme, darkTheme, lightTheme } from '../../style/color';
 import { ThemeProvider } from 'styled-components';
 
 fontAwesomeConfig.autoAddCss = false;
@@ -40,6 +35,13 @@ export default function Page(props: Props) {
       </Layout>
     </ThemeProvider>
   );
+}
+
+function getColorScheme(): ColorScheme {
+  return typeof window !== 'undefined' &&
+    window.matchMedia('(prefers-color-scheme: light)').matches
+    ? 'light'
+    : 'dark';
 }
 
 function listenForColorSchemeChanges(

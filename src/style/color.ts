@@ -39,10 +39,4 @@ export const lightTheme = {
   hover: GRAY,
 };
 
-export function getColorScheme(): ColorScheme {
-  return window.matchMedia('(prefers-color-scheme: light)').matches
-    ? 'light'
-    : 'dark';
-}
-
 export type ColorScheme = 'dark' | 'light';
