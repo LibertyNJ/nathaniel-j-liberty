@@ -12,8 +12,8 @@ export default styled(Link)`
   transition: filter ${transition.duration};
 
   &:focus {
-    filter: drop-shadow(0 0 5px ${(props) => props.theme.contrast})
-      drop-shadow(0 0 10px ${(props) => props.theme.contrast});
+    filter: drop-shadow(0 0 5px var(--color-contrast))
+      drop-shadow(0 0 10px var(--color-contrast));
   }
 
   &:hover {

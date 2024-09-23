@@ -1,4 +1,4 @@
-import { getRandomNumber } from '../../../utils';
+import { getRandomNumber } from '../../../utils/getRandomNumber';
 import Rectangle from './Rectangle';
 
 export default class Point {

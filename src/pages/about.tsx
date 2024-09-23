@@ -185,7 +185,7 @@ const GridContainer = styled.div`
 `;
 
 const StyledImage = styled(GatsbyImage)`
-  border: ${borderThickness} solid ${(props) => props.theme.contrast};
+  border: ${borderThickness} solid var(--color-contrast);
   border-radius: 50%;
   margin-bottom: calc(6 * ${baseline});
   width: 100%;

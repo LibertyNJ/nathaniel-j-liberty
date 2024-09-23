@@ -11,9 +11,9 @@ import Props from './Props';
 
 export default styled.button<Props>`
   background: none;
-  border: ${borderThickness} solid ${(props) => props.theme.contrast};
+  border: ${borderThickness} solid var(--color-contrast);
   border-radius: ${baseline};
-  color: ${(props) => props.theme.contrast};
+  color: var(--color-contrast);
   display: block;
   font-family: ${typography.font.monospace};
   text-align: center;
@@ -26,14 +26,14 @@ export default styled.button<Props>`
   ${(props) => props.$unlimitedWidth && 'width: 100%;'}
 
   &:focus {
-    background: ${(props) => props.theme.base};
-    filter: drop-shadow(0 0 5px ${(props) => props.theme.contrast})
-      drop-shadow(0 0 10px ${(props) => props.theme.contrast});
+    background: var(--color-base);
+    filter: drop-shadow(0 0 5px var(--color-contrast))
+      drop-shadow(0 0 10px var(--color-contrast));
   }
 
   &:hover {
-    background: ${(props) => props.theme.contrast};
-    color: ${(props) => props.theme.base};
+    background: var(--color-contrast);
+    color: var(--color-base);
     cursor: pointer;
   }
 

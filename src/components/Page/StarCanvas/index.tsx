@@ -1,37 +1,51 @@
-import { useEffect, useRef } from 'react';
+import { MutableRefObject, useEffect, useRef } from 'react';
 
-import Canvas from './Canvas';
 import Container from './Container';
 import Engine from './Engine';
-import Model from './Model';
 import Props from './Props';
-import Shroud from './Shroud';
+import { ColorScheme } from '../../../style/color';
 
 export default function StarCanvas(props: Props) {
   const { colorScheme, coveredElementSelector } = props;
   const shroud = props.shroud ?? false;
   const twinkle = props.twinkle ?? false;
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const canvas = new Canvas(canvasRef);
-  const model = new Model(shroud ? new Shroud(colorScheme) : null);
-  const engine = new Engine(canvas, twinkle, model);
+  const engineRef = useRef(new Engine(canvasRef));
+  engineRef.current.setIsAnimated(twinkle);
+  engineRef.current.setIsShrouded(shroud);
 
   useEffect(
-    () => initialize(coveredElementSelector, engine),
-    [colorScheme, coveredElementSelector, shroud, twinkle]
+    () => handleColorSchemeChange(colorScheme, engineRef),
+    [colorScheme]
+  );
+
+  useEffect(
+    () => initialize(coveredElementSelector, engineRef),
+    [coveredElementSelector, shroud, twinkle]
   );
 
   return <Container ref={canvasRef} />;
 }
 
-function initialize(coveredElementSelector: string, engine: Engine) {
-  const windowResizeHandler = () => engine.resize(coveredElementSelector);
+function handleColorSchemeChange(
+  colorScheme: ColorScheme | null,
+  engineRef: MutableRefObject<Engine>
+) {
+  engineRef.current.onColorSchemeChange(colorScheme);
+}
+
+function initialize(
+  coveredElementSelector: string,
+  engine: MutableRefObject<Engine>
+) {
+  const windowResizeHandler = () =>
+    engine.current.resize(coveredElementSelector);
   window.addEventListener('resize', windowResizeHandler);
-  engine.resize(coveredElementSelector);
-  engine.start();
+  engine.current.resize(coveredElementSelector);
+  engine.current.start();
 
   return () => {
     window.removeEventListener('resize', windowResizeHandler);
-    engine.stop();
+    engine.current.stop();
   };
 }

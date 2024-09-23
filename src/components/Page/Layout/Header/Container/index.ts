@@ -5,7 +5,7 @@ import Props from './Props';
 
 export default styled.header<Props>`
   background: ${(props) =>
-    props.$backgroundIsOpaque ? props.theme.base : 'none'};
+    props.$backgroundIsOpaque ? 'var(--color-base)' : 'none'};
   display: flex;
   flex: initial;
   font-family: ${typography.font.monospace};

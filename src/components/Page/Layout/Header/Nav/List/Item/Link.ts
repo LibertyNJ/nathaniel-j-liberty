@@ -19,19 +19,19 @@ export default styled(Link)`
     filter ${transition.duration};
 
   &:focus {
-    background: ${(props) => props.theme.base};
-    filter: drop-shadow(0 0 5px ${(props) => props.theme.contrast})
-      drop-shadow(0 0 10px ${(props) => props.theme.contrast});
+    background: var(--color-base);
+    filter: drop-shadow(0 0 5px var(--color-contrast))
+      drop-shadow(0 0 10px var(--color-contrast));
   }
 
   &:hover {
-    background: ${(props) => props.theme.contrast};
-    color: ${(props) => props.theme.base};
+    background: var(--color-contrast);
+    color: var(--color-base);
   }
 
   &:active,
   &.active {
-    border: ${borderThickness} ${(props) => props.theme.contrast} solid;
+    border: ${borderThickness} var(--color-contrast) solid;
     padding: calc(6 * ${baseline} - ${borderThickness});
   }
 

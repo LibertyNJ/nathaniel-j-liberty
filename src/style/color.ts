@@ -20,6 +20,7 @@ export const color = {
   darkGray: DARK_GRAY,
   darkWhite: DARK_WHITE,
   gitHub,
+  hover: GRAY,
   lightBlack: LIGHT_BLACK,
   lightGray: LIGHT_GRAY,
   linkedIn,
@@ -27,16 +28,22 @@ export const color = {
   white: WHITE,
 };
 
-export const darkTheme = {
+export const darkTheme: Theme = {
   base: BLACK,
   contrast: WHITE,
   hover: GRAY,
 };
 
-export const lightTheme = {
+export const lightTheme: Theme = {
   base: WHITE,
   contrast: BLACK,
   hover: GRAY,
+};
+
+export type Theme = {
+  readonly base: string;
+  readonly contrast: string;
+  readonly hover: string;
 };
 
 export type ColorScheme = 'dark' | 'light';

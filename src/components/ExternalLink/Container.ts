@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 
-import { transition } from '../../style';
+import { color, transition } from '../../style';
 
 export default styled.a`
-  color: ${(props) => props.theme.contrast};
+  color: var(--color-contrast);
   transition: color ${transition.duration};
 
   &:hover {
-    color: ${(props) => props.theme.hover};
+    color: ${color.hover};
   }
 `;

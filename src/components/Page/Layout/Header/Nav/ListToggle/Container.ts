@@ -10,7 +10,7 @@ import {
 export default styled.button`
   background: none;
   border: none;
-  color: ${(props) => props.theme.contrast};
+  color: var(--color-contrast);
   font-size: ${typography.fontSize.h1.xs};
   line-height: ${typography.lineHeight.h1.xs};
   margin-left: auto;
@@ -19,8 +19,8 @@ export default styled.button`
   width: ${typography.fontSize.h1.xs};
 
   &:focus {
-    filter: drop-shadow(0 0 5px ${(props) => props.theme.contrast})
-      drop-shadow(0 0 10px ${(props) => props.theme.contrast});
+    filter: drop-shadow(0 0 5px var(--color-contrast))
+      drop-shadow(0 0 10px var(--color-contrast));
   }
 
   :&hover {

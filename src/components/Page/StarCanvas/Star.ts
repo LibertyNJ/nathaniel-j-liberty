@@ -1,4 +1,4 @@
-import { getRandomNumber } from '../../../utils';
+import { getRandomNumber } from '../../../utils/getRandomNumber';
 import Color from './Color';
 import Point from './Point';
 import Rectangle from './Rectangle';

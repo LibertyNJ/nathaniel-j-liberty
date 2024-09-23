@@ -9,18 +9,18 @@ import {
 } from '../../style';
 
 export default styled.textarea`
-  background: ${(props) => props.theme.base};
-  border: ${borderThickness} solid ${(props) => props.theme.contrast};
+  background: var(--color-base);
+  border: ${borderThickness} solid var(--color-contrast);
   border-radius: ${baseline};
-  color: ${(props) => props.theme.contrast};
+  color: var(--color-contrast);
   font-size: ${typography.fontSize.body.xs};
   line-height: ${typography.lineHeight.body.xs};
   padding: calc(3 * ${baseline} - ${borderThickness});
   transition: filter ${transition.duration};
 
   &:focus {
-    filter: drop-shadow(0 0 5px ${(props) => props.theme.contrast})
-      drop-shadow(0 0 10px ${(props) => props.theme.contrast});
+    filter: drop-shadow(0 0 5px var(--color-contrast))
+      drop-shadow(0 0 10px var(--color-contrast));
   }
 
   @media (min-width: ${breakpoint.md}) {

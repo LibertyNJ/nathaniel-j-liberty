@@ -1,14 +1,19 @@
-import { ColorScheme } from '../../../style/color';
+import { color } from '../../../style';
 import Canvas from './Canvas';
 
 export default class Shroud {
-  constructor(colorScheme: ColorScheme) {
+  constructor() {
     this.bottomGradient = null;
-    this.colorScheme = colorScheme;
+    this.shouldResizeBeforeDraw = false;
     this.topGradient = null;
   }
 
   draw(canvas: Canvas) {
+    if (this.shouldResizeBeforeDraw) {
+      this.resize(canvas);
+      this.shouldResizeBeforeDraw = false;
+    }
+
     this.drawTopSection(canvas);
 
     if (canvas.height > 2 * window.innerHeight) {
@@ -18,8 +23,12 @@ export default class Shroud {
     this.drawBottomSection(canvas);
   }
 
+  recolor() {
+    this.shouldResizeBeforeDraw = true;
+  }
+
   resize(canvas: Canvas) {
-    const color = this.colorScheme === 'dark' ? '0, 0, 0' : '255, 255, 255';
+    const color = this.isDark() ? '0, 0, 0' : '255, 255, 255';
 
     this.topGradient = canvas.context.createLinearGradient(
       0.5 * canvas.width,
@@ -53,7 +62,8 @@ export default class Shroud {
   }
 
   private drawMidSection(canvas: Canvas) {
-    canvas.context.fillStyle = this.colorScheme === 'dark' ? 'black' : 'white';
+    const color = this.isDark() ? '0, 0, 0' : '255, 255, 255';
+    canvas.context.fillStyle = color;
     canvas.context.fillRect(
       0,
       window.innerHeight,
@@ -69,7 +79,13 @@ export default class Shroud {
     }
   }
 
+  private isDark() {
+    const root = document.documentElement;
+    const baseColor = root.style.getPropertyValue('--color-base');
+    return baseColor === color.black;
+  }
+
   private bottomGradient: CanvasGradient | null;
-  private colorScheme: ColorScheme;
+  private shouldResizeBeforeDraw: boolean;
   private topGradient: CanvasGradient | null;
 }

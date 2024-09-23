@@ -8,17 +8,17 @@ import Layout from './Layout';
 import Props from './Props';
 import StarCanvas from './StarCanvas';
 import { ColorScheme, darkTheme, lightTheme } from '../../style/color';
-import { ThemeProvider } from 'styled-components';
+import { getInitialColorScheme } from '../../utils/getInitialColorScheme';
 
 fontAwesomeConfig.autoAddCss = false;
 
 export default function Page(props: Props) {
-  const [colorScheme, setColorScheme] = useState(getColorScheme());
-  useEffect(() => listenForColorSchemeChanges(setColorScheme), []);
-  const theme = colorScheme === 'dark' ? darkTheme : lightTheme;
+  const [colorScheme, setColorScheme] = useState<ColorScheme | null>(null);
+  useEffect(() => setInitialColorScheme(setColorScheme), []);
+  useEffect(() => listenForColorSchemeChange(setColorScheme), []);
 
   return (
-    <ThemeProvider theme={theme}>
+    <>
       <GlobalStyle />
       <StarCanvas
         colorScheme={colorScheme}
@@ -33,24 +33,40 @@ export default function Page(props: Props) {
       >
         {props.children}
       </Layout>
-    </ThemeProvider>
+    </>
   );
 }
 
-function getColorScheme(): ColorScheme {
-  return typeof window !== 'undefined' &&
-    window.matchMedia('(prefers-color-scheme: light)').matches
-    ? 'light'
-    : 'dark';
+function setInitialColorScheme(
+  setColorScheme: Dispatch<SetStateAction<ColorScheme | null>>
+) {
+  const scheme = getInitialColorScheme();
+  setColorScheme(scheme);
 }
 
-function listenForColorSchemeChanges(
-  setColorScheme: Dispatch<SetStateAction<ColorScheme>>
+function listenForColorSchemeChange(
+  setColorScheme: Dispatch<SetStateAction<ColorScheme | null>>
 ) {
   const query = window.matchMedia('(prefers-color-scheme: light)');
+
   const handleChange = (event: MediaQueryListEvent) => {
-    setColorScheme(event.matches ? 'light' : 'dark');
+    const scheme = event.matches ? 'light' : 'dark';
+    const root = document.documentElement;
+    
+    root.style.setProperty(
+      '--color-base',
+      scheme === 'light' ? lightTheme.base : darkTheme.base
+    );
+    
+    root.style.setProperty(
+      '--color-contrast',
+      scheme === 'light' ? lightTheme.contrast : darkTheme.contrast
+    );
+    
+    localStorage.setItem('colorScheme', scheme);
+    setColorScheme(scheme);
   };
+
   query.addEventListener('change', handleChange);
   return () => query.removeEventListener('change', handleChange);
 }

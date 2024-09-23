@@ -62,8 +62,8 @@ export default createGlobalStyle`
   }
   
   html {
-    background: ${(props) => props.theme.base};
-    color: ${(props) => props.theme.contrast};
+    background: var(--color-base);
+    color: var(--color-contrast);
     font-family: ${typography.font.sansSerif};
     font-size: 100%;
     overflow-x: hidden;

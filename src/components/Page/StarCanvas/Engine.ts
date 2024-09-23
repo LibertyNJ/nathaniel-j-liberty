@@ -1,13 +1,22 @@
+import { RefObject } from 'react';
+import { ColorScheme } from '../../../style/color';
 import Canvas from './Canvas';
 import Model from './Model';
 
 export default class Engine {
-  constructor(canvas: Canvas, isAnimated: boolean, model: Model) {
+  constructor(canvasRef: RefObject<HTMLCanvasElement>) {
     this.animationRequestId = null;
-    this.canvas = canvas;
-    this.isAnimated = isAnimated;
-    this.model = model;
+    this.canvas = new Canvas(canvasRef);
+    this.isAnimated = false;
+    this.model = new Model();
     this.updateIntervalId = null;
+  }
+
+  onColorSchemeChange(colorScheme: ColorScheme | null) {
+    if (colorScheme !== null && !this.isAnimated) {
+      this.model.recolor();
+      this.drawFrame();
+    }
   }
 
   resize(coveredElementSelector: string) {
@@ -17,6 +26,14 @@ export default class Engine {
     if (!this.isAnimated) {
       this.drawFrame();
     }
+  }
+
+  setIsAnimated(isAnimated: boolean) {
+    this.isAnimated = isAnimated;
+  }
+
+  setIsShrouded(isShrouded: boolean) {
+    this.model.setIsShrouded(isShrouded);
   }
 
   start() {
@@ -36,7 +53,7 @@ export default class Engine {
       this.animationRequestId = null;
     }
 
-    if (this.updateIntervalId) {
+    if (this.updateIntervalId !== null) {
       window.clearInterval(this.updateIntervalId);
       this.updateIntervalId = null;
     }

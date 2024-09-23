@@ -7,7 +7,7 @@ const VIEWPORT_COVER_HEIGHT_ADJUSTMENT = '2px'; // Prevents gap between dropdown
 const VIEWPORT_COVER_TOP_ADJUSTMENT = '1px'; // Prevents gap between dropdown list and navbar
 
 export default styled.ul<Props>`
-  background: ${(props) => props.theme.base};
+  background: var(--color-base);
   height: calc(
     100vh - ${(props) => props.$topOffset}px +
       ${VIEWPORT_COVER_HEIGHT_ADJUSTMENT}
