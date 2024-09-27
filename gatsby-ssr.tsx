@@ -3,7 +3,7 @@ import { GatsbySSR } from 'gatsby';
 
 export const onRenderBody: GatsbySSR['onRenderBody'] = ({
   setPreBodyComponents,
-}) => setPreBodyComponents([<ColorSchemeDetector />]);
+}) => setPreBodyComponents([<ColorSchemeDetector key="ColorSchemeDetector" />]);
 
 /**
  * Detects the initial color scheme preference of the user and stores it and CSS
@@ -43,6 +43,13 @@ function ColorSchemeDetector() {
       scheme === 'light'
         ? '#000'
         : '#fff'
+    );
+
+    root.style.setProperty(
+      '--color-shroud',
+      scheme === 'light'
+        ? '255, 255, 255'
+        : '0, 0, 0'
     );
   })()`;
 

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export default styled.canvas`
+export default styled.div`
   left: 0;
   position: absolute;
   top: 0;

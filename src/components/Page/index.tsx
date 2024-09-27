@@ -1,6 +1,6 @@
 import { config as fontAwesomeConfig } from '@fortawesome/fontawesome-svg-core';
 import '@fortawesome/fontawesome-svg-core/styles.css';
-import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import GlobalStyle from './GlobalStyle';
 import './icon-library';
@@ -14,14 +14,36 @@ fontAwesomeConfig.autoAddCss = false;
 
 export default function Page(props: Props) {
   const [colorScheme, setColorScheme] = useState<ColorScheme | null>(null);
-  useEffect(() => setInitialColorScheme(setColorScheme), []);
-  useEffect(() => listenForColorSchemeChange(setColorScheme), []);
+
+  const setGlobalColorScheme = (scheme: ColorScheme) => {
+    const root = document.documentElement;
+
+    root.style.setProperty(
+      '--color-base',
+      scheme === 'light' ? lightTheme.base : darkTheme.base
+    );
+
+    root.style.setProperty(
+      '--color-contrast',
+      scheme === 'light' ? lightTheme.contrast : darkTheme.contrast
+    );
+
+    root.style.setProperty(
+      '--color-shroud',
+      scheme === 'light' ? '255, 255, 255' : '0, 0, 0'
+    );
+
+    localStorage.setItem('colorScheme', scheme);
+    setColorScheme(scheme);
+  };
+
+  useEffect(() => setInitialColorScheme(setGlobalColorScheme), []);
+  useEffect(() => listenForColorSchemeChange(setGlobalColorScheme), []);
 
   return (
     <>
       <GlobalStyle />
       <StarCanvas
-        colorScheme={colorScheme}
         coveredElementSelector="body"
         twinkle={props.twinkle}
         shroud={props.shroud}
@@ -38,32 +60,19 @@ export default function Page(props: Props) {
 }
 
 function setInitialColorScheme(
-  setColorScheme: Dispatch<SetStateAction<ColorScheme | null>>
+  setColorScheme: (colorScheme: ColorScheme) => void
 ) {
   const scheme = getInitialColorScheme();
   setColorScheme(scheme);
 }
 
 function listenForColorSchemeChange(
-  setColorScheme: Dispatch<SetStateAction<ColorScheme | null>>
+  setColorScheme: (colorScheme: ColorScheme) => void
 ) {
   const query = window.matchMedia('(prefers-color-scheme: light)');
 
   const handleChange = (event: MediaQueryListEvent) => {
     const scheme = event.matches ? 'light' : 'dark';
-    const root = document.documentElement;
-    
-    root.style.setProperty(
-      '--color-base',
-      scheme === 'light' ? lightTheme.base : darkTheme.base
-    );
-    
-    root.style.setProperty(
-      '--color-contrast',
-      scheme === 'light' ? lightTheme.contrast : darkTheme.contrast
-    );
-    
-    localStorage.setItem('colorScheme', scheme);
     setColorScheme(scheme);
   };
 

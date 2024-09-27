@@ -1,5 +1,5 @@
 import { RefObject } from 'react';
-import { ColorScheme } from '../../../style/color';
+
 import Canvas from './Canvas';
 import Model from './Model';
 
@@ -10,13 +10,6 @@ export default class Engine {
     this.isAnimated = false;
     this.model = new Model();
     this.updateIntervalId = null;
-  }
-
-  onColorSchemeChange(colorScheme: ColorScheme | null) {
-    if (colorScheme !== null && !this.isAnimated) {
-      this.model.recolor();
-      this.drawFrame();
-    }
   }
 
   resize(coveredElementSelector: string) {
@@ -30,10 +23,6 @@ export default class Engine {
 
   setIsAnimated(isAnimated: boolean) {
     this.isAnimated = isAnimated;
-  }
-
-  setIsShrouded(isShrouded: boolean) {
-    this.model.setIsShrouded(isShrouded);
   }
 
   start() {

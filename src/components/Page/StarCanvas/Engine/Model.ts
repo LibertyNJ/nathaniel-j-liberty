@@ -1,15 +1,11 @@
-import { ColorScheme } from '../../../style/color';
 import Canvas from './Canvas';
 import Point from './Point';
 import Rectangle from './Rectangle';
-import Shroud from './Shroud';
 import Star from './Star';
 
 export default class Model {
   constructor() {
     this.height = 0;
-    this.shouldDrawShroud = false;
-    this.shroud = new Shroud();
     this.stars = [];
     this.width = 0;
   }
@@ -17,18 +13,9 @@ export default class Model {
   draw(canvas: Canvas) {
     this.stars.forEach((star) => star.draw(canvas.context));
 
-    if (this.shouldDrawShroud) {
-      this.shroud.draw(canvas);
-    }
-  }
-
-  recolor() {
-    this.shroud.recolor();
   }
 
   resize(canvas: Canvas) {
-    this.shroud.resize(canvas);
-
     if (canvas.height > this.height) {
       this.expandHeight(canvas);
     }
@@ -38,9 +25,6 @@ export default class Model {
     }
   }
 
-  setIsShrouded(isShrouded: boolean) {
-    this.shouldDrawShroud = isShrouded;
-  }
 
   update() {
     this.stars.forEach((star) => star.update());
@@ -73,8 +57,6 @@ export default class Model {
   }
 
   private height: number;
-  private shouldDrawShroud: boolean;
-  private shroud: Shroud;
   private stars: Star[];
   private width: number;
 }
