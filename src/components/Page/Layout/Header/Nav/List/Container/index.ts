@@ -21,7 +21,9 @@ export default styled.ul<Props>`
   top: calc(
     ${(props) => props.$topOffset}px - ${VIEWPORT_COVER_TOP_ADJUSTMENT}
   );
-  transition: opacity ${transition.duration};
+  transition:
+    background ${transition.duration},
+    opacity ${transition.duration};
   visibility: hidden;
   width: 100%;
 

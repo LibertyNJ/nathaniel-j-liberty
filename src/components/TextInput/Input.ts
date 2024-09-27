@@ -16,7 +16,11 @@ export default styled.input`
   font-size: ${typography.fontSize.body.xs};
   line-height: ${typography.lineHeight.body.xs};
   padding: calc(3 * ${baseline} - ${borderThickness});
-  transition: filter ${transition.duration};
+  transition:
+    background ${transition.duration},
+    border ${transition.duration},
+    color ${transition.duration},
+    filter ${transition.duration};
 
   &:focus {
     filter: drop-shadow(0 0 5px var(--color-contrast))

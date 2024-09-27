@@ -15,7 +15,9 @@ export default styled.button`
   line-height: ${typography.lineHeight.h1.xs};
   margin-left: auto;
   padding: calc(3 * ${baseline}) 0;
-  transition: filter ${transition.duration};
+  transition:
+    color ${transition.duration},
+    filter ${transition.duration};
   width: ${typography.fontSize.h1.xs};
 
   &:focus {

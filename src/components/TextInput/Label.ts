@@ -1,11 +1,12 @@
 import styled from 'styled-components';
 
-import { breakpoint, typography } from '../../style';
+import { breakpoint, transition, typography } from '../../style';
 
 export default styled.label`
   font-family: ${typography.font.monospace};
   font-size: ${typography.fontSize.h5.xs};
   line-height: ${typography.lineHeight.h5.xs};
+  transition: color ${transition.duration};
 
   @media (min-width: ${breakpoint.md}) {
     font-size: ${typography.fontSize.h5.md};

@@ -10,7 +10,7 @@ import HeadedList from '../components/HeadedList';
 import Page from '../components/Page';
 import Seo from '../components/Seo';
 import Title from '../components/Title';
-import { baseline, borderThickness, breakpoint, color } from '../style';
+import { baseline, borderThickness, breakpoint, transition } from '../style';
 
 export default function AboutPage() {
   const data = useStaticQuery<StaticQueryData>(graphql`
@@ -188,6 +188,7 @@ const StyledImage = styled(GatsbyImage)`
   border: ${borderThickness} solid var(--color-contrast);
   border-radius: 50%;
   margin-bottom: calc(6 * ${baseline});
+  transition: border ${transition.duration};
   width: 100%;
 `;
 

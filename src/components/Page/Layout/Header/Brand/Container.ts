@@ -9,7 +9,9 @@ export default styled(Link)`
   padding: calc(3 * ${baseline}) 0;
   white-space: nowrap;
   flex: initial;
-  transition: filter ${transition.duration};
+  transition:
+    color ${transition.duration},
+    filter ${transition.duration};
 
   &:focus {
     filter: drop-shadow(0 0 5px var(--color-contrast))

@@ -1,7 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
 import styledNormalize from 'styled-normalize';
 
-import { baseline, breakpoint, typography } from '../../style';
+import { baseline, breakpoint, transition, typography } from '../../style';
 
 export default createGlobalStyle`
   ${styledNormalize}
@@ -67,12 +67,21 @@ export default createGlobalStyle`
     font-family: ${typography.font.sansSerif};
     font-size: 100%;
     overflow-x: hidden;
+    transition: background ${transition.duration};
   }
   
   p {
     font-size: ${typography.fontSize.body.xs};
     line-height: ${typography.lineHeight.body.xs};
     margin-bottom: calc(6 * ${baseline});
+    transition: color ${transition.duration};
+  }
+
+  small {
+    font-size: ${typography.fontSize.small.xs};
+    line-height: ${typography.lineHeight.small.xs};
+    margin-bottom: calc(6 * ${baseline});
+    transition: color ${transition.duration};
   }
   
   ul {
@@ -82,6 +91,7 @@ export default createGlobalStyle`
     li {
       font-size: ${typography.fontSize.body.xs};
       line-height: ${typography.lineHeight.body.xs};
+      transition: color ${transition.duration};
     }
   }
   
@@ -89,31 +99,43 @@ export default createGlobalStyle`
     font-size: ${typography.fontSize.h1.xs};
     line-height: ${typography.lineHeight.h1.xs};
     margin: 0 0 calc(6 * ${baseline});
+    transition: color ${transition.duration};
+
   }
   
   h2 {
     font-size: ${typography.fontSize.h2.xs};
     line-height: ${typography.lineHeight.h2.xs};
+    transition: color ${transition.duration};
+
   }
   
   h3 {
     font-size: ${typography.fontSize.h3.xs};
     line-height: ${typography.lineHeight.h3.xs};
+    transition: color ${transition.duration};
+
   }
   
   h4 {
     font-size: ${typography.fontSize.h4.xs};
     line-height: ${typography.lineHeight.h4.xs};
+    transition: color ${transition.duration};
+
   }
   
   h5 {
     font-size: ${typography.fontSize.h5.xs};
     line-height: ${typography.lineHeight.h5.xs};
+    transition: color ${transition.duration};
+
   }
   
   h6 {
     font-size: ${typography.fontSize.h6.xs};
     line-height: ${typography.lineHeight.h6.xs};
+    transition: color ${transition.duration};
+
   }
   
   @media (min-width: ${breakpoint.md}) {
