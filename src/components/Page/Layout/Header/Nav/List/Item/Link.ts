@@ -15,7 +15,7 @@ export default styled(Link)`
   padding: calc(6 * ${baseline});
   transition:
     background ${transition.duration},
-    border ${transition.duration},
+    border-color ${transition.duration},
     filter ${transition.duration};
 
   &:focus {

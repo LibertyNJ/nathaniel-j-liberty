@@ -18,7 +18,7 @@ export default styled.textarea`
   padding: calc(3 * ${baseline} - ${borderThickness});
   transition:
     background ${transition.duration},
-    border ${transition.duration},
+    border-color ${transition.duration},
     color ${transition.duration},
     filter ${transition.duration};
 

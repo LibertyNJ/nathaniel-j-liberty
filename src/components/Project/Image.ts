@@ -7,6 +7,6 @@ export default styled(GatsbyImage)`
   border: ${borderThickness} solid var(--color-contrast);
   border-radius: ${baseline};
   margin: calc(6 * ${baseline}) 0;
-  transition: border ${transition.duration};
+  transition: border-color ${transition.duration};
   width: 100%;
 `;

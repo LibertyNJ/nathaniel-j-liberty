@@ -188,7 +188,7 @@ const StyledImage = styled(GatsbyImage)`
   border: ${borderThickness} solid var(--color-contrast);
   border-radius: 50%;
   margin-bottom: calc(6 * ${baseline});
-  transition: border ${transition.duration};
+  transition: border-color ${transition.duration};
   width: 100%;
 `;
 

@@ -20,7 +20,7 @@ export default styled.button<Props>`
   text-decoration: none;
   transition:
     background ${transition.duration},
-    border ${transition.duration},
+    border-color ${transition.duration},
     color ${transition.duration},
     filter ${transition.duration};
   white-space: nowrap;

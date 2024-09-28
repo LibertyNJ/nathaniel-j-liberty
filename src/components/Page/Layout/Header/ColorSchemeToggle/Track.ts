@@ -10,7 +10,7 @@ export default styled.label`
   position: relative;
   transition:
     background ${transition.duration},
-    border ${transition.duration},
+    border-color ${transition.duration},
     color ${transition.duration},
     filter ${transition.duration};
   width: calc(2.2 * ${typography.fontSize.h5.lg});
