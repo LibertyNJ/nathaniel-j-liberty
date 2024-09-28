@@ -38,13 +38,11 @@ export default function LayoutHeader(props: Props) {
       id="page-header"
     >
       <Brand />
-      {colorScheme && (
-        <ColorSchemeToggle
-          colorScheme={colorScheme}
-          label={colorSchemeToggleLabel}
-          onToggle={handleColorSchemeToggle}
-        />
-      )}
+      <ColorSchemeToggle
+        colorScheme={colorScheme}
+        label={colorSchemeToggleLabel}
+        onToggle={handleColorSchemeToggle}
+      />
       <Nav
         listIsHiding={navListIsHiding}
         listIsShown={navListIsShown}

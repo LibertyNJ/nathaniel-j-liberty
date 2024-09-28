@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 
-import { transition, typography } from '../../../../../style';
+import Props from './Props';
+import { transition, typography } from '../../../../../../style';
 
-export default styled.span`
+export default styled.span<Props>`
   --size: calc(
     ${typography.lineHeight.h5.lg} * ${typography.fontSize.h5.lg} - 4px
   );
@@ -21,7 +22,8 @@ export default styled.span`
     left: 1px;
     position: absolute;
     top: 1px;
-    transition: ${transition.duration};
+    ${(props) =>
+      props.$wasEnabled ? `transition: transform ${transition.duration};` : ''}
     width: var(--size);
   }
 
