@@ -50,7 +50,9 @@ export default function Page(props: Props) {
       />
       <Layout
         breakpoints={props.breakpoints}
+        colorScheme={colorScheme}
         mainDisplay={props.display}
+        setColorScheme={setGlobalColorScheme}
         unlimitedWidth={props.unlimitedWidth}
       >
         {props.children}

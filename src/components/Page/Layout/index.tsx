@@ -12,7 +12,11 @@ export default function PageLayout(props: Props) {
 
   return (
     <Container>
-      <Header windowIsScrolled={windowIsScrolled} />
+      <Header
+        colorScheme={props.colorScheme}
+        setColorScheme={props.setColorScheme}
+        windowIsScrolled={windowIsScrolled}
+      />
       <Main
         display={props.mainDisplay}
         unlimitedWidth={props.unlimitedWidth}

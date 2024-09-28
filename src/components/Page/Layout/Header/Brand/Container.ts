@@ -6,6 +6,7 @@ import { baseline, transition, typography } from '../../../../../style';
 export default styled(Link)`
   font-size: ${typography.fontSize.h5.xs};
   line-height: ${typography.lineHeight.h5.xs};
+  margin-right: calc(3 * ${baseline});
   padding: calc(3 * ${baseline}) 0;
   white-space: nowrap;
   flex: initial;

@@ -8,9 +8,11 @@ import {
   faFileDownload,
   faGlobe,
   faGlobeAmericas,
+  faMoon,
   faRocket,
   faSatellite,
   faSatelliteDish,
+  faSun,
   faTimes,
   faUserAstronaut,
 } from '@fortawesome/free-solid-svg-icons';
@@ -25,9 +27,11 @@ export default library.add(
   faGlobe,
   faGlobeAmericas,
   faLinkedin,
+  faMoon,
   faRocket,
   faSatellite,
   faSatelliteDish,
+  faSun,
   faTimes,
   faUserAstronaut
 );
