@@ -28,7 +28,7 @@ function ColorSchemeDetector() {
     }
 
     const scheme = getColorScheme();
-    localStorage.setItem('colorScheme', scheme);
+    window.nathanielJLibertyInitialColorScheme = scheme;
     const root = document.documentElement;
 
     root.style.setProperty(

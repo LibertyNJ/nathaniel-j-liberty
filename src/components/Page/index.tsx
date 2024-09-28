@@ -14,9 +14,12 @@ fontAwesomeConfig.autoAddCss = false;
 
 export default function Page(props: Props) {
   const [colorScheme, setColorScheme] = useState<ColorScheme | null>(null);
-const [didMount, setDidMount] = useState(false);
+  const [didMount, setDidMount] = useState(false);
 
   const setGlobalColorScheme = (scheme: ColorScheme) => {
+    setColorScheme(scheme);
+    localStorage.setItem('colorScheme', scheme);
+
     const root = document.documentElement;
 
     root.style.setProperty(
@@ -33,9 +36,6 @@ const [didMount, setDidMount] = useState(false);
       '--color-shroud',
       scheme === 'light' ? '255, 255, 255' : '0, 0, 0'
     );
-
-    localStorage.setItem('colorScheme', scheme);
-    setColorScheme(scheme);
   };
 
   useEffect(() => setDidMount(true), []);

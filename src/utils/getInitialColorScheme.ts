@@ -1,23 +1,25 @@
-import { ColorScheme } from '../style/color';
+import { ColorScheme, isColorScheme } from '../style/color';
 
 /**
  * Returns the initial color scheme that should be used by the website.
  *
- * This function depends on local storage being set by a script that runs before
- * the initial React render, or a previous session.
- *
- * Defaults to `'dark'` if local storage is `null` or invalid.
+ * Defaults to `'dark'` if the user has no preference.
  */
 export function getInitialColorScheme(): ColorScheme {
-  const scheme = localStorage.getItem('colorScheme');
+  const storedScheme = localStorage.getItem('colorScheme');
 
-  if (scheme === null) {
-    return 'dark';
+  if (storedScheme !== null && isColorScheme(storedScheme)) {
+    return storedScheme;
   }
 
-  if (scheme === 'light') {
-    return 'light';
+  if (
+    typeof nathanielJLibertyInitialColorScheme !== 'undefined' &&
+    isColorScheme(nathanielJLibertyInitialColorScheme)
+  ) {
+    return nathanielJLibertyInitialColorScheme;
   }
 
   return 'dark';
 }
+
+declare var nathanielJLibertyInitialColorScheme: unknown;

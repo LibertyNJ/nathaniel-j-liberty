@@ -47,3 +47,7 @@ export type Theme = {
 };
 
 export type ColorScheme = 'dark' | 'light';
+
+export function isColorScheme(value: unknown): value is ColorScheme {
+  return value === 'dark' || value === 'light';
+}
