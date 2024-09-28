@@ -14,6 +14,7 @@ fontAwesomeConfig.autoAddCss = false;
 
 export default function Page(props: Props) {
   const [colorScheme, setColorScheme] = useState<ColorScheme | null>(null);
+const [didMount, setDidMount] = useState(false);
 
   const setGlobalColorScheme = (scheme: ColorScheme) => {
     const root = document.documentElement;
@@ -37,12 +38,13 @@ export default function Page(props: Props) {
     setColorScheme(scheme);
   };
 
+  useEffect(() => setDidMount(true), []);
   useEffect(() => setInitialColorScheme(setGlobalColorScheme), []);
   useEffect(() => listenForColorSchemeChange(setGlobalColorScheme), []);
 
   return (
     <>
-      <GlobalStyle />
+      <GlobalStyle didMount={didMount} />
       <StarCanvas
         coveredElementSelector="body"
         twinkle={props.twinkle}
