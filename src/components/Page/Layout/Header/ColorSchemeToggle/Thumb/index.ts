@@ -23,7 +23,7 @@ export default styled.span<Props>`
     position: absolute;
     top: 1px;
     ${(props) =>
-      props.$wasEnabled ? `transition: transform ${transition.duration};` : ''}
+      props.$isEnabled ? `transition: transform ${transition.duration};` : ''}
     width: var(--size);
   }
 

@@ -11,12 +11,13 @@ import Icon from '../../../../Icon';
 
 export default function ColorSchemeToggle(props: Props) {
   const { colorScheme, label, onToggle } = props;
-  const [wasEnabled, setWasEnabled] = useState(false);
+  const [thumbIsEnabled, setThumbIsEnabled] = useState(false);
   const isEnabled = colorScheme !== null;
 
-  if (!wasEnabled && isEnabled) {
-    setTimeout(() => setWasEnabled(true));
-  }
+  const handleChange = () => {
+    setThumbIsEnabled(true);
+    onToggle();
+  };
 
   return (
     <Container $isEnabled={isEnabled}>
@@ -29,10 +30,10 @@ export default function ColorSchemeToggle(props: Props) {
         <Input
           checked={colorScheme === 'dark'}
           disabled={!isEnabled}
-          onChange={onToggle}
+          onChange={handleChange}
           type="checkbox"
         />
-        <Thumb $wasEnabled={wasEnabled} />
+        <Thumb $isEnabled={thumbIsEnabled} />
       </Track>
     </Container>
   );
