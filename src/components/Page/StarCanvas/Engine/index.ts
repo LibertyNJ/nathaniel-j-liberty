@@ -8,17 +8,14 @@ export default class Engine {
     this.animationRequestId = null;
     this.canvas = new Canvas(canvasRef);
     this.isAnimated = false;
+    this.lastDraw = 0;
     this.model = new Model();
-    this.updateIntervalId = null;
   }
 
   resize(coveredElementSelector: string) {
     this.canvas.resize(coveredElementSelector);
     this.model.resize(this.canvas);
-
-    if (!this.isAnimated) {
-      this.drawFrame();
-    }
+    this.drawFrame();
   }
 
   setIsAnimated(isAnimated: boolean) {
@@ -26,13 +23,6 @@ export default class Engine {
   }
 
   start() {
-    if (this.isAnimated) {
-      this.updateIntervalId = window.setInterval(
-        () => this.model.update(),
-        UPDATE_INTERVAL
-      );
-    }
-
     this.processFrame();
   }
 
@@ -41,25 +31,31 @@ export default class Engine {
       cancelAnimationFrame(this.animationRequestId);
       this.animationRequestId = null;
     }
-
-    if (this.updateIntervalId !== null) {
-      window.clearInterval(this.updateIntervalId);
-      this.updateIntervalId = null;
-    }
   }
 
-  private drawFrame() {
+  private drawFrame(now: number = Date.now()) {
     // React’s useEffect cleanup happens just after the Canvas becomes invalid.
     // Checking for validity prevents an Error from being thrown and bubbling up
     // to the console.
-    if (this.canvas.isValid) {
-      this.canvas.clear();
-      this.model.draw(this.canvas);
+    if (!this.canvas.isValid) {
+      return;
     }
+
+    if (this.isAnimated) {
+      this.model.update();
+    }
+
+    this.canvas.clear();
+    this.model.draw(this.canvas);
+    this.lastDraw = now;
   }
 
   private processFrame() {
-    this.drawFrame();
+    const now = Date.now();
+
+    if (now - this.lastDraw >= DRAW_INTERVAL) {
+      this.drawFrame(now);
+    }
 
     if (this.isAnimated) {
       this.requestNextFrame();
@@ -73,10 +69,10 @@ export default class Engine {
   private animationRequestId: number | null;
   private canvas: Canvas;
   private isAnimated: boolean;
+  private lastDraw: number;
   private model: Model;
-  private updateIntervalId: number | null;
 }
 
 const MS_PER_SECOND = 1_000;
-const UPDATES_PER_SECOND = 20;
-const UPDATE_INTERVAL = MS_PER_SECOND / UPDATES_PER_SECOND;
+const DRAWS_PER_SECOND = 20;
+const DRAW_INTERVAL = MS_PER_SECOND / DRAWS_PER_SECOND;
