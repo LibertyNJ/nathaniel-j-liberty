@@ -21,6 +21,10 @@ export default class Canvas {
     return this.getElement().height;
   }
 
+  get isValid() {
+    return this.ref.current !== null;
+  }
+
   get region() {
     return new Rectangle(this.height, Point.default(), this.width);
   }

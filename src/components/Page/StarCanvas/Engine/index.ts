@@ -49,8 +49,13 @@ export default class Engine {
   }
 
   private drawFrame() {
-    this.canvas.clear();
-    this.model.draw(this.canvas);
+    // React’s useEffect cleanup happens just after the Canvas becomes invalid.
+    // Checking for validity prevents an Error from being thrown and bubbling up
+    // to the console.
+    if (this.canvas.isValid) {
+      this.canvas.clear();
+      this.model.draw(this.canvas);
+    }
   }
 
   private processFrame() {
